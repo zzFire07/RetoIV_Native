@@ -4,15 +4,10 @@ export function ButtonVerCanchasDisponibles(){
     return(
         <View style={styles.container}>
             <TouchableHighlight
-            style={{
-                width: 100,
-                height: 100,
-                backgroundColor: "white",
-                justifyContent: "center",
-                alignItems: "center"
-            }}
+                style={styles.button}
+                underlayColor={"red"}
             >
-                <Text style={{color: "black"}}>Ver canchas disponibles</Text>
+                <Text style={styles.text}>Ver canchas disponibles</Text>
             </TouchableHighlight>
         </View>
     )
@@ -27,4 +22,19 @@ const styles = StyleSheet.create({
       height: 100,
 
     },
-  });
+    button:{
+        width:150,
+        height: 100,
+        backgroundColor: "white",
+        borderWidth: 2,
+        borderColor: "black",
+        alignItems: "center",
+        justifyContent: "center",
+        overflow: "hidden"
+    },        
+    text:{
+        color: "black",
+        fontSize: 15,
+
+    }
+});
