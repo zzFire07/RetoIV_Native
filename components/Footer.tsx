@@ -5,8 +5,10 @@ import FooterButton from "./FooterButton";
 const Footer: React.FC = () => {
     return (
         <View style={styles.footer}>
+            <FooterButton title="Iniciar Sesion" onPress={() => alert("Iniciar Sesion presionando")} />
             <FooterButton title="Inicio" onPress={() => alert("Inicio presionado")} />
-            <FooterButton title="Iniciar Sesion" onPress={() => alert("Iniciar Sesion presionando")} />   
+            
+            <FooterButton title="Perfil" onPress={() => alert("Iniciar Sesion presionando")} />   
         </View>
     );
 };
