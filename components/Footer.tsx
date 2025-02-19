@@ -19,9 +19,9 @@ const styles = StyleSheet.create({
     justifyContent: "space-evenly",
     width: "140%",
     position: "bottom",
-    bottom: -260,
-    paddingTop:10,
-    paddingBottom: 220,
+    bottom: -330,
+    paddingTop:20,
+    paddingBottom: 320,
     backgroundColor: "#00bf63"
   }, 
 
