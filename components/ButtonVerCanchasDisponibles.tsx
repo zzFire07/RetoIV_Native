@@ -1,7 +1,7 @@
-import { StyleSheet, View, Text, TouchableHighlight } from "react-native";
+import { StyleSheet, Text, View, TouchableHighlight } from "react-native";
 
-export function HomePage() {
-    return (
+export function ButtonVerCanchasDisponibles(){
+    return(
         <View style={styles.container}>
             <TouchableHighlight
             style={{
@@ -9,16 +9,14 @@ export function HomePage() {
                 height: 100,
                 backgroundColor: "white",
                 justifyContent: "center",
-                alignItems: "center",
+                alignItems: "center"
             }}
             >
-            <Text style={{ color: "black" }}>Iniciar sesión</Text>
+                <Text style={{color: "black"}}>Ver canchas disponibles</Text>
             </TouchableHighlight>
-      </View>
-    );
-   
+        </View>
+    )
 }
-
 const styles = StyleSheet.create({
     container: {
       flex: 1,
@@ -30,4 +28,3 @@ const styles = StyleSheet.create({
 
     },
   });
-  
