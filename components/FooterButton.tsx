@@ -18,16 +18,16 @@ const FooterButton: React.FC<FooterButtonProps> = ({ title, onPress }) => {
 const styles = StyleSheet.create({
   button: {
     backgroundColor: "#354d34",
-    width: 100,
-    height: 40,
-    borderRadius: 20,
+    width: 50,
+    height: 50,
+    borderRadius: 100,
     alignItems: "center",
     justifyContent: "center",
     margin: 5,
   },
   text: {
     color: "white",
-    fontSize: 16,
+    fontSize: 10,
     fontWeight: "bold",
   },
 });

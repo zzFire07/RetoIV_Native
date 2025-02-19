@@ -15,10 +15,11 @@ const styles = StyleSheet.create({
   footer: {
     flexDirection: "row",
     justifyContent: "space-evenly",
-    width: "100%",
-    position: "absolute",
-    bottom: 20,
-    padding:10,
+    width: "140%",
+    position: "bottom",
+    bottom: -260,
+    paddingTop:10,
+    paddingBottom: 220,
     backgroundColor: "#00bf63"
   }, 
 
