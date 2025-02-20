@@ -5,12 +5,13 @@ import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 import HomePage from '@/components/HomePage';
-import TicketPage from '@/components/ui/TicketPage'
+import TicketPage from '@/components/TicketPage'
+import LoginPage from '@/components/LoginPage';
 
 export default function HomeScreen() {
   return (
       <ThemedView style={styles.titleContainer}>
-        <TicketPage />
+        <LoginPage />
       </ThemedView>
     
 
