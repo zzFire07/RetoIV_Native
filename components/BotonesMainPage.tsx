@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, TouchableHighlight } from "react-native";
+import { StyleSheet, Text, View, TouchableHighlight, Alert } from "react-native";
 
 export function BotonesMainPage(){
     return(
@@ -6,18 +6,21 @@ export function BotonesMainPage(){
             <TouchableHighlight
                 style={styles.buttonCancha}
                 underlayColor={"black"}
+                onPress={() => Alert.alert("Ver canchas disponibles")}
             >
                 <Text style={styles.text}>VER CANCHAS DISPONIBLES</Text>
             </TouchableHighlight>
             <TouchableHighlight
                 style= {styles.buttonTorneo}
                 underlayColor= {"black"}
+                onPress={() => Alert.alert("Ver torneos disponibles")}
             >
                 <Text style= {styles.text}>VER TORNEOS DISPONIBLES</Text>
             </TouchableHighlight>
             <TouchableHighlight
                 style= {styles.buttonTicketera}
                 underlayColor={"black"}
+                onPress={() => Alert.alert("Comprar ticketera")}
             >
                 <Text style= {styles.text}>COMPRAR TICKETERA</Text>
             </TouchableHighlight>
