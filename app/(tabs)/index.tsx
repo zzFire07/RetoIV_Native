@@ -5,7 +5,7 @@ import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 import { HomePage } from '@/components/HomePage';
-import { ButtonVerCanchasDisponibles } from '@/components/ButtonVerCanchasDisponibles';
+import { BotonesMainPage } from '@/components/BotonesMainPage';
 
 export default function HomeScreen() {
   return (
@@ -21,7 +21,7 @@ export default function HomeScreen() {
         <ThemedText type="title">Welcome!</ThemedText>
         <HelloWave />
       </ThemedView>
-      <ButtonVerCanchasDisponibles/>
+      <BotonesMainPage/>
     </ParallaxScrollView>
   );
 }
