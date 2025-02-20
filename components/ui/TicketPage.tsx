@@ -1,5 +1,6 @@
 import React from "react";
 import { View, Text, StyleSheet, Button, TouchableHighlight, useColorScheme } from "react-native";
+import ComponenteTicket from "@/components/ComponenteTicket";
 
 export function TicketPage(){
     const colorScheme = useColorScheme();
@@ -7,19 +8,18 @@ export function TicketPage(){
         { id: 1, name: "Ticket 1" },
         { id: 2, name: "Ticket 2" },
         { id: 3, name: "Ticket 3" },
+        { id:5, name: " Ituzaingo"},
     ];
     return (
         <View style={styles.container}>
             <Text style={styles.title}>Tickets Disponibles</Text>
             {listatickets.map((ticket)=>(
-                <TouchableHighlight
+                <ComponenteTicket
                     key={ticket.id}
-                    style={styles.button}
-                    onPress={()=>alert(`Seleccionaste ${ticket.name}`)}
-                    underlayColor="#333"
-                >
-                    <Text style={styles.buttonText}>{ticket.name}</Text>
-                </TouchableHighlight>
+                    id={ticket.id}
+                    name={ticket.name}
+                    onPress={()=> alert(`Seleccionaste ${ticket.name}`)}
+                />
             ))}
         </View>
        );
