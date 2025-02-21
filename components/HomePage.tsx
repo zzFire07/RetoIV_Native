@@ -1,9 +1,13 @@
 import { StyleSheet, View, Text, TouchableHighlight } from "react-native";
 import Calendar from '@/components/calendar';
 
+
+import React from "react";
+import CustomHeader from "./Header";
 export function HomePage() {
     return (
         <View style={styles.container}>
+            <CustomHeader title="Club Ituzaingo" />
             <TouchableHighlight
             style={{
                 width: 100,
@@ -16,7 +20,11 @@ export function HomePage() {
             >
             <Text style={{ color: "white" }}>Iniciar sesión</Text>
             </TouchableHighlight>
-      </View>
+            <View>
+                <Text>Home</Text>
+                
+            </View>
+        </View>
     );
    
 }
