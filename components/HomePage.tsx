@@ -1,26 +1,35 @@
-import { View, Text, StyleSheet } from "react-native";
-import Footer from '../components/Footer'
+import { StyleSheet, View, Text, TouchableHighlight } from "react-native";
+import Calendar from '@/components/calendar';
 
 export function HomePage() {
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>Home</Text>
-            <Footer/> {/*Agregamos el footer aqui*/}
-        </View>
+            <TouchableHighlight
+            style={{
+                width: 100,
+                height: 50,
+                backgroundColor: "black",
+                borderRadius: 5,
+                justifyContent: "center",
+                alignItems: "center",
+            }}
+            >
+            <Text style={{ color: "white" }}>Iniciar sesión</Text>
+            </TouchableHighlight>
+      </View>
     );
+   
 }
-const styles= StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: "space-between",
-        alignItems: "center",
-        padding: 20,
-    },
-    title: {
-        fontSize: 24,
-        fontWeight: "bold",
-        marginTop: 50,
-    },
-});
 
-export default HomePage;
+const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      backgroundColor: "white",
+      alignItems: "center",
+      justifyContent: "center",
+      width: "100%",
+      height: "100%",
+
+    },
+  });
+  

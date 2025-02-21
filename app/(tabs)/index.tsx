@@ -4,23 +4,19 @@ import { HelloWave } from '@/components/HelloWave';
 import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
-import HomePage from '@/components/HomePage';
-import TicketPage from '@/components/TicketPage'
-import LoginPage from '@/components/LoginPage';
+import { HomePage } from '@/components/HomePage';
+import { BotonesMainPage } from '@/components/BotonesMainPage';
+import Calendar from '@/components/calendar';
 
 export default function HomeScreen() {
   return (
-      <ThemedView style={styles.titleContainer}>
-        <LoginPage />
-      </ThemedView>
-    
-
+    <HomePage/>
   );
 }
 
 const styles = StyleSheet.create({
   titleContainer: {
-    height: "100%",
+    flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
     gap: 8,
