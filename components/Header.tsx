@@ -1,11 +1,16 @@
 import React from "react";
 import { View, Text, StyleSheet, Image } from "react-native";
-const ituzaingoImage = require("../assets/ituzaingo.png");
+
+// Carga la imagen correctamente con `require()`
+const ituzaingoImage = require("../assets/images/ituzaingo.png");
 
 const CustomHeader = ({ title }: { title: string }) => {
   return (
     <View style={styles.header}>
-        <Image style={styles.header} source={ituzaingoImage}  />
+      {/* Imagen con margen a la izquierda */}
+      <Image style={styles.logo} source={ituzaingoImage} />
+      
+      {/* Texto del header con color negro */}
       <Text style={styles.headerText}>{title}</Text>
     </View>
   );
@@ -15,14 +20,22 @@ const styles = StyleSheet.create({
   header: {
     width: "100%",
     height: 60,
-    backgroundColor: "#6200ea",
-    justifyContent: "center",
+    backgroundColor: "transparent", // Cambio: Se eliminó el color de fondo
+    flexDirection: "row", // Alinea imagen y texto en fila
     alignItems: "center",
-    paddingTop: 15,
+    justifyContent: "center", // Cambio: Alineación a la izquierda
+    paddingHorizontal: 15,
+    marginTop: 35,
+  },
+  logo: {
+    width: 40,
+    height: 40,
+    marginRight: 25, // Espacio entre la imagen y el texto
+    marginLeft: -5, // Cambio: Mueve la imagen un poco a la izquierda
   },
   headerText: {
-    fontSize: 20,
-    color: "#000000",
+    fontSize: 25,
+    color: "#000", // Cambio: Texto en color negro
     fontWeight: "bold",
   },
 });
