@@ -40,12 +40,7 @@ export default function TabLayout() {
           title:'TicketeraScreen',
         }}
       />
-      <Tabs.Screen
-        name= "HomePage"
-        options={{
-          title: 'PaginaInicio'
-        }}
-      />
+      
     </Tabs>
   );
 }
