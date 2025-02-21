@@ -16,12 +16,12 @@ const Footer: React.FC = () => {
 const styles = StyleSheet.create({
   footer: {
     flexDirection: "row",
-    justifyContent: "space-around",
+    justifyContent: "space-evenly",
     width: "140%",
-    position: "sticky",
-    bottom: Platform.select({ ios: -330, android: -315 }),
-    paddingTop: 20,
-    paddingBottom: 270,
+    position: "absolute",
+    bottom: -330,
+    paddingTop:20,
+    paddingBottom: 320,
     backgroundColor: "#00bf63"
   }, 
 
