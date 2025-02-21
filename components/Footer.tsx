@@ -1,14 +1,14 @@
-import React  from "react";
-import { View,StyleSheet } from "react-native";
+import React, { useState } from "react";
+import { View,StyleSheet, Platform } from "react-native";
 import FooterButton from "./FooterButton";
 
 const Footer: React.FC = () => {
+  const [loggedIn, setLoggedIn] = useState(false);
     return (
         <View style={styles.footer}>
-            <FooterButton title="Iniciar Sesion" onPress={() => alert("Iniciar Sesion presionando")} />
-            <FooterButton title="Inicio" onPress={() => alert("Inicio presionado")} />
-            
-            <FooterButton title="Perfil" onPress={() => alert("Iniciar Sesion presionando")} />   
+            <FooterButton title="Inicio" onPress={() => alert(loggedIn ? "Logged In" : "Logged Out")} />
+            {!loggedIn && <FooterButton title="Iniciar Sesión" onPress={() => setLoggedIn(true)} />}
+            {loggedIn && <FooterButton title="Perfil" onPress={() => setLoggedIn(false)} />}
         </View>
     );
 };
@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-evenly",
     width: "140%",
-    position: "bottom",
+    position: "absolute",
     bottom: -330,
     paddingTop:20,
     paddingBottom: 320,
