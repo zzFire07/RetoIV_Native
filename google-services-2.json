@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1083190847956",
+    "project_id": "clubituzaingopadel",
+    "storage_bucket": "clubituzaingopadel.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1083190847956:android:c7e29de8f297d1d82a8e41",
+        "android_client_info": {
+          "package_name": "com.clubituzango.retoivnative"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1083190847956-12sm91dqgh1ms21qqvgm4fielagp76ft.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB0VDuvIMek1krRy5yAW-I96GB2mvUi00k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1083190847956-12sm91dqgh1ms21qqvgm4fielagp76ft.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
