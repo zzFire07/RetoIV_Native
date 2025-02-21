@@ -9,14 +9,14 @@ interface TicketProps {
 
 const ComponenteTicket: React.FC<TicketProps> = ({id, name, onPress}) => {
     return (
-        <TouchableHighlight
-            key={id}
-            style={styles.button}
-            onPress={onPress}
-            underlayColor="#333"
-        >
-            <Text style={styles.buttonText}>{name}</Text>
-        </TouchableHighlight>
+            <TouchableHighlight
+                key={id}
+                style={styles.button}
+                onPress={onPress}
+                underlayColor="#333"
+            >
+                <Text style={styles.buttonText}>{name}</Text>
+            </TouchableHighlight>
     );
 };
 

@@ -1,16 +1,19 @@
 import { StyleSheet, View, Text, TouchableHighlight, Alert } from "react-native";
+import { Link } from "expo-router";
 
 export function BotonAutenticacion() {
     return (
         <View style={styles.container}>
+          <Link href="/TicketPage" asChild>
             <TouchableHighlight
                 style={styles.ButtonIniciarSesion}
                 underlayColor={"black"}
-                onPress={() => Alert.alert('Iniciar sesión / Registrarse')}
+                onPress={() => {}}
             >
                 <Text style={styles.text}>INICIAR SESIÓN / REGISTRARSE</Text>
             </TouchableHighlight>
-      </View>
+          </Link>
+        </View>
     );  
 }
 
