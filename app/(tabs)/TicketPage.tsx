@@ -1,6 +1,7 @@
 import React from "react";
 import { View, Text, StyleSheet, Button, TouchableHighlight, useColorScheme } from "react-native";
 import ComponenteTicket from "@/components/ComponenteTicket";
+import CustomHeader from "@/components/Header";
 
 export function TicketPage(){
     const colorScheme = useColorScheme();
@@ -8,20 +9,23 @@ export function TicketPage(){
         { id: 1, name: "Ticket 1" },
         { id: 2, name: "Ticket 2" },
         { id: 3, name: "Ticket 3" },
-        { id:5, name: " Ituzaingo"},
+        { id: 5, name: "Ituzaingo"},
     ];
     return (
+        <>
+        <CustomHeader title="Club Ituzaingo" />
         <View style={styles.container}>
             <Text style={styles.title}>Tickets Disponibles</Text>
             {listatickets.map((ticket)=>(
                 <ComponenteTicket
-                    key={ticket.id}
-                    id={ticket.id}
-                    name={ticket.name}
-                    onPress={()=> alert(`Seleccionaste ${ticket.name}`)}
+                key={ticket.id}
+                id={ticket.id}
+                name={ticket.name}
+                onPress={()=> alert(`Seleccionaste ${ticket.name}`)}
                 />
             ))}
         </View>
+        </>
        );
     }
 
@@ -41,7 +45,7 @@ export function TicketPage(){
             marginBottom: 20,
         },
         button: {
-            width:200,
+            width: 200,
             height: 50,
             backgroundColor:"black",
             borderRadius: 5,
