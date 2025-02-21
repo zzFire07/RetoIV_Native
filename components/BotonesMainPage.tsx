@@ -3,20 +3,7 @@ import { StyleSheet, Text, View, TouchableHighlight, Alert } from "react-native"
 export function BotonesMainPage(){
     return(
         <View style={styles.container}>
-            <TouchableHighlight
-                style={styles.buttonCancha}
-                underlayColor={"black"}
-                onPress={() => Alert.alert("Ver canchas disponibles")}
-            >
-                <Text style={styles.text}>VER CANCHAS DISPONIBLES</Text>
-            </TouchableHighlight>
-            <TouchableHighlight
-                style= {styles.buttonTorneo}
-                underlayColor= {"black"}
-                onPress={() => Alert.alert("Ver torneos disponibles")}
-            >
-                <Text style= {styles.text}>VER TORNEOS DISPONIBLES</Text>
-            </TouchableHighlight>
+            <Text style={styles.cantidadTicket}>Cantidad de tickets: </Text>
             <TouchableHighlight
                 style= {styles.buttonTicketera}
                 underlayColor={"black"}
@@ -74,5 +61,17 @@ const styles = StyleSheet.create({
         alignSelf: "center", 
         justifyContent: "center"
 
-    }
+    },
+    cantidadTicket:{
+        fontSize: 20,
+        width: 250,
+        height: 50,
+        margin: 10,
+        backgroundColor: "#1a8945",
+        borderRadius: 20,
+        color: "black",
+        alignItems: "center",
+        justifyContent: "center",
+        textAlign: "center",
+        }
 });
