@@ -14,36 +14,39 @@ export default function TabLayout() {
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
+        tabBarActiveTintColor: "#fff",
+        tabBarInactiveTintColor: "#000",
+        tabBarActiveBackgroundColor: "#00bf63",
+        tabBarInactiveBackgroundColor: "#00bf63",
         headerShown: false,
         tabBarButton: HapticTab,
         tabBarBackground: TabBarBackground,
-        tabBarStyle: { display: "none"}
+        tabBarStyle: Platform.select({
+          ios: {
+            position: 'absolute',
+          },
+          default: {},
+        }),
       }}>
       <Tabs.Screen
         name="index"
         options={{
-          title: 'Home',
+          title: 'Inicio',
           tabBarIcon: ({ color }) => <IconSymbol size={28} name="house.fill" color={color} />,
         }}
       />
       <Tabs.Screen
         name="explore"
         options={{
-          title: 'Explore',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="paperplane.fill" color={color} />,
+          title: 'Perfil',
+          tabBarIcon: ({ color }) => <IconSymbol size={28} name="person.fill" color={color} />,
         }}
       />
       <Tabs.Screen
         name= "TicketPage"
         options={{
           title:'TicketeraScreen',
-        }}
-      />
-      <Tabs.Screen
-        name= "HomePage"
-        options={{
-          title: 'PaginaInicio'
+          tabBarIcon: ({ color }) => <IconSymbol size={28} name="wallet.pass" color={color} />,
         }}
       />
     </Tabs>
