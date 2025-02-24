@@ -1,17 +1,11 @@
 import { StyleSheet, Text, View, TouchableHighlight, Alert } from "react-native";
+import BotonComprarTicketera from "@/components/BotonComprarTicketera"
 
 export function BotonesMainPage(){
     return(
         <View style={styles.container}>
             <Text style={styles.cantidadTicket}>Cantidad de tickets: </Text>
-            <TouchableHighlight
-                style= {styles.buttonTicketera}
-                underlayColor={"black"}
-                onPress={() => Alert.alert("Comprar ticketera")}
-            >
-                <Text style= {styles.text}>COMPRAR TICKETERA</Text>
-            </TouchableHighlight>
-          
+            <BotonComprarTicketera/>
         </View>
     )
 }
@@ -24,27 +18,7 @@ const styles = StyleSheet.create({
       flexDirection: "column",
       gap: 20,
     },
-    buttonCancha:{
-        width:150,
-        height: 100,
-        backgroundColor: "white",
-        borderWidth: 2,
-        borderColor: "black",
-        alignSelf: "center",
-        justifyContent: "center",
-        overflow: "hidden"
-        
-    },        
-    buttonTorneo:{
-        width:150,
-        height: 100,
-        backgroundColor: "white",
-        borderWidth: 2,
-        borderColor: "black",
-        alignSelf: "center",
-        justifyContent: "center",
-        overflow: "hidden"
-    },    
+   
     buttonTicketera:{
         width: 150,
         height: 100,

@@ -8,7 +8,6 @@ export function BotonAutenticacion() {
             <TouchableHighlight
                 style={styles.ButtonIniciarSesion}
                 underlayColor={"black"}
-                onPress={() => {}}
             >
                 <Text style={styles.text}>INICIAR SESIÓN / REGISTRARSE</Text>
             </TouchableHighlight>
