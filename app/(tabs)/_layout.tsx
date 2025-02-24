@@ -6,6 +6,7 @@ import { IconSymbol } from '@/components/ui/IconSymbol';
 import TabBarBackground from '@/components/ui/TabBarBackground';
 
 export default function TabLayout() {
+
   const isLoggedIn = true; // gotta change this to however we authenticate
 
   return (
@@ -38,12 +39,6 @@ export default function TabLayout() {
             href: (isLoggedIn ? '/explore' : null),
             title: 'Perfil',
             tabBarIcon: ({ color }) => <IconSymbol size={28} name="person.fill" color={color} />,
-          }}
-        />
-        <Tabs.Screen
-          name="TicketPage"
-          options={{
-            href: null,
           }}
         />
       </Tabs>
