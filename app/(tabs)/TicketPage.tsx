@@ -9,13 +9,12 @@ export function TicketPage(){
         { id: 1, name: "Ticket 1" },
         { id: 2, name: "Ticket 2" },
         { id: 3, name: "Ticket 3" },
-        { id: 5, name: "Ituzaingo"},
     ];
     return (
         <>
         <CustomHeader title="Club Ituzaingo" />
         <View style={styles.container}>
-            <Text style={styles.title}>Tickets Disponibles</Text>
+            <Text style={styles.title}>Ticketeras Disponibles</Text>
             {listatickets.map((ticket)=>(
                 <TicketComponent
                 key={ticket.id}
@@ -35,27 +34,20 @@ export function TicketPage(){
             flex: 1,
             justifyContent: "center",
             alignItems: "center",
-            padding: 20,
+            padding: 2,
             backgroundColor: "white",
-            marginTop:40,
         },
         title: {
             fontSize: 24,
             fontWeight: "bold",
             marginBottom: 20,
-        },
-        button: {
-            width: 200,
-            height: 50,
-            backgroundColor:"black",
-            borderRadius: 5,
-            justifyContent: "center",
-            alignItems: "center",
-            marginVertical: 10,
-        },
-        buttonText: {
+            width: 300,
+            height: 70,
+            backgroundColor:"#00bf63",
+            borderRadius: 15,
+            textAlign: "center",
+            textAlignVertical: "center",
             color: "white",
-            fontSize: 18,
         },
     });
 

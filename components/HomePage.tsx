@@ -24,7 +24,7 @@ export function HomePage() {
 
 const styles = StyleSheet.create({
   button: {
-    backgroundColor: "#4285F4",
+    backgroundColor: "#00bf63",
     paddingVertical: 12,
     paddingHorizontal: 20,
     borderRadius: 8,
