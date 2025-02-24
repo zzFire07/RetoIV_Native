@@ -1,22 +1,14 @@
-import React, { useState, useEffect } from "react";
-import { View, Text, StyleSheet, Button, TouchableHighlight, useColorScheme, Alert } from "react-native";
-import ComponenteTicket from "@/components/ComponenteTicket";
-import CustomHeader from "@/components/Header";
+import React, { useEffect, useState } from "react";
+import { View, Text, StyleSheet, Button, TouchableHighlight, useColorScheme } from "react-native";
+import TicketComponent from "@/components/TicketComponent";
+import CustomHeader from "@/components/CustomHeader";
 import * as WebBrowser from 'expo-web-browser';
 
 export function TicketPage(){
 
   const [result, setResult] = useState<WebBrowser.WebBrowserResult | null>(null);
 
-  useEffect(() => {
-    if (result) {
-      console.log("Resultado del WebBrowser:", result);
-    }
-  }, [result]);
-
-
     const auth_token = process.env.EXPO_PUBLIC_MP_AUTH;
-    console.log(auth_token);
 
     const handleBuy = async (product: { name: any; price: any; }) => {
         try {
@@ -43,10 +35,9 @@ export function TicketPage(){
           });
       
           const data = await response.json();
-          console.log("Respuesta de MP:", data);
+
           return data.init_point;
         } catch (error) {
-          Alert.alert("Error", "Hubo un problema al generar la compra.");
           console.log("Error al generar la compra:", error);
         }
       };
@@ -73,9 +64,9 @@ export function TicketPage(){
         <>
         <CustomHeader title="Club Ituzaingo" />
         <View style={styles.container}>
-            <Text style={styles.title}>Tickets Disponibles</Text>
+            <Text style={styles.title}>Ticketeras Disponibles</Text>
             {listatickets.map((ticket)=>(
-                <ComponenteTicket
+                <TicketComponent
                 key={ticket.id}
                 id={ticket.id}
                 name={ticket.name}
@@ -93,27 +84,20 @@ export function TicketPage(){
             flex: 1,
             justifyContent: "center",
             alignItems: "center",
-            padding: 20,
+            padding: 2,
             backgroundColor: "white",
-            marginTop:40,
         },
         title: {
             fontSize: 24,
             fontWeight: "bold",
             marginBottom: 20,
-        },
-        button: {
-            width: 200,
-            height: 50,
-            backgroundColor:"black",
-            borderRadius: 5,
-            justifyContent: "center",
-            alignItems: "center",
-            marginVertical: 10,
-        },
-        buttonText: {
+            width: 300,
+            height: 70,
+            backgroundColor:"#00bf63",
+            borderRadius: 15,
+            textAlign: "center",
+            textAlignVertical: "center",
             color: "white",
-            fontSize: 18,
         },
     });
 
