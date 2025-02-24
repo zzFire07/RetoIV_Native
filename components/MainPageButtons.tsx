@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View, TouchableHighlight, Alert } from "react-native";
 
-export function BotonesMainPage(){
+export function MainPageButtons(){
     return(
         <View style={styles.container}>
             <TouchableHighlight
