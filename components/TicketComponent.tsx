@@ -7,7 +7,7 @@ interface TicketProps {
     onPress: () => void;
 }
 
-const ComponenteTicket: React.FC<TicketProps> = ({id, name, onPress}) => {
+const TicketComponent: React.FC<TicketProps> = ({id, name, onPress}) => {
     return (
             <TouchableHighlight
                 key={id}
@@ -34,4 +34,4 @@ const styles= StyleSheet.create({
       },
 });
 
-export default ComponenteTicket;
+export default TicketComponent;

@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text, StyleSheet, Button, TouchableHighlight, useColorScheme } from "react-native";
-import ComponenteTicket from "@/components/ComponenteTicket";
-import CustomHeader from "@/components/Header";
+import TicketComponent from "@/components/TicketComponent";
+import CustomHeader from "@/components/CustomHeader";
 
 export function TicketPage(){
     const colorScheme = useColorScheme();
@@ -17,7 +17,7 @@ export function TicketPage(){
         <View style={styles.container}>
             <Text style={styles.title}>Tickets Disponibles</Text>
             {listatickets.map((ticket)=>(
-                <ComponenteTicket
+                <TicketComponent
                 key={ticket.id}
                 id={ticket.id}
                 name={ticket.name}
