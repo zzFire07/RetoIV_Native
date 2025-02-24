@@ -1,4 +1,5 @@
-import { BotonAutenticacion } from "./BotonAutenticacion";
+
+import BotonAutenticacion from "./BotonAutenticacion";
 import React, { useState } from "react";
 import CustomHeader from "./Header";
 import { BotonesMainPage } from "./BotonesMainPage";
