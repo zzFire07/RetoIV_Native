@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View, TouchableOpacity, Alert } from "react-native";
 import { Link } from "expo-router";
 
-export default function TicketsDisponibles(){
+export default function TicketDisponibility(){
 
     const cantidadTickets = 0
 
@@ -17,7 +17,7 @@ export default function TicketsDisponibles(){
             <View style={styles.container}>
                 <Link href="/TicketPage" asChild>
                     <TouchableOpacity style={styles.boton}>
-                        <Text style={styles.text}>Comprar Tickets</Text>
+                        <Text style={styles.text}>COMPRAR TICKETS YA</Text>
                     </TouchableOpacity>
                 </Link>
             </View>
@@ -28,6 +28,7 @@ export default function TicketsDisponibles(){
 
 const styles = StyleSheet.create({
     container:{
+        backgroundColor: "white",
         alignItems: "center",
         justifyContent: "center",
         padding: 10,
