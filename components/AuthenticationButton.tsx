@@ -8,7 +8,7 @@ import * as WebBrowser from "expo-web-browser";
 // Necesario para la autenticación en iOS
 WebBrowser.maybeCompleteAuthSession();
 
-const BotonAutenticacion: React.FC = () => {
+const AuthenticationButton: React.FC = () => {
   const [request, response, promptAsync] = Google.useIdTokenAuthRequest({
     clientId: "TU_CLIENT_ID_WEB.apps.googleusercontent.com", // Reemplázalo con tu Client ID de Google
     iosClientId: "TU_CLIENT_ID_IOS.apps.googleusercontent.com", // Para iOS
@@ -61,7 +61,7 @@ const BotonAutenticacion: React.FC = () => {
   );
 };
 
-export default BotonAutenticacion;
+export default AuthenticationButton;
 
 const styles = StyleSheet.create({
   container: {
@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   button: {
-    backgroundColor: "#4285F4",
+    backgroundColor: "#00bf63",
     paddingVertical: 12,
     paddingHorizontal: 20,
     borderRadius: 8,

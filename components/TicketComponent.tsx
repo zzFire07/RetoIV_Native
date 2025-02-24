@@ -7,7 +7,7 @@ interface TicketProps {
     onPress: () => void;
 }
 
-const ComponenteTicket: React.FC<TicketProps> = ({id, name, onPress}) => {
+const TicketComponent: React.FC<TicketProps> = ({id, name, onPress}) => {
     return (
             <TouchableHighlight
                 key={id}
@@ -22,16 +22,16 @@ const ComponenteTicket: React.FC<TicketProps> = ({id, name, onPress}) => {
 
 const styles= StyleSheet.create({
     button: {
-        backgroundColor: "#444",
+        backgroundColor: "#00bf63",
         padding: 10,
         marginVertical: 5,
         borderRadius: 5,
         alignItems: "center",
       },
       buttonText: {
-        color: "#fff",
+        color: "#111",
         fontSize: 16,
       },
 });
 
-export default ComponenteTicket;
+export default TicketComponent;
