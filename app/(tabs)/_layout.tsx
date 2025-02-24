@@ -42,13 +42,6 @@ export default function TabLayout() {
           tabBarIcon: ({ color }) => <IconSymbol size={28} name="person.fill" color={color} />,
         }}
       />
-      <Tabs.Screen
-        name= "TicketPage"
-        options={{
-          title:'TicketeraScreen',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="wallet.pass" color={color} />,
-        }}
-      />
     </Tabs>
   );
 }
