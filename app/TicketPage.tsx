@@ -9,6 +9,7 @@ export function TicketPage(){
   const [result, setResult] = useState<WebBrowser.WebBrowserResult | null>(null);
 
     const auth_token = process.env.EXPO_PUBLIC_MP_AUTH;
+    console.log("Token auth de MP: ", auth_token);
 
     const handleBuy = async (product: { name: any; price: any; }) => {
         try {
@@ -35,6 +36,7 @@ export function TicketPage(){
           });
       
           const data = await response.json();
+          console.log(data);
 
           return data.init_point;
         } catch (error) {
