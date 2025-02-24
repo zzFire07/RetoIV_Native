@@ -45,11 +45,14 @@ export function TicketPage(){
 
     const handlePayment = async (product: any, setPaymentUrl: any) =>{
         await handleBuy(product, setPaymentUrl);
-        if(paymentUrl){
+        
+        setTimeout(async () => {
+          if (paymentUrl) {
             alert("Redireccionando a MercadoPago");
             let result = await WebBrowser.openBrowserAsync(paymentUrl);
             setResult(result);
-        }
+          }
+        }, 500);
     }
 
 
