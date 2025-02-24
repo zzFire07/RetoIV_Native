@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { View, Text, StyleSheet, Button, TouchableHighlight, useColorScheme, Alert } from "react-native";
 import ComponenteTicket from "@/components/ComponenteTicket";
 import CustomHeader from "@/components/Header";
@@ -6,14 +6,19 @@ import * as WebBrowser from 'expo-web-browser';
 
 export function TicketPage(){
 
-    const [result, setResult] = useState<WebBrowser.WebBrowserResult | null>(null);
+  const [result, setResult] = useState<WebBrowser.WebBrowserResult | null>(null);
+
+  useEffect(() => {
+    if (result) {
+      console.log("Resultado del WebBrowser:", result);
+    }
+  }, [result]);
+
 
     const auth_token = process.env.EXPO_PUBLIC_MP_AUTH;
+    console.log(auth_token);
 
-    const [paymentUrl, setPaymentUrl] = useState(null);
-
-
-    const handleBuy = async (product: any, setPaymentUrl: (arg0: any) => void) => {
+    const handleBuy = async (product: { name: any; price: any; }) => {
         try {
           const response = await fetch("https://api.mercadopago.com/checkout/preferences", {
             method: "POST",
@@ -30,29 +35,29 @@ export function TicketPage(){
               }],
               auto_return: "approved",
               back_urls: {
-                success: "tuapp://success",
-                failure: "tuapp://failure",
+                success: "exp://10.4.3.51:8081/PaymentStatusPage",
+                failure: "exp://10.4.3.51:8081/PaymentStatusPage",
+                cancel: "exp://10.4.3.51:8081/PaymentStatusPage"
               },
             }),
           });
       
           const data = await response.json();
-          setPaymentUrl(data.init_point); // Guardar la URL de pago
+          console.log("Respuesta de MP:", data);
+          return data.init_point;
         } catch (error) {
           Alert.alert("Error", "Hubo un problema al generar la compra.");
+          console.log("Error al generar la compra:", error);
         }
       };
 
-    const handlePayment = async (product: any, setPaymentUrl: any) =>{
-        await handleBuy(product, setPaymentUrl);
-        
-        setTimeout(async () => {
-          if (paymentUrl) {
-            alert("Redireccionando a MercadoPago");
-            let result = await WebBrowser.openBrowserAsync(paymentUrl);
-            setResult(result);
-          }
-        }, 500);
+    const handlePayment = async (product: any) =>{
+        const paymentUrl = await handleBuy(product);
+        console.log(paymentUrl);
+        if (paymentUrl) {
+          let result = await WebBrowser.openBrowserAsync(paymentUrl);
+          setResult(result);
+        }
     }
 
 
@@ -60,7 +65,8 @@ export function TicketPage(){
     const listatickets = [
         { id: 1, name: "Ticketera 8 partidos", price: 1000 },
         { id: 2, name: "Ticketera 18 partidos", price: 2000 },
-        { id: 3, name: "Ticketera 27", price: 3000 },
+        { id: 3, name: "Ticketera 27 partidos", price: 3000 },
+        { id: 4, name: "Ticketera 36 partidos", price: 4000 },
         { id: 5, name: "Pasar el reto IV", price: 5000 },
     ];
     return (
@@ -73,7 +79,7 @@ export function TicketPage(){
                 key={ticket.id}
                 id={ticket.id}
                 name={ticket.name}
-                onPress={()=> handlePayment(ticket, setPaymentUrl)}
+                onPress={()=> handlePayment(ticket)}
                 />
             ))}
         </View>
