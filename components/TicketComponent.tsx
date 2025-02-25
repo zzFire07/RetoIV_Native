@@ -41,6 +41,7 @@ const styles= StyleSheet.create({
         marginVertical: 5,
         borderRadius: 5,
         alignItems: "center",
+        width: "65%"
       },
       buttonContent: {
         flexDirection:"row",

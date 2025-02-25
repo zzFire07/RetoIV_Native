@@ -80,18 +80,18 @@ export function TicketPage(){
 
     return (
         <>
-        <CustomHeader title="Club Ituzaingo" />
-        <View style={styles.container}>
-            <Text style={styles.title}>Ticketeras Disponibles</Text>
-            {listaTicket.map((ticket)=>(
-                <TicketComponent
-                key={ticket.id}
-                id={ticket.id}
-                name={ticket.name}
-                onPress={()=> handlePayment(ticket)}
-                />
-            ))}
-        </View>
+          <CustomHeader title="Club Ituzaingo" />
+          <View style={styles.container}>
+              <Text style={styles.title}>Ticketeras Disponibles</Text>
+              {listaTicket.map((ticket)=>(
+                  <TicketComponent
+                  key={ticket.id}
+                  id={ticket.id}
+                  name={ticket.name}
+                  onPress={()=> handlePayment(ticket)}
+                  />
+              ))}
+          </View>
         </>
        );
     }
@@ -99,11 +99,10 @@ export function TicketPage(){
     const styles = StyleSheet.create({
         container: {
             height: "100%",
-            flex: 1,
-            justifyContent: "center",
             alignItems: "center",
             padding: 2,
             backgroundColor: "white",
+            paddingTop: "20%",
         },
         title: {
             fontSize: 24,
