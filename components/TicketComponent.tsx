@@ -1,5 +1,7 @@
 import React from "react";
-import { Text, StyleSheet, TouchableHighlight } from "react-native";
+import { Text, StyleSheet, TouchableHighlight, Image, View } from "react-native";
+
+const mercadoPagoLogo = require("../assets/images/Mercado-Pagoo.png");
 
 interface TicketProps {
     id: number;
@@ -9,14 +11,24 @@ interface TicketProps {
 
 const TicketComponent: React.FC<TicketProps> = ({id, name, onPress}) => {
     return (
+        <>
+        
+       
             <TouchableHighlight
                 key={id}
                 style={styles.button}
                 onPress={onPress}
                 underlayColor="#333"
             >
-                <Text style={styles.buttonText}>{name}</Text>
+                <View style={styles.buttonContent}>
+                    
+                    <Text style={styles.buttonText}>{name}</Text>
+                    <Image source={mercadoPagoLogo} style={styles.logo} />
+
+                </View>
+                
             </TouchableHighlight>
+            </>
     );
 };
 
@@ -27,6 +39,20 @@ const styles= StyleSheet.create({
         marginVertical: 5,
         borderRadius: 5,
         alignItems: "center",
+      },
+      buttonContent: {
+        flexDirection:"row",
+        alignItems:"center",
+        justifyContent:"center",
+
+      },
+      logo:{
+        width:30,
+        height: 30,
+        resizeMode: "contain",
+        marginRight: 10,
+        marginLeft: 10,
+
       },
       buttonText: {
         color: "#111",
