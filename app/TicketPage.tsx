@@ -3,10 +3,20 @@ import { View, Text, StyleSheet } from "react-native";
 import TicketComponent from "@/components/TicketComponent";
 import CustomHeader from "@/components/CustomHeader";
 import * as WebBrowser from 'expo-web-browser';
+import axios from 'axios';
+
+const lista = [
+  { id: 1, name: "Ticketera 8 partidos", price: 1000 },
+  { id: 2, name: "Ticketera 18 partidos", price: 2000 },
+  { id: 3, name: "Ticketera 27 partidos", price: 3000 }
+];
 
 export function TicketPage(){
 
   const [result, setResult] = useState<WebBrowser.WebBrowserResult | null>(null);
+
+  
+  const [listaTicket, setListaTicket] = useState(lista);
 
     const auth_token = process.env.EXPO_PUBLIC_MP_AUTH;
 
@@ -51,19 +61,29 @@ export function TicketPage(){
         }
     }
 
+    useEffect(()=>{
+        // Se intenta traer informacion desde la base de datos, si no se puede se setea la informacion provisoria.
+        axios.get('http://localhost:3000/traerpaquetes',{
+          headers: {
+            'Access-Control-Allow-Origin' : '*'
+          },
+          responseType: "json",
+        }).then((response) => {
+        // Si el back-end esta corriendo correctamente, se setea la informacion de la base de datos.
+          setListaTicket(response.data);
+          console.log('restaurantes', response.data)
+        }).catch((error) => {
+        // Si el back-end no esta corriendo, se setea la informacion provisoria.
+        })
+    
+    },[])
 
-
-    const listatickets = [
-        { id: 1, name: "Ticketera 8 partidos", price: 1000 },
-        { id: 2, name: "Ticketera 18 partidos", price: 2000 },
-        { id: 3, name: "Ticketera 27 partidos", price: 3000 }
-    ];
     return (
         <>
         <CustomHeader title="Club Ituzaingo" />
         <View style={styles.container}>
             <Text style={styles.title}>Ticketeras Disponibles</Text>
-            {listatickets.map((ticket)=>(
+            {listaTicket.map((ticket)=>(
                 <TicketComponent
                 key={ticket.id}
                 id={ticket.id}

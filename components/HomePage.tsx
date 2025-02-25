@@ -1,11 +1,13 @@
 import AuthenticationButton from "./AuthenticationButton";
-import React, { useState } from "react";
+import React from "react";
 import CustomHeader from "./CustomHeader";
-import { Text, TouchableOpacity, StyleSheet, View } from "react-native";
+import { Text, TouchableOpacity, StyleSheet, View} from "react-native";
 import BuyTicketsButton from "./BuyTicketsButton";
 import TicketDisponibility from "./TicketDisponibility";
+import { useAppContext } from "@/context/AppContext";
+
 export function HomePage() {
-  const [loggedIn, setLoggedIn] = useState(false);
+  const { loggedIn, setLoggedIn } = useAppContext();
   
     return (
       <>
@@ -13,6 +15,7 @@ export function HomePage() {
         <TouchableOpacity style={styles.button} onPress={() => setLoggedIn(!loggedIn)}>
           <Text>{loggedIn ? "Cerrar Sesión" : "Iniciar Sesión"}</Text>
         </TouchableOpacity>
+
         <View style={styles.container}>
           {!loggedIn && <AuthenticationButton />}
           {loggedIn && (
@@ -21,6 +24,7 @@ export function HomePage() {
               <BuyTicketsButton />
             </>
           )}
+        
         </View>
       </>
     );  
@@ -42,4 +46,5 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     gap: 20,
   },
+  
 });
