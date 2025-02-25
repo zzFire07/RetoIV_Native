@@ -56,9 +56,7 @@ export function TicketPage(){
     const listatickets = [
         { id: 1, name: "Ticketera 8 partidos", price: 1000 },
         { id: 2, name: "Ticketera 18 partidos", price: 2000 },
-        { id: 3, name: "Ticketera 27 partidos", price: 3000 },
-        { id: 4, name: "Ticketera 36 partidos", price: 4000 },
-        { id: 5, name: "Pasar el reto IV", price: 5000 },
+        { id: 3, name: "Ticketera 27 partidos", price: 3000 }
     ];
     return (
         <>
