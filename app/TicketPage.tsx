@@ -110,7 +110,7 @@ export function TicketPage(){
             marginBottom: 20,
             width: 300,
             height: 70,
-            backgroundColor:"#00bf63",
+            backgroundColor:"#ca312b",
             borderRadius: 15,
             textAlign: "center",
             textAlignVertical: "center",
