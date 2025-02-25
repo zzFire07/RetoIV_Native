@@ -5,24 +5,11 @@ export default function TicketDisponibility(){
 
     const cantidadTickets = 0;
 
-    if (cantidadTickets > 0) {
-        return (
-            <View style={styles.container}>
-                <Text style={styles.text}>Tickets disponibles: {cantidadTickets}</Text>
-            </View>
+    return (
+        <View style={styles.container}>
+            <Text style={styles.text}>Partidos disponibles: {cantidadTickets}</Text>
+        </View>
         );
-        
-    } else {
-        return (
-            <View style={styles.container}>
-                <Link href="/TicketPage" asChild>
-                    <TouchableOpacity style={styles.boton}>
-                        <Text style={styles.text}>COMPRAR TICKETS YA</Text>
-                    </TouchableOpacity>
-                </Link>
-            </View>
-        );
-    }
 }
 
 
