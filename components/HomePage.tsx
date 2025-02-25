@@ -1,12 +1,13 @@
 import AuthenticationButton from "./AuthenticationButton";
-import React, { useState } from "react";
+import React from "react";
 import CustomHeader from "./CustomHeader";
 import { Text, TouchableOpacity, StyleSheet, View } from "react-native";
-import { MainPageButtons } from "./MainPageButtons";
 import BuyTicketsButton from "./BuyTicketsButton";
 import TicketDisponibility from "./TicketDisponibility";
+import { useAppContext } from "@/context/AppContext";
+
 export function HomePage() {
-  const [loggedIn, setLoggedIn] = useState(false);
+  const { loggedIn, setLoggedIn } = useAppContext();
   
     return (
       <>
