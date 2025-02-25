@@ -3,7 +3,7 @@ import React from "react";
 import CustomHeader from "./CustomHeader";
 import { Text, TouchableOpacity, StyleSheet, View} from "react-native";
 import BuyTicketsButton from "./BuyTicketsButton";
-import TicketDisponibility from "./TicketDisponibility";
+import MatchDisponibility from "./MatchDisponibility";
 import { useAppContext } from "@/context/AppContext";
 
 export function HomePage() {
@@ -20,7 +20,7 @@ export function HomePage() {
           {!loggedIn && <AuthenticationButton />}
           {loggedIn && (
             <>
-              <TicketDisponibility />
+              <MatchDisponibility />
               <BuyTicketsButton />
             </>
           )}

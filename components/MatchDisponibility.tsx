@@ -1,7 +1,6 @@
-import { StyleSheet, Text, View, TouchableOpacity, Alert } from "react-native";
-import { Link } from "expo-router";
+import { StyleSheet, Text, View } from "react-native";
 
-export default function TicketDisponibility(){
+export default function MatchDisponibility(){
 
     const cantidadTickets = 0;
 
@@ -31,15 +30,5 @@ const styles = StyleSheet.create({
         textAlign: "center",
         textAlignVertical: "center", // For Android
         lineHeight: 50, // For iOS
-    },
-    boton: {
-        padding: 10,
-        width: 250,
-        height: 50,
-        margin: 10,
-        marginTop: 50,
-        borderRadius: 30,
-        alignItems: "center",
-        justifyContent: "center"
     }
 })
