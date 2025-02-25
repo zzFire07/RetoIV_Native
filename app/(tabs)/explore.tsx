@@ -1,14 +1,14 @@
-import { StyleSheet, Text } from 'react-native';
+import { StyleSheet } from 'react-native';
 
 import CustomHeader from '@/components/CustomHeader';
-import { Profile } from '@/components/Profile';
+import ProfileScreen from '@/components/PantallaPerfil';
 
 
 export default function TabTwoScreen() {
   return (
     <>
       <CustomHeader title="Club Ituzaingo" />
-      <Profile />
+      <ProfileScreen />
     </>
   );
 }
