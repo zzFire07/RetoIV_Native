@@ -5,24 +5,11 @@ export default function TicketDisponibility(){
 
     const cantidadTickets = 0;
 
-    if (cantidadTickets > 0) {
-        return (
-            <View style={styles.container}>
-                <Text style={styles.text}>Tickets disponibles: {cantidadTickets}</Text>
-            </View>
+    return (
+        <View style={styles.container}>
+            <Text style={styles.text}>Partidos disponibles: {cantidadTickets}</Text>
+        </View>
         );
-        
-    } else {
-        return (
-            <View style={styles.container}>
-                <Link href="/TicketPage" asChild>
-                    <TouchableOpacity style={styles.boton}>
-                        <Text style={styles.text}>COMPRAR TICKETS YA</Text>
-                    </TouchableOpacity>
-                </Link>
-            </View>
-        );
-    }
 }
 
 
@@ -38,7 +25,7 @@ const styles = StyleSheet.create({
         width: 250,
         height: 50,
         margin: 10,
-        backgroundColor: "#1a8945",
+        backgroundColor: "#11aa5a",
         borderRadius: 30,
         color: "white",
         textAlign: "center",
@@ -50,7 +37,7 @@ const styles = StyleSheet.create({
         width: 250,
         height: 50,
         margin: 10,
-        marginTop: 100,
+        marginTop: 50,
         borderRadius: 30,
         alignItems: "center",
         justifyContent: "center"

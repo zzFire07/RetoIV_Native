@@ -30,19 +30,19 @@ const styles = StyleSheet.create({
     buttonTicketera:{
         width: 150,
         height: 100,
-        backgroundColor: "white",
-        borderWidth: 2,
-        borderColor: "black",
+        backgroundColor: "#ca312b",
+        borderRadius: 18,
         alignSelf: "center",
         justifyContent: "center",
         overflow: "hidden",
-        marginBottom: 250
+        marginBottom: 300
     }, 
     text:{
-        color: "black",
+        color: "white",
         fontSize: 15,
         alignSelf: "center", 
-        justifyContent: "center"
+        justifyContent: "center",
+        fontWeight: "bold"
 
     },
 })

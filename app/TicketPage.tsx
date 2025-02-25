@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, StyleSheet, useColorScheme } from "react-native";
+import { View, Text, StyleSheet } from "react-native";
 import TicketComponent from "@/components/TicketComponent";
 import CustomHeader from "@/components/CustomHeader";
-import axios from "axios";
 import * as WebBrowser from 'expo-web-browser';
+import axios from 'axios';
 
 const lista = [
     { id: 1, name: "Ticketera 8 partidos", price: 1000 },
@@ -59,7 +59,6 @@ export function TicketPage(){
           setResult(result);
         }
     }
-
 
     useEffect(()=>{
         // Se intenta traer informacion desde la base de datos, si no se puede se setea la informacion provisoria.
