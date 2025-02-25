@@ -3,6 +3,7 @@ import { View, Text, StyleSheet } from 'react-native';
 
 const User = {
     nombre: 'Pedro',
+    apellido: 'Perez',
     email: 'super_pedro@gmail.com',
     cupones: 10
 }
@@ -10,11 +11,12 @@ const User = {
 const ProfileScreen = () => {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Perfil</Text>
+      <Text style={styles.title}>Mi Perfil</Text>
       <View style={styles.infocontainer}>
-        <Text style={styles.textinfo}>{User.nombre}</Text>
-        <Text style={styles.textinfo}>{User.email}</Text>
-        <Text style={styles.textinfo}>{User.cupones}</Text>
+        <Text style= {styles.text}>Información de la cuenta</Text>
+        <Text style={styles.textinfo}>Nombre: {User.nombre} {User.apellido}</Text>
+        <Text style={styles.textinfo}>Email: {User.email}</Text>
+        <Text style={styles.textinfo}>Tickets disponibles: {User.cupones}</Text>
       </View>
     </View>
   );
@@ -22,7 +24,7 @@ const ProfileScreen = () => {
 
 const styles = StyleSheet.create({
   container: {
-    paddingTop: 60,
+    paddingTop: 30,
     height: '100%',
     alignItems: 'center',
     backgroundColor: '#ffffff',
@@ -37,21 +39,28 @@ const styles = StyleSheet.create({
     marginBottom: 40,
     textAlign: 'center',
     alignSelf: 'center',
-    backgroundColor: '#1bc01b',
+    fontWeight: "bold"
   },
   infocontainer: {
      width: '75%',
      height: '60%',
      borderRadius: 15,
-     backgroundColor: '#a0ffa0',
+     backgroundColor: '#95d3a1',
      alignItems: 'center'
   },
   textinfo: {
     marginTop: 20,
     fontSize: 15,
-    textAlign: 'center',
-    alignSelf: 'center',
+    textAlign: 'left',
+    alignSelf: 'flex-start',
+    marginLeft: 20,
+    marginBottom: 15
   },
+  text:{
+    fontSize: 16,
+    fontWeight: "bold",
+    marginTop: 20
+  }
 });
 
 export default ProfileScreen;
