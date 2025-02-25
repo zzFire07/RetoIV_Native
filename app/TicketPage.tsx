@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, StyleSheet, Button, TouchableHighlight, useColorScheme } from "react-native";
+import { View, Text, StyleSheet } from "react-native";
 import TicketComponent from "@/components/TicketComponent";
 import CustomHeader from "@/components/CustomHeader";
 import * as WebBrowser from 'expo-web-browser';
@@ -9,7 +9,6 @@ export function TicketPage(){
   const [result, setResult] = useState<WebBrowser.WebBrowserResult | null>(null);
 
     const auth_token = process.env.EXPO_PUBLIC_MP_AUTH;
-    console.log("Token auth de MP: ", auth_token);
 
     const handleBuy = async (product: { name: any; price: any; }) => {
         try {
@@ -46,7 +45,6 @@ export function TicketPage(){
 
     const handlePayment = async (product: any) =>{
         const paymentUrl = await handleBuy(product);
-        console.log(paymentUrl);
         if (paymentUrl) {
           let result = await WebBrowser.openBrowserAsync(paymentUrl);
           setResult(result);
