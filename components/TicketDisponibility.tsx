@@ -3,7 +3,7 @@ import { Link } from "expo-router";
 
 export default function TicketDisponibility(){
 
-    const cantidadTickets = 0
+    const cantidadTickets = 0;
 
     if (cantidadTickets > 0) {
         return (
@@ -40,10 +40,10 @@ const styles = StyleSheet.create({
         margin: 10,
         backgroundColor: "#1a8945",
         borderRadius: 30,
-        color: "black",
-        alignItems: "center",
-        justifyContent: "center",
+        color: "white",
         textAlign: "center",
+        textAlignVertical: "center", // For Android
+        lineHeight: 50, // For iOS
     },
     boton: {
         padding: 10,
@@ -55,5 +55,4 @@ const styles = StyleSheet.create({
         alignItems: "center",
         justifyContent: "center"
     }
-
 })
