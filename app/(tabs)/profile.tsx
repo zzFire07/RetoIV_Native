@@ -1,7 +1,7 @@
 import { StyleSheet } from 'react-native';
 
 import CustomHeader from '@/components/CustomHeader';
-import ProfileScreen from '@/components/PantallaPerfil';
+import ProfileScreen from '@/app/ProfileScreen';
 
 
 export default function TabTwoScreen() {

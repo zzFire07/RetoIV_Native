@@ -101,18 +101,19 @@ export function TicketPage(){
             alignItems: "center",
             padding: 2,
             backgroundColor: "white",
-            paddingTop: "20%",
+            paddingTop: 60,
         },
         title: {
             fontSize: 24,
             fontWeight: "bold",
-            marginBottom: 20,
+            marginBottom: 40,
             width: 300,
-            height: 70,
+            height: 70, // MANTENER HEIGHT CON LINE HEIGHT PARA MANTENER CENTRADO
             backgroundColor:"#ca312b",
             borderRadius: 15,
             textAlign: "center",
-            textAlignVertical: "center",
+            textAlignVertical: "center", // For Android
+            lineHeight: 70, // For iOS == MANTENER LINE HEIGHT CON HEIGHT PARA MANTENER CENTRADO
             color: "white",
         },
     });

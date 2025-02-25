@@ -1,9 +1,9 @@
-import AuthenticationButton from "./AuthenticationButton";
+import AuthenticationButton from "../components/AuthenticationButton";
 import React from "react";
-import CustomHeader from "./CustomHeader";
+import CustomHeader from "../components/CustomHeader";
 import { Text, TouchableOpacity, StyleSheet, View} from "react-native";
-import BuyTicketsButton from "./BuyTicketsButton";
-import MatchDisponibility from "./MatchDisponibility";
+import BuyTicketsButton from "../components/BuyTicketsButton";
+import MatchDisponibility from "../components/MatchDisponibility";
 import { useAppContext } from "@/context/AppContext";
 
 export function HomePage() {
