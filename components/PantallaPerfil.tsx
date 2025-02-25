@@ -16,7 +16,7 @@ const ProfileScreen = () => {
         <Text style= {styles.text}>Información de la cuenta</Text>
         <Text style={styles.textinfo}>Nombre: {User.nombre} {User.apellido}</Text>
         <Text style={styles.textinfo}>Email: {User.email}</Text>
-        <Text style={styles.textinfo}>Tickets disponibles: {User.cupones}</Text>
+        <Text style={styles.textinfo}>Partidos disponibles: {User.cupones}</Text>
       </View>
     </View>
   );

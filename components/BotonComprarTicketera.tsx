@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
         marginBottom: 250
     }, 
     text:{
-        color: "white",
+        color: "black",
         fontSize: 15,
         alignSelf: "center", 
         justifyContent: "center"
