@@ -4,10 +4,11 @@ import { Platform } from 'react-native';
 import { HapticTab } from '@/components/premade-comps/HapticTab';
 import { IconSymbol } from '@/components/ui/IconSymbol';
 import TabBarBackground from '@/components/ui/TabBarBackground';
+import { useAppContext } from '@/context/AppContext';
 
 export default function TabLayout() {
 
-  const isLoggedIn = true; // gotta change this to however we authenticate
+  const loggedIn = useAppContext().loggedIn;
 
   return (
     <Tabs
@@ -36,7 +37,7 @@ export default function TabLayout() {
         <Tabs.Screen
         name="explore"
           options={{
-            href: (isLoggedIn ? '/explore' : null),
+            href: (loggedIn ? '/explore' : null),
             title: 'Perfil',
             tabBarIcon: ({ color }) => <IconSymbol size={28} name="person.fill" color={color} />,
           }}

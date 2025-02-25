@@ -98,11 +98,10 @@ export function TicketPage(){
     const styles = StyleSheet.create({
         container: {
             height: "100%",
-            flex: 1,
-            justifyContent: "center",
             alignItems: "center",
             padding: 2,
             backgroundColor: "white",
+            paddingTop: "20%",
         },
         title: {
             fontSize: 24,
@@ -110,7 +109,7 @@ export function TicketPage(){
             marginBottom: 20,
             width: 300,
             height: 70,
-            backgroundColor:"#00bf63",
+            backgroundColor:"#ca312b",
             borderRadius: 15,
             textAlign: "center",
             textAlignVertical: "center",
