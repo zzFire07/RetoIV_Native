@@ -1,30 +1,12 @@
 import { StyleSheet, Text, View, TouchableHighlight, Alert } from "react-native";
+import BuyTicketsButton from "@/components/BuyTicketsButton"
+import TicketDisponibility from "@/components/TicketDisponibility";
 
-export function BotonesMainPage(){
+export function MainPageButtons(){
     return(
         <View style={styles.container}>
-            <TouchableHighlight
-                style={styles.buttonCancha}
-                underlayColor={"black"}
-                onPress={() => Alert.alert("Ver canchas disponibles")}
-            >
-                <Text style={styles.text}>VER CANCHAS DISPONIBLES</Text>
-            </TouchableHighlight>
-            <TouchableHighlight
-                style= {styles.buttonTorneo}
-                underlayColor= {"black"}
-                onPress={() => Alert.alert("Ver torneos disponibles")}
-            >
-                <Text style= {styles.text}>VER TORNEOS DISPONIBLES</Text>
-            </TouchableHighlight>
-            <TouchableHighlight
-                style= {styles.buttonTicketera}
-                underlayColor={"black"}
-                onPress={() => Alert.alert("Comprar ticketera")}
-            >
-                <Text style= {styles.text}>COMPRAR TICKETERA</Text>
-            </TouchableHighlight>
-          
+            <TicketDisponibility/>
+            <BuyTicketsButton/>
         </View>
     )
 }
@@ -74,5 +56,17 @@ const styles = StyleSheet.create({
         alignSelf: "center", 
         justifyContent: "center"
 
-    }
+    },
+    cantidadTicket:{
+        fontSize: 20,
+        width: 250,
+        height: 50,
+        margin: 10,
+        backgroundColor: "#1a8945",
+        borderRadius: 20,
+        color: "black",
+        alignItems: "center",
+        justifyContent: "center",
+        textAlign: "center",
+        }
 });
