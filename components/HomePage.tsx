@@ -2,7 +2,6 @@ import AuthenticationButton from "./AuthenticationButton";
 import React, { useState } from "react";
 import CustomHeader from "./CustomHeader";
 import { Text, TouchableOpacity, StyleSheet, View } from "react-native";
-import { MainPageButtons } from "./MainPageButtons";
 import BuyTicketsButton from "./BuyTicketsButton";
 import TicketDisponibility from "./TicketDisponibility";
 export function HomePage() {

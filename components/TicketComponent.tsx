@@ -1,6 +1,8 @@
 import React from "react";
 import { Text, StyleSheet, TouchableHighlight } from "react-native";
 
+
+
 interface TicketProps {
     id: number;
     name: string;
