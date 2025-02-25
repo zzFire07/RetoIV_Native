@@ -1,12 +1,12 @@
 import { StyleSheet, Text, View, TouchableHighlight, Alert } from "react-native";
-import BotonComprarTicketera from "@/components/BotonComprarTicketera"
-import TicketsDisponibles from "@/components/TicketsDisponibles"
+import BuyTicketsButton from "@/components/BuyTicketsButton"
+import TicketDisponibility from "@/components/TicketDisponibility";
 
 export function MainPageButtons(){
     return(
         <View style={styles.container}>
-            <TicketsDisponibles/>
-            <BotonComprarTicketera/>
+            <TicketDisponibility/>
+            <BuyTicketsButton/>
         </View>
     )
 }

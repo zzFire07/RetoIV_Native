@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View, TouchableHighlight, Alert } from "react-native";
 import { Link } from "expo-router";
 
-export default function BotonComprarTicketera(){
+export default function BuyTicketsButton(){
     return(
         <View style= {styles.container}>
             <Link href={"/TicketPage"} asChild>

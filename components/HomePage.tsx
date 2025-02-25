@@ -1,8 +1,9 @@
 import AuthenticationButton from "./AuthenticationButton";
 import React, { useState } from "react";
 import CustomHeader from "./CustomHeader";
-import { Text, TouchableOpacity, StyleSheet, Linking  } from "react-native";
-
+import { Text, TouchableOpacity, StyleSheet, View } from "react-native";
+import BuyTicketsButton from "./BuyTicketsButton";
+import TicketDisponibility from "./TicketDisponibility";
 export function HomePage() {
   const [loggedIn, setLoggedIn] = useState(false);
 const handleWhatsAppPress=() => {
@@ -19,18 +20,15 @@ const handleWhatsAppPress=() => {
         <TouchableOpacity style={styles.button} onPress={() => setLoggedIn(!loggedIn)}>
           <Text>{loggedIn ? "Cerrar Sesión" : "Iniciar Sesión"}</Text>
         </TouchableOpacity>
-
-        <TouchableOpacity style={styles.whatsappButton}
-        onPress={handleWhatsAppPress}>
-          <Text style={styles.whatsappText}> Contactar con Administrador</Text>
-        </TouchableOpacity>
-        {!loggedIn && <AuthenticationButton />}
-        {loggedIn && (
-          <>
-            <Text>logged in</Text>
-            {/* ticketera */}
-          </>
-        )}
+        <View style={styles.container}>
+          {!loggedIn && <AuthenticationButton />}
+          {loggedIn && (
+            <>
+              <TicketDisponibility />
+              <BuyTicketsButton />
+            </>
+          )}
+        </View>
       </>
     );  
 }
@@ -43,17 +41,12 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     alignItems: "center",
   },
-  whatsappButton: {
-    backgroundColor:"#25D366",
-    paddingVertical: 12,
-    paddingHorizontal: 20,
-    borderRadius: 8,
+  container: {
+    flex: 1,
+    backgroundColor: "white",
     alignItems: "center",
-    marginTop: 20,
-  },
-  whatsappText:{
-    color:"white",
-    fontSize: 16,
-    fontWeight: "bold",
+    justifyContent: "center",
+    flexDirection: "column",
+    gap: 20,
   },
 });

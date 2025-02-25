@@ -3,6 +3,8 @@ import { Text, StyleSheet, TouchableHighlight, Image, View } from "react-native"
 
 const mercadoPagoLogo = require("../assets/images/Mercado-Pagoo.png");
 
+
+
 interface TicketProps {
     id: number;
     name: string;
