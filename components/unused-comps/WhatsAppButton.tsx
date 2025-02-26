@@ -1,5 +1,5 @@
 import React from "react";
-import {TouchableOpacity, Image,  StyleSheet, Linking } from "react-native";
+import {View, Text, TouchableOpacity, Image,  StyleSheet, Linking } from "react-native";
 
 const handleWhatsAppPress = () => {
   const phoneNumber = "59899532260";
@@ -12,23 +12,38 @@ const handleWhatsAppPress = () => {
 
 export default function WhatsAppButton() {
   return (
-    <TouchableOpacity style={styles.whatsappButton} onPress={handleWhatsAppPress}>
-      <Image source={require("../../assets/images/whatsapp-logo.jpg")}
-      style={styles.whatsappIcon} 
-      />
-    </TouchableOpacity>
+    <View style={styles.container}>
+      <Text style={styles.texto}>Contáctanos</Text>
+    
+      <TouchableOpacity onPress={handleWhatsAppPress}>
+        <Image source={require("../../assets/images/whatsapp-logo.jpg")}
+        style={styles.whatsappIcon} 
+        />
+      </TouchableOpacity>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
-  whatsappButton: {
-    position: "absolute",
-    bottom: 60,
+  container:{
+    flexDirection:"row",
+    alignItems:"center",
+    justifyContent: "center",
+    position:"absolute",
+    bottom: 100,
     right: 20,
     zIndex: 10,
-    marginTop: 50,
-    marginBottom: 50,
-  
+    backgroundColor: "white",
+    borderWidth: 2,
+    borderColor:"#00bf63",
+    borderRadius:10,
+    paddingHorizontal: 10,
+    paddingVertical: 5,
+  },
+  texto:{
+    fontSize: 16,
+    color: "black",
+    marginRight: 10,
   },
   whatsappIcon: {
     width: 50,
