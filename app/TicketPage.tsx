@@ -4,6 +4,8 @@ import TicketComponent from "@/components/TicketComponent";
 import CustomHeader from "@/components/CustomHeader";
 import * as WebBrowser from 'expo-web-browser';
 import axios from 'axios';
+import WhatsAppButton from "@/components/unused-comps/WhatsAppButton";
+
 
 const lista = [
     { id: 1, name: "Ticketera 8 partidos", price: 1000 },
@@ -89,6 +91,7 @@ export function TicketPage(){
                   />
               ))}
           </View>
+          <WhatsAppButton />
         </>
        );
     }
