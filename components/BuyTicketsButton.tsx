@@ -10,7 +10,6 @@ export default function BuyTicketsButton(){
                 underlayColor={"black"}
             >
                 <Text style= {styles.text}>COMPRAR TICKETERA</Text>
-
                 </TouchableHighlight>
             </Link>
         </View>

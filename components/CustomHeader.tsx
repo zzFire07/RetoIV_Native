@@ -6,10 +6,7 @@ const ituzaingoImage = require("../assets/images/padel.png");
 const CustomHeader = ({ title }: { title: string }) => {
   return (
     <View style={styles.header}>
-      
       <Image style={styles.logo} source={ituzaingoImage} />
-      
-      
       <Text style={styles.headerText}>{title}</Text>
     </View>
   );
