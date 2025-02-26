@@ -8,7 +8,7 @@ export default function MatchDisponibility(){
         <View style={styles.container}>
             <Text style={styles.text}>Partidos disponibles: {cantidadTickets}</Text>
         </View>
-        );
+    );
 }
 
 
@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
         borderRadius: 30,
         color: "white",
         textAlign: "center",
-        textAlignVertical: "center", // For Android
-        lineHeight: 50, // For iOS
+        textAlignVertical: "center",
+        lineHeight: 50
     }
 })

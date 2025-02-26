@@ -44,11 +44,10 @@ export function TicketPage(){
           });
       
           const data = await response.json();
-          console.log(data);
 
           return data.init_point;
         } catch (error) {
-          console.log("Error al generar la compra:", error);
+          
         }
       };
 
@@ -70,7 +69,6 @@ export function TicketPage(){
         }).then((response) => {
         // Si el back-end esta corriendo correctamente, se setea la informacion de la base de datos.
           setListaTicket(response.data);
-          console.log('restaurantes', response.data)
         }).catch((error) => {
         // Si el back-end no esta corriendo, se setea la informacion provisoria.
         })
