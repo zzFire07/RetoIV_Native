@@ -2,7 +2,7 @@ import React from "react";
 import {View, Text, TouchableOpacity, Image,  StyleSheet, Linking } from "react-native";
 
 const handleWhatsAppPress = () => {
-  const phoneNumber = "59899532260";
+  const phoneNumber = "59897664353";
   const whatsappURL = `https://wa.me/${phoneNumber}`;
 
   Linking.openURL(whatsappURL).catch(() =>
