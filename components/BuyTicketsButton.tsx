@@ -1,14 +1,13 @@
-import { StyleSheet, Text, View, TouchableHighlight, Alert } from "react-native";
+import { StyleSheet, Text, View, TouchableHighlight } from "react-native";
 import { Link } from "expo-router";
 
 export default function BuyTicketsButton(){
     return(
-        <View style= {styles.container}>
+        <View>
             <Link href={"/TicketPage"} asChild>
                 <TouchableHighlight
                 style= {styles.buttonTicketera}
                 underlayColor={"black"}
-                onPress={() => {}}
             >
                 <Text style= {styles.text}>COMPRAR TICKETERA</Text>
 
@@ -19,19 +18,11 @@ export default function BuyTicketsButton(){
 }
 
 const styles = StyleSheet.create({
-    container:{
-        flex: 1,
-        alignItems: "center",
-        justifyContent: "center",
-        backgroundColor: "#fff",
-        padding: 20,
-    
-    },
     buttonTicketera:{
         width: 150,
         height: 100,
         backgroundColor: "#ca312b",
-        borderRadius: 18,
+        borderRadius: 12,
         alignSelf: "center",
         justifyContent: "center",
         overflow: "hidden",
@@ -39,10 +30,10 @@ const styles = StyleSheet.create({
     }, 
     text:{
         color: "white",
-        fontSize: 15,
+        fontSize: 16,
         alignSelf: "center", 
         justifyContent: "center",
-        fontWeight: "bold"
-
+        fontWeight: "bold",
+        textAlign: "center"
     },
 })

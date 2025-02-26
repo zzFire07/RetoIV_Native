@@ -6,19 +6,18 @@ import * as WebBrowser from 'expo-web-browser';
 import axios from 'axios';
 
 const lista = [
-  { id: 1, name: "Ticketera 8 partidos", price: 1000 },
-  { id: 2, name: "Ticketera 18 partidos", price: 2000 },
-  { id: 3, name: "Ticketera 27 partidos", price: 3000 }
+    { id: 1, name: "Ticketera 8 partidos", price: 1000 },
+    { id: 2, name: "Ticketera 18 partidos", price: 2000 },
+    { id: 3, name: "Ticketera 27 partidos", price: 3000 }
 ];
 
 export function TicketPage(){
 
   const [result, setResult] = useState<WebBrowser.WebBrowserResult | null>(null);
-
   
-  const [listaTicket, setListaTicket] = useState(lista);
+  const auth_token = process.env.EXPO_PUBLIC_MP_AUTH;
 
-    const auth_token = process.env.EXPO_PUBLIC_MP_AUTH;
+  const [listaTicket, setListaTicket] = useState(lista);
 
     const handleBuy = async (product: { name: any; price: any; }) => {
         try {
@@ -102,18 +101,19 @@ export function TicketPage(){
             alignItems: "center",
             padding: 2,
             backgroundColor: "white",
-            paddingTop: "20%",
+            paddingTop: 60,
         },
         title: {
             fontSize: 24,
             fontWeight: "bold",
-            marginBottom: 20,
+            marginBottom: 40,
             width: 300,
-            height: 70,
-            backgroundColor:"#00bf63",
+            height: 70, // MANTENER HEIGHT CON LINE HEIGHT PARA MANTENER CENTRADO
+            backgroundColor:"#ca312b",
             borderRadius: 15,
             textAlign: "center",
-            textAlignVertical: "center",
+            textAlignVertical: "center", // For Android
+            lineHeight: 70, // For iOS == MANTENER LINE HEIGHT CON HEIGHT PARA MANTENER CENTRADO
             color: "white",
         },
     });

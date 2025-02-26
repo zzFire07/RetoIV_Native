@@ -5,7 +5,7 @@ const User = {
     nombre: 'Pedro',
     apellido: 'Perez',
     email: 'super_pedro@gmail.com',
-    cupones: 10
+    partidos: 10
 }
 
 const ProfileScreen = () => {
@@ -16,7 +16,7 @@ const ProfileScreen = () => {
         <Text style= {styles.text}>Información de la cuenta</Text>
         <Text style={styles.textinfo}>Nombre: {User.nombre} {User.apellido}</Text>
         <Text style={styles.textinfo}>Email: {User.email}</Text>
-        <Text style={styles.textinfo}>Partidos disponibles: {User.cupones}</Text>
+        <Text style={styles.textinfo}>Partidos disponibles: {User.partidos}</Text>
       </View>
     </View>
   );
