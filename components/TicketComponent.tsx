@@ -3,8 +3,6 @@ import { Text, StyleSheet, TouchableHighlight, Image, View } from "react-native"
 
 const mercadoPagoLogo = require("../assets/images/Mercado-Pagoo.png");
 
-
-
 interface TicketProps {
     id: number;
     name: string;
@@ -37,11 +35,11 @@ const TicketComponent: React.FC<TicketProps> = ({id, name, onPress}) => {
 const styles= StyleSheet.create({
     button: {
         backgroundColor: "#00bf63",
-        padding: 10,
-        marginVertical: 5,
-        borderRadius: 5,
+        padding: 15,
+        marginVertical: 10,
+        borderRadius: 20,
         alignItems: "center",
-        width: "65%"
+        width: "65%",
       },
       buttonContent: {
         flexDirection:"row",

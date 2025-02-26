@@ -115,6 +115,8 @@ export function TicketPage(){
             textAlignVertical: "center", // For Android
             lineHeight: 70, // For iOS == MANTENER LINE HEIGHT CON HEIGHT PARA MANTENER CENTRADO
             color: "white",
+            boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.5)"
+
         },
     });
 
