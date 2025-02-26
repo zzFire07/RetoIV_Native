@@ -3,8 +3,8 @@
 # dependencies
 node_modules/
 package-lock.json
-
 .env
+
 
 # Expo
 .expo/
@@ -22,6 +22,14 @@ expo-env.d.ts
 
 # Metro
 .metro-health-check*
+
+# Build
+build/
+android/
+
+# firebase and google
+google-services.json
+GoogleService-Info.plist
 
 # debug
 npm-debug.*
