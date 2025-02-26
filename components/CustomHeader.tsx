@@ -1,8 +1,7 @@
 import React from "react";
 import { View, Text, StyleSheet, Image } from "react-native";
 
-// Carga la imagen correctamente con `require()`
-const ituzaingoImage = require("../assets/images/ituzaingo.png");
+const ituzaingoImage = require("../assets/images/padel.png");
 
 const CustomHeader = ({ title }: { title: string }) => {
   return (
@@ -20,7 +19,7 @@ const styles = StyleSheet.create({
   header: {
     width: "100%",
     height: 60,
-    backgroundColor: "white",
+    backgroundColor: "#eee",
     flexDirection: "row", 
     alignItems: "center",
     justifyContent: "center",
@@ -28,10 +27,11 @@ const styles = StyleSheet.create({
     marginTop: 35,
   },
   logo: {
-    width: 40,
+    width: 70,
     height: 40,
-    marginRight: 25, 
-    marginLeft: -5, 
+    marginRight: 15, 
+    marginLeft: -5,
+    marginTop: 5, 
   },
   headerText: {
     fontSize: 25,
