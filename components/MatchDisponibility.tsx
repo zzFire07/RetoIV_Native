@@ -18,6 +18,8 @@ const styles = StyleSheet.create({
         alignItems: "center",
         justifyContent: "center",
         padding: 10,
+        marginBottom: 90,
+        
     },
     text:{
         fontSize: 20,
@@ -28,7 +30,9 @@ const styles = StyleSheet.create({
         borderRadius: 30,
         color: "white",
         textAlign: "center",
-        textAlignVertical: "center",
-        lineHeight: 50
+        textAlignVertical: "center", // For Android
+        lineHeight: 50, // For iOS,
+        boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.5)"
+
     }
 })
