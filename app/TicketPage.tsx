@@ -3,25 +3,28 @@ import { View, Text, StyleSheet } from "react-native";
 import TicketComponent from "@/components/TicketComponent";
 import CustomHeader from "@/components/CustomHeader";
 import * as WebBrowser from 'expo-web-browser';
-import axios from 'axios';
 import WhatsAppButton from "@/components/unused-comps/WhatsAppButton";
-
-
-const lista = [
-    { id: 1, name: "Ticketera 8 partidos", price: 1000 },
-    { id: 2, name: "Ticketera 18 partidos", price: 2000 },
-    { id: 3, name: "Ticketera 27 partidos", price: 3000 }
-];
+import apiService from "@/services/apiService";
 
 export function TicketPage(){
 
   const [result, setResult] = useState<WebBrowser.WebBrowserResult | null>(null);
-  
+  const [listaTicket, setListaTicket] = useState([]);
   const auth_token = process.env.EXPO_PUBLIC_MP_AUTH;
 
-  const [listaTicket, setListaTicket] = useState(lista);
+  useEffect(() => {
+    apiService
+      .getAllPackages()
+      .then((response) => {
+        setListaTicket(response.data); 
+        console.log("Paquetes obtenidos:", response.data);
+      })
+      .catch((error) => {
+        console.error("Error al obtener paquetes:", error);
+      });
+  }, []);
 
-    const handleBuy = async (product: { name: any; price: any; }) => {
+    const handleBuy = async (product: { name: string; price: number }) => {
         try {
           const response = await fetch("https://api.mercadopago.com/checkout/preferences", {
             method: "POST",
@@ -46,14 +49,13 @@ export function TicketPage(){
           });
       
           const data = await response.json();
-
           return data.init_point;
         } catch (error) {
-          
+          console.error("Error al generar la compra:", error);
         }
       };
 
-    const handlePayment = async (product: any) =>{
+    const handlePayment = async (product: {name: string; price: number}) =>{
         const paymentUrl = await handleBuy(product);
         if (paymentUrl) {
           let result = await WebBrowser.openBrowserAsync(paymentUrl);
@@ -61,40 +63,34 @@ export function TicketPage(){
         }
     }
 
-    useEffect(()=>{
-        // Se intenta traer informacion desde la base de datos, si no se puede se setea la informacion provisoria.
-        axios.get('http://localhost:3000/traerpaquetes',{
-          headers: {
-            'Access-Control-Allow-Origin' : '*'
-          },
-          responseType: "json",
-        }).then((response) => {
-        // Si el back-end esta corriendo correctamente, se setea la informacion de la base de datos.
-          setListaTicket(response.data);
-        }).catch((error) => {
-        // Si el back-end no esta corriendo, se setea la informacion provisoria.
-        })
-    
-    },[])
 
     return (
-        <>
-          <CustomHeader title="Club Ituzaingo" />
-          <View style={styles.container}>
-              <Text style={styles.title}>Ticketeras Disponibles</Text>
-              {listaTicket.map((ticket)=>(
-                  <TicketComponent
+      <>
+        <CustomHeader title="Club Ituzaingo" />
+        <View style={styles.container}>
+          <Text style={styles.title}>Ticketeras Disponibles</Text>
+          {listaTicket.length > 0 ? (
+            listaTicket.map((ticket, index) => (
+              ticket && ticket.id && ticket.name ? ( 
+                <TicketComponent
                   key={ticket.id}
                   id={ticket.id}
                   name={ticket.name}
-                  onPress={()=> handlePayment(ticket)}
-                  />
-              ))}
-          </View>
-          <WhatsAppButton />
-        </>
-       );
-    }
+                  onPress={() => handlePayment(ticket)}
+                />
+              ) : (
+                  <Text key={index} style={styles.noTickets}>Error en los datos del ticket</Text>
+                  )
+                ))
+              ) : (
+                <Text style={styles.noTickets}>No hay tickets disponibles.</Text>
+              )}
+
+        </View>
+        <WhatsAppButton />
+      </>
+    );
+  }
 
     const styles = StyleSheet.create({
         container: {
@@ -116,8 +112,11 @@ export function TicketPage(){
             textAlignVertical: "center", // For Android
             lineHeight: 70, // For iOS == MANTENER LINE HEIGHT CON HEIGHT PARA MANTENER CENTRADO
             color: "white",
-            boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.5)"
-
+        },
+        noTickets: {
+          fontSize: 18,
+          color: "gray",
+          marginTop: 20,
         },
     });
 
