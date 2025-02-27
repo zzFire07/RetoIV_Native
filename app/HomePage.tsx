@@ -1,7 +1,7 @@
 import AuthenticationButton from "../components/AuthenticationButton";
 import React from "react";
 import CustomHeader from "../components/CustomHeader";
-import { Text, TouchableOpacity, StyleSheet, View} from "react-native";
+import { Text, TouchableOpacity, StyleSheet, View } from "react-native";
 import BuyTicketsButton from "../components/BuyTicketsButton";
 import MatchDisponibility from "../components/MatchDisponibility";
 import { useAppContext } from "@/context/AppContext";
@@ -26,9 +26,6 @@ export function HomePage() {
               <BuyTicketsButton />
             </>
           )}
-
-          
-        
         </View>
         <WhatsAppButton />
       </>

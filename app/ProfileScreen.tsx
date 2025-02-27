@@ -13,7 +13,7 @@ const ProfileScreen = () => {
     <View style={styles.container}>
       <Text style={styles.title}>Mi Perfil</Text>
       <View style={styles.infocontainer}>
-        <Text style= {styles.text}>Información de la cuenta</Text>
+        <Text style={styles.text}>Información de la cuenta</Text>
         <Text style={styles.textinfo}>Nombre: {User.nombre} {User.apellido}</Text>
         <Text style={styles.textinfo}>Email: {User.email}</Text>
         <Text style={styles.textinfo}>Partidos disponibles: {User.partidos}</Text>
