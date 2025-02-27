@@ -70,17 +70,22 @@ export function TicketPage(){
         <View style={styles.container}>
           <Text style={styles.title}>Ticketeras Disponibles</Text>
           {listaTicket.length > 0 ? (
-            listaTicket.map((ticket) => (
-              <TicketComponent
-                key={ticket.id}
-                id={ticket.id}
-                name={ticket.name}
-                onPress={() => handlePayment(ticket)}
-              />
-            ))
-          ) : (
-            <Text style={styles.noTickets}>No hay tickets disponibles.</Text>
-          )}
+            listaTicket.map((ticket, index) => (
+              ticket && ticket.id && ticket.name ? ( 
+                <TicketComponent
+                  key={ticket.id}
+                  id={ticket.id}
+                  name={ticket.name}
+                  onPress={() => handlePayment(ticket)}
+                />
+              ) : (
+                  <Text key={index} style={styles.noTickets}>Error en los datos del ticket</Text>
+                  )
+                ))
+              ) : (
+                <Text style={styles.noTickets}>No hay tickets disponibles.</Text>
+              )}
+
         </View>
         <WhatsAppButton />
       </>
