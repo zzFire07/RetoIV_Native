@@ -1,97 +1,89 @@
-import React from "react";
-import { View, Text, TouchableOpacity, Alert, StyleSheet } from "react-native";
-import { getAuth, GoogleAuthProvider, signInWithCredential } from "firebase/auth";
-import { app } from "../firebaseConfig"; // Ajusta la ruta según tu proyecto
-import * as Google from "expo-auth-session/providers/google";
-import * as WebBrowser from "expo-web-browser";
+import { useState } from "react";
+import { View, TextInput, Button, Text, StyleSheet } from "react-native";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../firebaseConfig";
 
-// Necesario para la autenticación en iOS
-WebBrowser.maybeCompleteAuthSession();
+export default function AuthScreen() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
-const AuthenticationButton: React.FC = () => {
-  const [request, response, promptAsync] = Google.useIdTokenAuthRequest({
-    clientId: "TU_CLIENT_ID_WEB.apps.googleusercontent.com", // Reemplázalo con tu Client ID de Google
-    iosClientId: "TU_CLIENT_ID_IOS.apps.googleusercontent.com", // Para iOS
-    androidClientId: "TU_CLIENT_ID_ANDROID.apps.googleusercontent.com", // Para Android
-  });
-
-  React.useEffect(() => {
-    if (response?.type === "success") {
-      const { id_token } = response.params;
-      iniciarSesionConGoogle(id_token);
-    }
-  }, [response]);
-
-  const iniciarSesionConGoogle = async (idToken: string) => {
+  const handleLogin = async () => {
     try {
-      const auth = getAuth(app);
-      const credential = GoogleAuthProvider.credential(idToken);
-      const { user } = await signInWithCredential(auth, credential);
-      const token = await user.getIdToken();
-
-      const apiResponse = await fetch("http://127.0.0.1:8000/protected", {
-        method: "GET",
-        headers: { Authorization: `Bearer ${token}` },
-      });
-
-      if (apiResponse.ok) {
-        const data = await apiResponse.json();
-        Alert.alert(`Bienvenido, ${user.displayName}`, "Acceso autorizado.");
-      } else {
-        Alert.alert("Acceso denegado", "Token inválido.");
-      }
-    } catch (error) {
-      console.error("Error al iniciar sesión con Google:", error);
-      Alert.alert("Error", "Hubo un problema al iniciar sesión con Google.");
+      await signInWithEmailAndPassword(auth, email, password);
+      alert("Inicio de sesión exitoso");
+    } catch (err) {
+      console.log(err);
+      setError(err.message);
     }
-  };
+  }
+
+  const handleRegister = async () => {
+    try {
+      await createUserWithEmailAndPassword(auth, email, password);
+      alert("Usuario registrado con éxito");
+    } catch (err) {
+      console.log(err);
+      setError(err.message);
+    }
+  }
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Iniciar Sesión</Text>
-      <Text style={styles.subtitle}>Ingrese con Google para continuar</Text>
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => promptAsync()}
-        disabled={!request}
-      >
-        <Text style={styles.buttonText}>Iniciar sesión con Google</Text>
-      </TouchableOpacity>
+      <Text style={styles.title} >{"Autenticarse"}</Text>
+
+      <View style={styles.inputView}>
+        <Text style={styles.textView}>Correo Electronico</Text>
+        <TextInput style={styles.input} placeholder="Correo" value={email} onChangeText={setEmail} keyboardType="email-address" />
+      </View>
+
+      <View style={styles.inputView}>
+        <Text style={styles.textView}>Contraseña</Text>
+        <TextInput style={styles.input} placeholder="Contraseña" value={password} onChangeText={setPassword} secureTextEntry />
+      </View>
+      
+      <View style={styles.button}>
+        <Button color={"white"} title={"Iniciar Sesión"} onPress={handleLogin} />
+      </View>
+      <View style={styles.button}>
+        <Button color={"white"} title={"Registrarse"} onPress={handleRegister} />
+      </View>
+
+      {error ? <Text style={{ color: "red", fontSize: 16}}>{error}</Text> : null}
     </View>
   );
-};
-
-export default AuthenticationButton;
+}
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "#fff",
-    padding: 20,
   },
   title: {
-    fontSize: 24,
-    fontWeight: "bold",
-    marginBottom: 10,
+    fontSize: 36,
+    marginBottom: 80,
+    marginTop: 40
   },
-  subtitle: {
-    fontSize: 16,
-    color: "gray",
-    marginBottom: 20,
-    textAlign: "center",
+  inputView: {
+    width: "60%",
+    marginBottom: 40
+  },
+  textView:{
+    marginBottom: 6,
+  },
+  input: {
+    paddingLeft: 20,
+    paddingRight: 20,
+    borderRadius: 10,
+    height: 50,
+    backgroundColor: "#f9f9f9",
+    width: "100%"
   },
   button: {
-    backgroundColor: "#CA312B",
-    paddingVertical: 12,
-    paddingHorizontal: 20,
-    borderRadius: 8,
-    alignItems: "center",
-  },
-  buttonText: {
-    color: "#fff",
-    fontSize: 16,
-    fontWeight: "bold",
-  },
+    backgroundColor: "#ca312b",
+    borderRadius: 10,
+    marginBottom: 30,
+    color: "white",
+    width: "40%"
+  }
 });
