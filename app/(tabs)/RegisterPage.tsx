@@ -80,38 +80,41 @@ export default function RegisterPage() {
                 <TouchableOpacity style={styles.button} onPress={handleRegister}>
                     <Text style={styles.buttonText}>Registrarse</Text>
                 </TouchableOpacity>
+                <Text style= {styles.textCuenta}>Ya tienes cuenta?</Text>
+                <TouchableOpacity style={styles.buttonLogIn}>
+                    <Text style={styles.textLogIn}>Iniciar sesión</Text>
+                </TouchableOpacity>
             </View>
         </View>
     );
 }
 const styles = StyleSheet.create({
-    inputContainer:{
-        width: "100%",
-        marginBottom: 10,
-        marginLeft: 55
-        },
-    text:{
-        fontWeight: "bold",
-        marginBottom: 5
-    },
     pageContainer:{
         flex:1,
         backgroundColor: "white",
+        justifyContent: "center",
     },
     container: {
         flex: 1,
         justifyContent: "center",
         alignItems: "center",
-        padding: 20,
         backgroundColor: "white",
-      },
-      title: {
+        position: "relative",
+        marginBottom: 80
+    },
+    title: {
         fontSize: 24,
         fontWeight: "bold",
         marginBottom: 20,
         
-      },
-      input: {
+    },
+    inputContainer:{
+        width: "100%",
+        marginBottom: 10,
+        backgroundColor: "white",
+        alignItems: "center"
+    },
+    input: {
         width: "80%",
         padding: 12,
         marginBottom: 10,
@@ -119,24 +122,45 @@ const styles = StyleSheet.create({
         backgroundColor: "#e7e7e7",
         borderColor: "#ccc",
         borderRadius: 8,
-      },
-      button: {
+    },
+    text:{
+        fontWeight: "bold",
+        marginBottom: 5,
+        width: "80%",
+    },
+     
+    button: {
         backgroundColor: "#11aa5a",
         paddingVertical: 12,
         paddingHorizontal: 20,
         borderRadius: 8,
         alignItems: "center",
-        width: "80%",
+        justifyContent: "center",
+        width: 141,
         marginTop: 10,
-      },
-      buttonText: {
+    },
+   buttonText: {
         color: "white",
         fontSize: 16,
         fontWeight: "bold",
-      },
-      link: {
-        color: "#00bf63",
-        marginTop: 15,
+    },
+    textCuenta:{
         fontSize: 16,
-      },
+        marginTop: 20
+    },
+    buttonLogIn:{
+        backgroundColor:"#ca312b",
+        borderRadius: 10,
+        width: 141,
+        height: 40,
+        alignItems: "center",
+        justifyContent: "center",
+        marginTop: 10,
+        marginBottom: 30
+    },
+    textLogIn:{
+        color: "white",
+        fontWeight: "bold",
+        fontSize: 16
+    }
 });
