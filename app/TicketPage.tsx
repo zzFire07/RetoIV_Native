@@ -71,11 +71,11 @@ export function TicketPage(){
           <Text style={styles.title}>Ticketeras Disponibles</Text>
           {listaTicket.length > 0 ? (
             listaTicket.map((ticket, index) => (
-              ticket && ticket.id && ticket.name ? ( 
+              ticket && ticket?.id && ticket?.name ? ( 
                 <TicketComponent
-                  key={ticket.id}
-                  id={ticket.id}
-                  name={ticket.name}
+                  key={index}
+                  id={ticket?.id}
+                  name={ticket?.name}
                   onPress={() => handlePayment(ticket)}
                 />
               ) : (
