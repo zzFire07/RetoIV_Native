@@ -8,8 +8,10 @@ import AsyncStorage from "@react-native-async-storage/async-storage"; // Importa
 import "react-native-reanimated";
 import "react-native-screens";
 import { useColorScheme } from "@/hooks/useColorScheme";
-import { AppProvider } from "@/context/AppContext";
+import { ContextProvider } from "@/context/ContextProvider";
+
 import * as Linking from "expo-linking"
+
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
 export default function RootLayout() {
@@ -61,28 +63,30 @@ export default function RootLayout() {
             SplashScreen.hideAsync();
         }
     }, [loaded]);
-    if (!loaded) {
-        return null;
-    }
-    return (
-        <AppProvider>
-            <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
-                <Stack>
-                    <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-                    <Stack.Screen name="+not-found" />
-                    <Stack.Screen
-                        name="TicketPage"
-                        options={{
-                            headerTitle: "",
-                            headerTransparent: true,
-                            headerBackButtonDisplayMode: "minimal",
-                        }}
-                    />
-                </Stack>
-                <StatusBar style="auto" />
-            </ThemeProvider>
-        </AppProvider>
-    );
+
+  if (!loaded) {
+    return null;
+  }
+
+  return (
+    <ContextProvider>
+      <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+        <Stack>
+          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+          <Stack.Screen name="+not-found" />
+          <Stack.Screen 
+            name="TicketPage" 
+            options={{ 
+              headerTitle: '', 
+              headerTransparent: true,
+              headerBackButtonDisplayMode: 'minimal'
+              }} 
+          />
+        </Stack>
+        <StatusBar style="auto" />
+      </ThemeProvider>
+    </ContextProvider>
+  );
 }
 
 
