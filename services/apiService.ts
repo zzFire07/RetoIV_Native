@@ -2,8 +2,12 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
 
 const api = axios.create({ //instancia personalizada de axios
-    baseURL: "https://retopadelbackend.onrender.com/" // url base
+    baseURL: "https://retopadelbackend.onrender.com/",
+    headers: {
+        "Content-Type": "application/json", 
+    }
 });
+
 api.interceptors.request.use( //modifico la request antes que se envie al servidor
     (config) => { //objeto config tiene la configuracion de la request
         const token = "tocken"; // obtengo token almacenado
@@ -12,6 +16,7 @@ api.interceptors.request.use( //modifico la request antes que se envie al servid
         }
         return config;
 });
+
 const apiService = {
     // Función para almacenar el token al iniciar sesión
     saveToken: async (token: string) => {
@@ -28,6 +33,7 @@ const apiService = {
     getUserById: (userId: any) => api.get(`/user/getUserById/${userId}`),
     editUserTickets: (userId: any, newTicketsData: any) =>
         api.put(`/users/AddTickets/${userId}`, newTicketsData),
+    logUser: (firebase_uid: any) => api.post(`/user/logUser/${firebase_uid}`),
 
     // Llamadas de Paquetes
     createPackage: (packageData: any) =>
