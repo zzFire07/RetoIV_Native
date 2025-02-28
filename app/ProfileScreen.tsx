@@ -41,43 +41,10 @@ const ProfileScreen = () => {
     <View style={styles.container}>
       <Text style={styles.title}>Mi Perfil</Text>
       <View style={styles.infocontainer}>
-        <Text style={styles.text}>Información de la cuenta</Text>
-
-        {showInputs ? (
-          <>
-            <TextInput
-              style={styles.inputInline}
-              placeholder="Nuevo nombre"
-              value={nuevoNombre}
-              onChangeText={setNuevoNombre}
-            />
-            <TextInput
-              style={styles.inputInline}
-              placeholder="Nuevo apellido"
-              value={nuevoApellido}
-              onChangeText={setNuevoApellido}
-            />
-          </>
-        ) : (
-          <Text style={styles.textinfo}>Nombre: {usuario.nombre} {usuario.apellido}</Text>
-        )}
-  
-        {showInputs ? (
-          <TextInput
-            style={styles.inputInline}
-            placeholder="Nuevo número"
-            value={nuevoNumero}
-            onChangeText={setNuevoNumero}
-            keyboardType='numeric'
-          />
-        ) : (
-          <Text style={styles.textinfo}>Número: {usuario.numero}</Text>
-        )}
-  
-        <Text style={styles.textinfo}>Email: {usuario.email}</Text>
-        <Text style={styles.textinfoLast}>Partidos disponibles: {usuario.partidos}</Text>
-  
-        <ProfileButton onPress={editarPerfil} />
+        <Text style= {styles.text}>Información de la cuenta</Text>
+        <Text style={styles.textinfo}>Nombre: {User.nombre} {User.apellido}</Text>
+        <Text style={styles.textinfo}>Email: {User.email}</Text>
+        <Text style={styles.textinfo}>Partidos disponibles: {User.partidos}</Text>
       </View>
     </View>
   );  

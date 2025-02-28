@@ -10,7 +10,6 @@ export default function BuyTicketsButton(){
                 underlayColor={"black"}
             >
                 <Text style= {styles.text}>COMPRAR TICKETERA</Text>
-
                 </TouchableHighlight>
             </Link>
         </View>
@@ -19,21 +18,22 @@ export default function BuyTicketsButton(){
 
 const styles = StyleSheet.create({
     buttonTicketera:{
-        width: 150,
-        height: 100,
+        width: 153,
+        height: 79,
         backgroundColor: "#ca312b",
-        borderRadius: 12,
+        borderRadius: 20,
         alignSelf: "center",
         justifyContent: "center",
         overflow: "hidden",
-        marginBottom: 300
+        marginBottom: 300,
+        boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.5)"
     }, 
     text:{
         color: "white",
         fontSize: 16,
         alignSelf: "center", 
         justifyContent: "center",
-        fontWeight: "bold",
+        fontWeight: "800",
         textAlign: "center"
     },
 })

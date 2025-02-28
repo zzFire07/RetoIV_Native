@@ -1,10 +1,11 @@
 import AuthenticationButton from "../components/AuthenticationButton";
 import React from "react";
 import CustomHeader from "../components/CustomHeader";
-import { Text, TouchableOpacity, StyleSheet, View} from "react-native";
+import { Text, TouchableOpacity, StyleSheet, View } from "react-native";
 import BuyTicketsButton from "../components/BuyTicketsButton";
 import MatchDisponibility from "../components/MatchDisponibility";
 import { useAppContext } from "@/context/AppContext";
+import WhatsAppButton from "@/components/unused-comps/WhatsAppButton";
 
 export function HomePage() {
   const { loggedIn, setLoggedIn } = useAppContext();
@@ -15,6 +16,7 @@ export function HomePage() {
         <TouchableOpacity style={styles.button} onPress={() => setLoggedIn(!loggedIn)}>
           <Text>{loggedIn ? "Cerrar Sesión" : "Iniciar Sesión"}</Text>
         </TouchableOpacity>
+        
 
         <View style={styles.container}>
           {!loggedIn && <AuthenticationButton />}
@@ -24,8 +26,8 @@ export function HomePage() {
               <BuyTicketsButton />
             </>
           )}
-        
         </View>
+        <WhatsAppButton />
       </>
     );  
 }
