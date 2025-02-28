@@ -1,6 +1,6 @@
 import { DarkTheme, DefaultTheme, ThemeProvider } from "@react-navigation/native";
 import { useFonts } from "expo-font";
-import { Stack } from "expo-router";
+import { Stack, useRouter } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 import { StatusBar } from "expo-status-bar";
 import { useEffect } from "react";
@@ -9,13 +9,36 @@ import "react-native-reanimated";
 import "react-native-screens";
 import { useColorScheme } from "@/hooks/useColorScheme";
 import { AppProvider } from "@/context/AppContext";
+import * as Linking from "expo-linking"
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
 export default function RootLayout() {
+
+
+    const router = useRouter();
     const colorScheme = useColorScheme();
     const [loaded] = useFonts({
         SpaceMono: require("../assets/fonts/SpaceMono-Regular.ttf"),
     });
+
+    useEffect(() => {
+        const handleDeepLink = (event) => { 
+            const url = event.url; 
+            if (url) {
+                const { path, queryParams } = Linking.parse(url); 
+                if (path === "PaymentStatus") {
+                    router.push(`/PaymentStatus?${new URLSearchParams(queryParams)}`);
+                } 
+            }
+    };
+
+    const subscription = Linking.addEventListener("url", handleDeepLink); 
+    return () => subscription.remove();
+
+}, []);
+
+
+
     // :diamante_azul_pequeño: Agregar el useEffect para verificar el token en AsyncStorage
     useEffect(() => {
         const checkToken = async () => {

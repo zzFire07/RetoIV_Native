@@ -5,7 +5,8 @@ import CustomHeader from "@/components/CustomHeader";
 import * as WebBrowser from "expo-web-browser";
 import apiService from "@/services/apiService"; // Asegúrate de importar el servicio correctamente
 import WhatsAppButton from "@/components/unused-comps/WhatsAppButton";
-import AsyncStorage from "@react-native-async-storage/async-storage"; useEffect(() => { const setTestToken = async () => { await AsyncStorage.setItem("authToken", "TOKEN_PRUEBA_12345"); console.log("Token de prueba guardado en AsyncStorage"); }; setTestToken(); }, []);
+import AsyncStorage from "@react-native-async-storage/async-storage"; 
+import * as Linking from "expo-linking";
 const lista = [
     { id: 1, name: "Ticketera 8 partidos", price: 1000 },
     { id: 2, name: "Ticketera 18 partidos", price: 2000 },
@@ -15,6 +16,9 @@ export function TicketPage() {
     const [result, setResult] = useState<WebBrowser.WebBrowserResult | null>(null);
     const auth_token = process.env.EXPO_PUBLIC_MP_AUTH;
     const [listaTicket, setListaTicket] = useState(lista);
+
+    const dipLink = Linking.createURL("PaymentStatusPage");
+
     /** :diamante_azul_pequeño: Función para manejar la compra */
     const handleBuy = async (product: { name: any; price: any }) => {
         try {
@@ -35,9 +39,9 @@ export function TicketPage() {
                     ],
                     auto_return: "approved",
                     back_urls: {
-                        success: "exp://10.4.3.51:8081/PaymentStatusPage",
-                        failure: "exp://10.4.3.51:8081/PaymentStatusPage",
-                        cancel: "exp://10.4.3.51:8081/PaymentStatusPage"
+                        success: dipLink,
+                        failure: dipLink,
+                        cancel: dipLink
                     }
                 })
             });
