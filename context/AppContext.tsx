@@ -1,24 +1,24 @@
-import React, { createContext, useState, useEffect, ReactNode } from 'react';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import React, { createContext, useState, useEffect, ReactNode } from "react";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 interface AuthContextProps {
   token: string | null;
   setToken: (token: string | null) => void;
   loggedIn: boolean;
-  setLoggedIn: (value: boolean) => void;
   logOut: () => Promise<void>;
+  setLoggedIn: (loggedIn: boolean) => void;
 }
 
 const AuthContext = createContext<AuthContextProps | undefined>(undefined);
 
-export const AuthProvider = ({ children }: { children: ReactNode }) => {
+export const AppContext = ({ children }: { children: ReactNode }) => {
   const [token, setToken] = useState<string | null>(null);
   const [loggedIn, setLoggedIn] = useState(false);
 
+  // Cargar el token almacenado al iniciar la app
   useEffect(() => {
-    // Recuperar el token almacenado al iniciar la app
     const loadToken = async () => {
-      const storedToken = await AsyncStorage.getItem('authToken');
+      const storedToken = await AsyncStorage.getItem("authToken");
       if (storedToken) {
         setToken(storedToken);
         setLoggedIn(true);
@@ -27,13 +27,14 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     loadToken();
   }, []);
 
+  // Guardar o eliminar el token
   const handleSetToken = async (newToken: string | null) => {
     if (newToken) {
-      await AsyncStorage.setItem('authToken', newToken);
+      await AsyncStorage.setItem("authToken", newToken);
       setToken(newToken);
       setLoggedIn(true);
     } else {
-      await AsyncStorage.removeItem('authToken');
+      await AsyncStorage.removeItem("authToken");
       setToken(null);
       setLoggedIn(false);
     }
@@ -44,7 +45,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ token, setToken: handleSetToken, loggedIn, setLoggedIn, logOut }}>
+    <AuthContext.Provider value={{ token, setToken: handleSetToken, loggedIn, logOut, setLoggedIn }}>
       {children}
     </AuthContext.Provider>
   );
@@ -53,7 +54,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 export const useAppContext = () => {
   const context = React.useContext(AuthContext);
   if (!context) {
-    throw new Error('useAppContext must be used within an AuthProvider');
+    throw new Error("useAuthContext must be used within an AuthProvider");
   }
   return context;
 };
