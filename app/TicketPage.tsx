@@ -78,38 +78,59 @@ export function TicketPage() {
     }, []);
     return (
         <>
-            <CustomHeader title="Club Ituzaingo" />
-            <View style={styles.container}>
-                <Text style={styles.title}>Ticketeras Disponibles</Text>
-                {listaTicket.map((ticket) => (
-                    <TicketComponent key={ticket.id} id={ticket.id} name={ticket.name} onPress={() => handlePayment(ticket)} />
-                ))}
-            </View>
-            <WhatsAppButton />
+          <CustomHeader title="Club Ituzaingo" />
+          <View style={styles.container}>
+            <Text style={styles.title}>Ticketeras Disponibles</Text>
+            {listaTicket.length > 0 ? (
+              listaTicket.map((ticket, index) => (
+                ticket && ticket?.id && ticket?.name ? ( 
+                  <TicketComponent
+                    key={index}
+                    id={ticket?.id}
+                    name={ticket?.name}
+                    onPress={() => handlePayment(ticket)}
+                  />
+                ) : (
+                    <Text key={index} style={styles.noTickets}>Error en los datos del ticket</Text>
+                    )
+                  ))
+                ) : (
+                  <Text style={styles.noTickets}>No hay tickets disponibles.</Text>
+                )}
+  
+          </View>
+          <WhatsAppButton />
         </>
-    );
-}
-const styles = StyleSheet.create({
-    container: {
-        height: "100%",
-        alignItems: "center",
-        padding: 2,
-        backgroundColor: "white",
-        paddingTop: 60
-    },
-    title: {
-        fontSize: 24,
-        fontWeight: "bold",
-        marginBottom: 40,
-        width: 300,
-        height: 70, // MANTENER HEIGHT CON LINE HEIGHT PARA MANTENER CENTRADO
-        backgroundColor: "#CA312B",
-        borderRadius: 15,
-        textAlign: "center",
-        textAlignVertical: "center", // For Android
-        lineHeight: 70, // For iOS == MANTENER LINE HEIGHT CON HEIGHT PARA MANTENER CENTRADO
-        color: "white",
-        boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.5)"
+      );
     }
-});
-export default TicketPage;
+  
+      const styles = StyleSheet.create({
+          container: {
+              height: "100%",
+              alignItems: "center",
+              padding: 2,
+              backgroundColor: "white",
+              paddingTop: 60,
+          },
+          title: {
+              fontSize: 24,
+              fontWeight: "bold",
+              marginBottom: 40,
+              width: 300,
+              height: 70, // MANTENER HEIGHT CON LINE HEIGHT PARA MANTENER CENTRADO
+              backgroundColor:"#ca312b",
+              borderRadius: 15,
+              textAlign: "center",
+              textAlignVertical: "center", // For Android
+              lineHeight: 70, // For iOS == MANTENER LINE HEIGHT CON HEIGHT PARA MANTENER CENTRADO
+              color: "white",
+          },
+          noTickets: {
+            fontSize: 18,
+            color: "gray",
+            marginTop: 20,
+          },
+      });
+  
+  
+      export default TicketPage;
