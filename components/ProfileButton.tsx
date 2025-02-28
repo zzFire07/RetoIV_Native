@@ -28,6 +28,7 @@ const styles = StyleSheet.create({
     bottom: '5%',
     justifyContent: 'center',
     overflow: 'hidden',
+    marginTop: 50,
   },
   text: {
     color: '#000000',

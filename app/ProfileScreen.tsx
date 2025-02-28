@@ -1,6 +1,7 @@
 import ProfileButton from '@/components/ProfileButton';
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, TextInput, Button } from 'react-native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const ProfileScreen = () => {
   const [usuario, setUsuario] = useState({
@@ -24,7 +25,15 @@ const ProfileScreen = () => {
         apellido: nuevoApellido,
         numero: nuevoNumero
       }));
+    }
+  };
+
+  const editarPerfil = () => {
+    if (showInputs) {
+      actualizarUsuario();
       setShowInputs(false);
+    } else {
+      setShowInputs(true);
     }
   };
 
@@ -33,46 +42,51 @@ const ProfileScreen = () => {
       <Text style={styles.title}>Mi Perfil</Text>
       <View style={styles.infocontainer}>
         <Text style={styles.text}>Información de la cuenta</Text>
-        <Text style={styles.textinfo}>Nombre: {usuario.nombre} {usuario.apellido}</Text>
-        <Text style={styles.textinfo}>Número: {usuario.numero}</Text>
-        <Text style={styles.textinfo}>Email: {usuario.email}</Text>
-        <Text style={styles.textinfo}>Partidos disponibles: {usuario.partidos}</Text>
 
-        <ProfileButton onPress={() => setShowInputs(!showInputs)} />
-
-        {showInputs && (
-          <View style={styles.inputContainer}>
+        {showInputs ? (
+          <>
             <TextInput
-              style={styles.input}
+              style={styles.inputInline}
               placeholder="Nuevo nombre"
               value={nuevoNombre}
               onChangeText={setNuevoNombre}
             />
             <TextInput
-              style={styles.input}
+              style={styles.inputInline}
               placeholder="Nuevo apellido"
               value={nuevoApellido}
               onChangeText={setNuevoApellido}
             />
-            <TextInput
-              style={styles.input}
-              placeholder="Nuevo número"
-              value={nuevoNumero}
-              onChangeText={setNuevoNumero}
-              inputMode='numeric'
-            />
-            <Button title="Guardar" onPress={actualizarUsuario} />
-          </View>
+          </>
+        ) : (
+          <Text style={styles.textinfo}>Nombre: {usuario.nombre} {usuario.apellido}</Text>
         )}
+  
+        {showInputs ? (
+          <TextInput
+            style={styles.inputInline}
+            placeholder="Nuevo número"
+            value={nuevoNumero}
+            onChangeText={setNuevoNumero}
+            keyboardType='numeric'
+          />
+        ) : (
+          <Text style={styles.textinfo}>Número: {usuario.numero}</Text>
+        )}
+  
+        <Text style={styles.textinfo}>Email: {usuario.email}</Text>
+        <Text style={styles.textinfoLast}>Partidos disponibles: {usuario.partidos}</Text>
+  
+        <ProfileButton onPress={editarPerfil} />
       </View>
     </View>
-  );
+  );  
 };
 
 const styles = StyleSheet.create({
   container: {
     paddingTop: 30,
-    height: '100%',
+    flex: 1,
     alignItems: 'center',
     backgroundColor: '#ffffff',
   },
@@ -100,20 +114,38 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     marginBottom: 10,
   },
-  inputContainer: {
-    marginTop: 20,
-    width: '100%',
+  ProfileSaveButton: {
+    width: 200,
+    height: 50,
+    backgroundColor: '#1bc01b',
+    borderWidth: 2,
+    borderColor: '#000000',
+    borderRadius: 35,
+    justifyContent: 'center',
     alignItems: 'center',
+    marginTop: 20, // 🔹 Cambio: En vez de position absolute
   },
-  input: {
+  textSave: {
+    color: '#000000',
+    fontSize: 15,
+    textAlign: 'center'
+  },
+  inputInline: {
     height: 40,
-    width: '90%',
+    width: '100%',
     borderColor: 'gray',
     borderWidth: 1,
     paddingHorizontal: 10,
     borderRadius: 5,
-    marginBottom: 10,
     backgroundColor: '#fff',
+    marginBottom: 10
+  },
+  textinfoLast: {
+    marginTop: 10,
+    fontSize: 15,
+    textAlign: 'left',
+    alignSelf: 'flex-start',
+    marginBottom: 100
   }
 });
 
