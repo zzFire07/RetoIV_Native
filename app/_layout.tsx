@@ -8,7 +8,6 @@ import AsyncStorage from "@react-native-async-storage/async-storage"; // Importa
 import "react-native-reanimated";
 import "react-native-screens";
 import { useColorScheme } from "@/hooks/useColorScheme";
-
 import { ContextProvider } from "@/context/ContextProvider";
 
 import * as Linking from "expo-linking"

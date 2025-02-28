@@ -5,7 +5,6 @@ import { Text, TouchableOpacity, StyleSheet, View } from "react-native";
 import BuyTicketsButton from "../components/BuyTicketsButton";
 import MatchDisponibility from "../components/MatchDisponibility";
 import WhatsAppButton from "@/components/unused-comps/WhatsAppButton";
-import {  } from "@/context/ContextProvider";
 import { useAuth } from "@/context/AuthContext";
 
 export function HomePage() {
