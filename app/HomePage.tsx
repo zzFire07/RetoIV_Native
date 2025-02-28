@@ -4,7 +4,7 @@ import CustomHeader from "../components/CustomHeader";
 import { Text, TouchableOpacity, StyleSheet, View } from "react-native";
 import BuyTicketsButton from "../components/BuyTicketsButton";
 import MatchDisponibility from "../components/MatchDisponibility";
-import { useAppContext } from "@/context/AppContext";
+import { useAppContext } from "@/context/AuthContext";
 import WhatsAppButton from "@/components/unused-comps/WhatsAppButton";
 
 export function HomePage() {

@@ -1,5 +1,5 @@
 import auth from '@react-native-firebase/auth';
-import { useAppContext } from '../context/AppContext';
+import { useAppContext } from '../context/AuthContext';
 
 export const useAuthService = () => {
   const { setToken, logOut } = useAppContext();
