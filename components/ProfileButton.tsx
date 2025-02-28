@@ -12,7 +12,7 @@ const ProfileButton: React.FC<ProfileButtonProps> = ({ onPress }) => {
       onPress={onPress}
       underlayColor="#16a016"
     >
-      <Text style={styles.text}>{Editar Perfil}</Text>
+      <Text style={styles.text}>Editar Perfil</Text>
     </TouchableHighlight>
   );
 }
