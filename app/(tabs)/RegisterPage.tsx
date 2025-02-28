@@ -12,16 +12,31 @@ export default function RegisterPage() {
     const [telefono, setTelefono]= useState("");
     const [email, setEmail]= useState("");
     const [password, setPassword] = useState("");
+    const [isValid, setIsValid] = useState(false);
+
+    const validateEmail = (text: string) => {
+        setEmail(text);
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        setIsValid(emailRegex.test(text));
+    };
 
     const handleRegister = async () => {
         if (!nombre || !telefono || !email || !password) {
             alert("Por favor, complete todos los campos.");
             return;
         }
+        if (password.length < 8) {
+            alert("la contraseña debe contener minimo 8 caracteres");
+            return;
+        }
+        if (!isValid) {
+            alert("correo no valido");
+            return;
+        }
         try {
             //await apiService.createUser({ nombre, email, password});
             alert("Registro exitoso!");
-            router.push("/");
+            router.back();
         } catch (error) {
             console.error("Error en el registro:", error);
             alert("Error al registrarse, intenta nuevamente.");
@@ -49,9 +64,9 @@ export default function RegisterPage() {
                     <TextInput
                         style={styles.input}
                         placeholder=""
-                        keyboardType="phone-pad"
                         value={telefono}
                         onChangeText={setTelefono}
+                        inputMode="tel"
 
                     />
                 </View>
@@ -63,7 +78,8 @@ export default function RegisterPage() {
                         keyboardType="email-address"
                         autoCapitalize="none"
                         value={email}
-                        onChangeText={setEmail}
+                        //onChangeText={setEmail}
+                        onChangeText={validateEmail}
                     />
                 </View>
                 <View style={styles.inputContainer}>
