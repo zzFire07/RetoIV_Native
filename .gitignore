@@ -3,7 +3,7 @@
 # dependencies
 node_modules/
 package-lock.json
-.env
+# y el env para el front master crack german .env
 
 
 # Expo
@@ -28,8 +28,8 @@ build/
 android/
 
 # firebase and google
-google-services.json
-GoogleService-Info.plist
+# para que mancho tenga todo google-services.json
+# para el germancho con amor zz GoogleService-Info.plist
 
 # debug
 npm-debug.*
