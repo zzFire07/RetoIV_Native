@@ -4,15 +4,15 @@ import { Platform } from 'react-native';
 import { HapticTab } from '@/components/premade-comps/HapticTab';
 import { IconSymbol } from '@/components/ui/IconSymbol';
 import TabBarBackground from '@/components/ui/TabBarBackground';
-import { useAppContext } from '@/context/AuthContext';
+import { useAuth } from '@/context/AuthContext';
 
 
 export default function TabLayout() {
 
-  const { loggedIn } = useAppContext();
+  const { loggedIn } = useAuth();
 
   return (
-    <Tabs
+      <Tabs
         screenOptions={{
           tabBarActiveTintColor: "#fff",
           tabBarInactiveTintColor: "#000",
@@ -44,6 +44,5 @@ export default function TabLayout() {
           }}
         />
       </Tabs>
-      
     );
 }

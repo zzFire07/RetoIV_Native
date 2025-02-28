@@ -13,7 +13,7 @@ interface UserContextProps {
   setUser: (user: User | null) => void;
 }
 
-const UserContext = createContext<UserContextProps | null>(null);
+export const UserContext = createContext<UserContextProps | null>(null);
 
 export const UserProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
@@ -23,6 +23,11 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
          </UserContext.Provider>;
 };
 
-export const useUserContext = () => useContext(UserContext) as UserContextProps;
-
-
+// Hook para usar el contexto (Opcional, pero recomendado)
+export const useUser = () => {
+  const context = useContext(UserContext);
+  if (!context) {
+    throw new Error("useUser debe usarse dentro de un UserProvider");
+  }
+  return context;
+};

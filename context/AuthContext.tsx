@@ -5,13 +5,14 @@ interface AuthContextProps {
   token: string | null;
   setToken: (token: string | null) => void;
   loggedIn: boolean;
-  logOut: () => Promise<void>;
+  setLoggedIn: (value: boolean) => void;
 }
 
-const AuthContext = createContext<AuthContextProps | null>(null);
+export const AuthContext = createContext<AuthContextProps | null>(null);
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [token, setToken] = useState<string | null>(null);
+  const [loggedIn, setLoggedIn] = useState(false);
 
   useEffect(() => {
     (async () => {
@@ -26,10 +27,18 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ token, setToken: handleSetToken, loggedIn: !!token, logOut: () => handleSetToken(null) }}>
+    <AuthContext.Provider value={{ token, setToken: handleSetToken, loggedIn, setLoggedIn }}>
       {children}
     </AuthContext.Provider>
   );
 };
 
-export const useAuthContext = () => useContext(AuthContext) as AuthContextProps;
+
+// Hook para usar el contexto (Opcional, pero recomendado)
+export const useAuth = () => {
+  const context = useContext(AuthContext);
+  if (!context) {
+    throw new Error("useAuth debe usarse dentro de un AuthProvider");
+  }
+  return context;
+};

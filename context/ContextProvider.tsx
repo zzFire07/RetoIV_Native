@@ -4,10 +4,10 @@ import { UserProvider } from "./UserContext";
 
 export const ContextProvider = ({ children }: { children: ReactNode }) => {
   return (
-    <AuthProvider>
-      <UserProvider>
-        {children}
-      </UserProvider>
-    </AuthProvider>
+      <AuthProvider>
+        <UserProvider>
+          {children}
+        </UserProvider>
+      </AuthProvider>
   );
 };

@@ -1,14 +1,17 @@
 import AuthenticationButton from "../components/AuthenticationButton";
-import React from "react";
+import React, { useEffect } from "react";
 import CustomHeader from "../components/CustomHeader";
 import { Text, TouchableOpacity, StyleSheet, View } from "react-native";
 import BuyTicketsButton from "../components/BuyTicketsButton";
 import MatchDisponibility from "../components/MatchDisponibility";
-import { useAppContext } from "@/context/AuthContext";
 import WhatsAppButton from "@/components/unused-comps/WhatsAppButton";
+import {  } from "@/context/ContextProvider";
+import { useAuth } from "@/context/AuthContext";
 
 export function HomePage() {
-  const { loggedIn, setLoggedIn } = useAppContext();
+
+  const { loggedIn, setLoggedIn } = useAuth();
+
   
     return (
       <>
