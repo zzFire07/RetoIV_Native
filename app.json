@@ -3,6 +3,9 @@
     "name": "RetoIVNative",
     "slug": "RetoIVNative",
     "version": "1.0.0",
+    "runtimeVersion": {
+      "policy": "nativeVersion"
+    },
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "myapp",
@@ -22,6 +25,9 @@
       }
     },
     "web": {
+      "config": {
+        "redirectUri": "https://auth.expo.io/@giosimon0533/RetoIVNative"
+      },
       "bundler": "metro",
       "output": "static",
       "favicon": "./assets/images/favicon.png"
@@ -44,6 +50,9 @@
     "extra": {
       "router": {
         "origin": false
+      },
+      "eas": {
+        "projectId": "580dabb5-4cfa-41d9-afa3-d888cd83ffc1"
       }
     }
   }

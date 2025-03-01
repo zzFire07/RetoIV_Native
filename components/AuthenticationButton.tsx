@@ -2,11 +2,16 @@ import { useState } from "react";
 import { View, TextInput, Button, Text, StyleSheet } from "react-native";
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebaseConfig";
+import useGoogleAuth from "../firebaseConfig";
+
+// GOOGLE
 
 export default function AuthScreen() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+
+  const { user, signIn, signOut } = useGoogleAuth();
 
   const handleLogin = async () => {
     try {
@@ -46,6 +51,9 @@ export default function AuthScreen() {
         <Button color={"white"} title={"Iniciar Sesión"} onPress={handleLogin} />
       </View>
       <View style={styles.button}>
+        <Button color={"white"} title={"Iniciar con Google"} onPress={signIn} />
+      </View>
+      <View style={styles.button}>
         <Button color={"white"} title={"Registrarse"} onPress={handleRegister} />
       </View>
 
@@ -61,12 +69,12 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 36,
-    marginBottom: 80,
+    marginBottom: 40,
     marginTop: 40
   },
   inputView: {
     width: "60%",
-    marginBottom: 40
+    marginBottom: 20
   },
   textView:{
     marginBottom: 6,
@@ -82,7 +90,7 @@ const styles = StyleSheet.create({
   button: {
     backgroundColor: "#ca312b",
     borderRadius: 10,
-    marginBottom: 30,
+    marginBottom: 10,
     color: "white",
     width: "40%"
   }
