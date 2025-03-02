@@ -7,7 +7,7 @@ import { IconSymbol } from "@/components/ui/IconSymbol";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebaseConfig";
 import { useRouter } from "expo-router";
-import { useAppContext } from "@/context/AppContext";
+import { useAuth } from "@/context/AuthContext";
 
 
 export function LoginPage () {
@@ -16,7 +16,7 @@ export function LoginPage () {
     const [isValid, setIsValid] = useState(false);
     const [error, setError] = useState("");
 
-    const { loggedIn, setLoggedIn } = useAppContext();
+    const { loggedIn, setLoggedIn } = useAuth();
 
     const router = useRouter();
 

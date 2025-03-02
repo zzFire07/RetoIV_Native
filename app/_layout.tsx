@@ -8,8 +8,10 @@ import AsyncStorage from "@react-native-async-storage/async-storage"; // Importa
 import "react-native-reanimated";
 import "react-native-screens";
 import { useColorScheme } from "@/hooks/useColorScheme";
-import { AppProvider } from "@/context/AppContext";
+import { ContextProvider } from "@/context/ContextProvider";
+
 import * as Linking from "expo-linking"
+
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
 export default function RootLayout() {
@@ -69,7 +71,7 @@ export default function RootLayout() {
         return null;
     }
     return (
-        <AppProvider>
+        <ContextProvider>
             <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
                 <Stack>
                     <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
@@ -109,7 +111,7 @@ export default function RootLayout() {
                 </Stack>
                 <StatusBar style="auto" />
             </ThemeProvider>
-        </AppProvider>
+        </ContextProvider>
     );
 }
 

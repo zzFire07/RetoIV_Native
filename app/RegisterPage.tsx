@@ -9,7 +9,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { IconSymbol } from "@/components/ui/IconSymbol";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebaseConfig";
-import { useAppContext } from "@/context/AppContext";
+import { useAuth } from "@/context/AuthContext";
 
 
 
@@ -23,7 +23,7 @@ export default function RegisterPage() {
     const [isValid, setIsValid] = useState(false);
     const [error, setError] = useState("");
 
-    const { loggedIn, setLoggedIn } = useAppContext();
+    const { loggedIn, setLoggedIn } = useAuth();
 
 
     const validateEmail = (text: string) => {

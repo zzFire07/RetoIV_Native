@@ -1,17 +1,13 @@
-import AuthenticationButton from "./AuthenticationButton";
 import React, { useEffect } from "react";
 import CustomHeader from "./CustomHeader";
-import { Text, TouchableOpacity, StyleSheet, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import BuyTicketsButton from "./BuyTicketsButton";
 import MatchDisponibility from "./MatchDisponibility";
-import { useAppContext } from "@/context/AppContext";
-import WhatsAppButton from "@/components/unused-comps/WhatsAppButton";
-import AuthenticationPage from "../app/AuthenticationPage";
 import { useRouter } from "expo-router";
-import LogoHomePage from "@/components/LogoHomePage";
+import { useAuth } from "@/context/AuthContext";
 
 export function HomePage() {
-  const { loggedIn, setLoggedIn } = useAppContext();
+  const { loggedIn, setLoggedIn } = useAuth();
 
   const router = useRouter();
 
