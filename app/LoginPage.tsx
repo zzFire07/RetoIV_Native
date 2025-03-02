@@ -1,20 +1,49 @@
-import React, { useState } from "react";
-import { View, Text, TextInput, TouchableOpacity, StyleSheet } from "react-native";
+import React, { useEffect, useState } from "react";
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Button } from "react-native";
 import WhatsAppButton from "@/components/unused-comps/WhatsAppButton";
 import CustomHeader from "@/components/CustomHeader";
 import { LinearGradient } from 'expo-linear-gradient';
 import { IconSymbol } from "@/components/ui/IconSymbol";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../firebaseConfig";
+import { useRouter } from "expo-router";
+import { useAppContext } from "@/context/AppContext";
+
 
 export function LoginPage () {
-    const [email, setEmail]= useState(" ");
-    const [password, setPassword]= useState(" ");
+    const [email, setEmail]= useState("");
+    const [password, setPassword]= useState("");
     const [isValid, setIsValid] = useState(false);
+    const [error, setError] = useState("");
+
+    const { loggedIn, setLoggedIn } = useAppContext();
+
+    const router = useRouter();
 
     const validateEmail = (text: string) => {
         setEmail(text);
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         setIsValid(emailRegex.test(text));
     }
+
+    const firebaseLogin = async () => {
+        try {
+          await signInWithEmailAndPassword(auth, email, password);
+          alert("Inicio de sesión exitoso");
+          setLoggedIn(true);
+          setTimeout(() => {
+            router.replace("/"); // Espera para que actualice el contexto.
+          }, 10);
+        } catch (err: any) {
+          console.log(err);
+          setError(err.message);
+        }
+      }
+
+      const irhome = () => {
+        router.replace("/");
+      }
+
 
     return (
        <>
@@ -49,7 +78,7 @@ export function LoginPage () {
                         onChangeText={setPassword}
                     />
                 </View>
-                <TouchableOpacity >
+                <TouchableOpacity onPress={firebaseLogin}>
                     <LinearGradient style={styles.button} colors={['#255E13', '#4DC428']} start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }}>
                         <Text style={styles.buttonText}> Iniciar sesión </Text>
                     </LinearGradient>

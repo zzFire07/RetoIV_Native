@@ -1,6 +1,4 @@
-import { HomePage } from '@/app/HomePage';
-import {LoginPage} from '@/app/LoginPage'
-import {HomePage2} from '@/app/HomePage2'
+import { HomePage } from '@/components/HomePage';
 
 export default function HomeScreen() {
   return (

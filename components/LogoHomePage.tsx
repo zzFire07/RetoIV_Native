@@ -1,33 +1,34 @@
 import React from "react";
 import { View, Image, StyleSheet } from "react-native";
 
-const LogoHeader: React.FC = () => {
+const LogoHomePage: React.FC = () => {
   return (
     <View style={styles.container}>
-      <Image source={require("@/assets/images/padel.png")} style={styles.logo} />
-      <Image source={require("@/assets/images/logo.png")} style={styles.nombre} />
+      <Image source={require("@/assets/images/logo-club.png")} style={styles.logoClub} />
+      <Image source={require("@/assets/images/nombre-club.png")} style={styles.nombreClub} />
     </View>
   );
 };
 
 const styles = StyleSheet.create({
     container: {
+        alignSelf: "center", // Centra el contenedor
         width: "100%", 
         alignItems: "center", // Centra el nombre
         marginTop: 40, // Ajusta según sea necesario
       },
-      logo: {
+      logoClub: {
         position: "absolute",
-        top: 10,
-        left: 10,
+        top: 5,
+        left: 15,
         width: 123,
         height: 73,
       },
-      nombre: {
+      nombreClub: {
         width: 355,
         height: 65,
-        marginTop: 80, // Espacio desde el logo
+        marginTop: 20 + 73, // 20 de margen + 73 que es la altura del logo
       },
 });
 
-export default LogoHeader;
+export default LogoHomePage;

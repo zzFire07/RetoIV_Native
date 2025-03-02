@@ -2,21 +2,29 @@ import React, {useState} from "react";
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from "react-native";
 import { useRouter } from "expo-router";
 import apiService from "@/services/apiService";
+import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
 import CustomHeader from "@/components/CustomHeader";
 import WhatsAppButton from "@/components/unused-comps/WhatsAppButton";
 import { LinearGradient } from 'expo-linear-gradient';
 import { IconSymbol } from "@/components/ui/IconSymbol";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../firebaseConfig";
+import { useAppContext } from "@/context/AppContext";
+
+
 
 
 
 export default function RegisterPage() {
     const router= useRouter();
-
-    const [nombre, setNombre]= useState("");
-    const [telefono, setTelefono]= useState("");
+    
     const [email, setEmail]= useState("");
     const [password, setPassword] = useState("");
     const [isValid, setIsValid] = useState(false);
+    const [error, setError] = useState("");
+
+    const { loggedIn, setLoggedIn } = useAppContext();
+
 
     const validateEmail = (text: string) => {
         setEmail(text);
@@ -25,7 +33,7 @@ export default function RegisterPage() {
     };
 
     const handleRegister = async () => {
-        if (!nombre || !telefono || !email || !password) {
+        if  (!email || !password) {
             alert("Por favor, complete todos los campos.");
             return;
         }
@@ -38,9 +46,13 @@ export default function RegisterPage() {
             return;
         }
         try {
+            await createUserWithEmailAndPassword(auth, email, password);
             //await apiService.createUser({ nombre, email, password});
             alert("Registro exitoso!");
-            router.back();
+            setLoggedIn(true);
+            setTimeout(() => {
+                router.replace("/"); // Espera para que actualice el contexto.
+              }, 10);
         } catch (error) {
             console.error("Error en el registro:", error);
             alert("Error al registrarse, intenta nuevamente.");
@@ -53,28 +65,9 @@ export default function RegisterPage() {
          <View style={styles.container}>
             <Text style={styles.title}>Registrarse</Text>
             <View style={styles.content}>
-                <View style = {styles.inputContainer}>
-                    <Text style={styles.inputText}>Nombre</Text>
-                    <TextInput
-                        style={styles.input}
-                        placeholder=""
-                        value={nombre}
-                        onChangeText={setNombre}
-                    />
-                </View>
-                <View style={styles.inputContainer}>
-                    <Text style={styles.inputText}>Telefono</Text>
-                    <TextInput
-                        style={styles.input}
-                        placeholder=""
-                        value={telefono}
-                        onChangeText={setTelefono}
-                        inputMode="tel"
-                    />
-                </View>
                 <View style={styles.inputContainer}>
                     <View style={{flexDirection: "row", alignItems: "center"}}>
-                        <IconSymbol name="envelope.fill" size={30} color="black" />
+                        <IconSymbol style={{marginRight: 5}} name="envelope.fill" size={25} color="black" />
                         <Text style={styles.inputText}>Correo electrónico</Text>
                     </View>
                     <TextInput
@@ -88,7 +81,7 @@ export default function RegisterPage() {
                 </View>
                 <View style={styles.inputContainer}>
                     <View style={{flexDirection: "row", alignItems: "center"}}>
-                        <IconSymbol name="lock.fill" size={30} color="black" />
+                        <IconSymbol style={{marginRight: 5}} name="lock.fill" size={25} color="black" />
                         <Text style={styles.inputText}>Contraseña</Text>
                     </View>
                     <TextInput
@@ -124,15 +117,15 @@ const styles = StyleSheet.create({
     },
     content:{
         width:308,
-        height:485,
         borderRadius:25,
         backgroundColor: "#95D3A1",
         alignItems: "center",
-        paddingTop: 15
+        paddingTop: 25
     }, 
     inputContainer:{
         width: "80%",
         alignSelf: "center",
+        marginBottom: 25,
     },
     inputText:{
         fontSize: 20,
@@ -142,7 +135,6 @@ const styles = StyleSheet.create({
     input:{
         width: 254,
         height: 41,
-        marginBottom: 10,
         backgroundColor: "#e7e7e7",
         borderRadius: 40, 
         paddingLeft: 10,   
@@ -154,8 +146,8 @@ const styles = StyleSheet.create({
         borderRadius: 40,
         alignItems: "center",
         justifyContent: "center",
-        marginTop: 20,
-        
+        marginTop: 25,
+        marginBottom: 25 + 25 // 25 de margen del boton mas 25 de margen del inputcontainer, para que quede centrado
     },
     buttonText:{
         color: "white",

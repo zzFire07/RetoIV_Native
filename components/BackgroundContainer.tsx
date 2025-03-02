@@ -1,9 +1,13 @@
 import React from "react";
 import { ImageBackground, StyleSheet } from "react-native";
 
+
 const BackgroundContainer: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+
+  const background = require("../assets/images/background-padel.png");
+
   return (
-    <ImageBackground source={require("@/assets/images/background.png")} style={styles.background}>
+    <ImageBackground source={background} style={styles.background}>
       {children}
     </ImageBackground>
   );
@@ -12,6 +16,8 @@ const BackgroundContainer: React.FC<{ children: React.ReactNode }> = ({ children
 const styles = StyleSheet.create({
   background: {
     height: "100%",
+    alignSelf: "center",
+    width: "100%",
   },
 });
 

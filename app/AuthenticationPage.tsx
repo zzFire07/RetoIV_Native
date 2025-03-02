@@ -2,14 +2,14 @@ import { View, Text, StyleSheet, ImageBackground, Image } from "react-native";
 import LoginButton from "@/components/LoginButton";
 import RegisterText from "@/components/RegisterText";
 import BackgroundContainer from "@/components/BackgroundContainer";
-import LogoHeader from "@/components/LogoHeader";
+import LogoHomePage from "@/components/LogoHomePage";
 
-export function HomePage2(){
+export function AuthenticationPage(){
    
     return(
         <BackgroundContainer>
             <View style={styles.container}>
-                <LogoHeader/>
+                <LogoHomePage/>
                 <View style = {styles.content}>
                     <LoginButton/>
                     <RegisterText/>
@@ -22,15 +22,15 @@ export function HomePage2(){
 const styles = StyleSheet.create({
 
       container: {
-        flex: 1,
+        alignItems: "center",
+        height: "100%",
+
+      },
+      content: {
         alignItems: "center",
         justifyContent: "center",
-      },
-      content:{
-        flex:1,
-        alignItems: "center",
-        justifyContent: "flex-end",
-        marginBottom: 150
+        position: "absolute",
+        bottom: "30%"
       },
 })
-export default HomePage2
+export default AuthenticationPage;
