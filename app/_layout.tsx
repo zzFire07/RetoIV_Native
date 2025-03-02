@@ -78,6 +78,22 @@ export default function RootLayout() {
                             headerBackButtonDisplayMode: "minimal",
                         }}
                     />
+                    <Stack.Screen
+                        name="LoginPage"
+                        options={{
+                            headerTitle: "",
+                            headerTransparent: true,
+                            headerBackButtonDisplayMode: "minimal",
+                        }}
+                    />
+                    <Stack.Screen
+                        name="RegisterPage"
+                        options={{
+                            headerTitle: "",
+                            headerTransparent: true,
+                            headerBackButtonDisplayMode: "minimal",
+                        }}
+                    />
                 </Stack>
                 <StatusBar style="auto" />
             </ThemeProvider>

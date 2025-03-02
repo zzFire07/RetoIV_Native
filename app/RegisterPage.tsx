@@ -3,6 +3,10 @@ import { View, Text, TextInput, TouchableOpacity, StyleSheet } from "react-nativ
 import { useRouter } from "expo-router";
 import apiService from "@/services/apiService";
 import CustomHeader from "@/components/CustomHeader";
+import WhatsAppButton from "@/components/unused-comps/WhatsAppButton";
+import { LinearGradient } from 'expo-linear-gradient';
+import { IconSymbol } from "@/components/ui/IconSymbol";
+
 
 
 export default function RegisterPage() {
@@ -44,139 +48,118 @@ export default function RegisterPage() {
     };
 
     return ( 
-        <View style={styles.pageContainer}>
-            <CustomHeader title="Club Ituzaingo" />
-
-            <View style={ styles.container}>
-                <Text style={styles.title}>Registrarse</Text>
-                <View style={styles.inputContainer}>
-                    <Text style={styles.text}>Nombre</Text>
-                    <TextInput 
+        <>
+        <CustomHeader title="Club Ituzaingo" />
+         <View style={styles.container}>
+            <Text style={styles.title}>Registrarse</Text>
+            <View style={styles.content}>
+                <View style = {styles.inputContainer}>
+                    <Text style={styles.inputText}>Nombre</Text>
+                    <TextInput
                         style={styles.input}
                         placeholder=""
                         value={nombre}
                         onChangeText={setNombre}
-                    
                     />
                 </View>
                 <View style={styles.inputContainer}>
-                    <Text style={styles.text}>Telefono</Text>
+                    <Text style={styles.inputText}>Telefono</Text>
                     <TextInput
                         style={styles.input}
                         placeholder=""
                         value={telefono}
                         onChangeText={setTelefono}
                         inputMode="tel"
-
                     />
                 </View>
                 <View style={styles.inputContainer}>
-                    <Text style={styles.text}>Correo electrónico</Text>
+                    <View style={{flexDirection: "row", alignItems: "center"}}>
+                        <IconSymbol name="envelope.fill" size={30} color="black" />
+                        <Text style={styles.inputText}>Correo electrónico</Text>
+                    </View>
                     <TextInput
                         style={styles.input}
                         placeholder=""
                         keyboardType="email-address"
                         autoCapitalize="none"
                         value={email}
-                        //onChangeText={setEmail}
                         onChangeText={validateEmail}
                     />
                 </View>
                 <View style={styles.inputContainer}>
-                    <Text style={styles.text}>Contraseña</Text>
-                    <TextInput 
+                    <View style={{flexDirection: "row", alignItems: "center"}}>
+                        <IconSymbol name="lock.fill" size={30} color="black" />
+                        <Text style={styles.inputText}>Contraseña</Text>
+                    </View>
+                    <TextInput
                         style={styles.input}
                         placeholder=""
                         secureTextEntry
                         value={password}
                         onChangeText={setPassword}
-                    
                     />
                 </View>
-                <TouchableOpacity style={styles.button} onPress={handleRegister}>
-                    <Text style={styles.buttonText}>Registrarse</Text>
-                </TouchableOpacity>
-                <Text style= {styles.textCuenta}>Ya tienes cuenta?</Text>
-                <TouchableOpacity style={styles.buttonLogIn}>
-                    <Text style={styles.textLogIn}>Iniciar sesión</Text>
+                <TouchableOpacity onPress={handleRegister}>
+                    <LinearGradient style={styles.button} colors={['#255E13', '#4DC428']} start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }}>
+                        <Text style={styles.buttonText}> Registrarse </Text>
+                    </LinearGradient>
                 </TouchableOpacity>
             </View>
-        </View>
+         </View>
+         <WhatsAppButton />
+        </>
     );
 }
 const styles = StyleSheet.create({
-    pageContainer:{
-        flex:1,
-        backgroundColor: "white",
-        justifyContent: "center",
-    },
-    container: {
+    container:{
         flex: 1,
-        justifyContent: "center",
         alignItems: "center",
         backgroundColor: "white",
-        position: "relative",
-        marginBottom: 80
     },
-    title: {
-        fontSize: 24,
-        fontWeight: "bold",
-        marginBottom: 20,
+    title:{
+        fontSize: 35,
+        fontWeight: "500",
+        marginTop: 30,
+        marginBottom: 30,
+    },
+    content:{
+        width:308,
+        height:485,
+        borderRadius:25,
+        backgroundColor: "#95D3A1",
+        alignItems: "center",
+        paddingTop: 15
+    }, 
+    inputContainer:{
+        width: "80%",
+        alignSelf: "center",
+    },
+    inputText:{
+        fontSize: 20,
+        marginTop: 10,
+        marginBottom: 5,
+    },
+    input:{
+        width: 254,
+        height: 41,
+        marginBottom: 10,
+        backgroundColor: "#e7e7e7",
+        borderRadius: 40, 
+        paddingLeft: 10,   
+    },
+    button: {
+        width: 270,
+        height: 54,
+        backgroundColor: "#255E13",
+        borderRadius: 40,
+        alignItems: "center",
+        justifyContent: "center",
+        marginTop: 20,
         
     },
-    inputContainer:{
-        width: "100%",
-        marginBottom: 10,
-        backgroundColor: "white",
-        alignItems: "center"
-    },
-    input: {
-        width: "80%",
-        padding: 12,
-        marginBottom: 10,
-        borderWidth: 1,
-        backgroundColor: "#e7e7e7",
-        borderColor: "#ccc",
-        borderRadius: 8,
-    },
-    text:{
-        fontWeight: "bold",
-        marginBottom: 5,
-        width: "80%",
-    },
-     
-    button: {
-        backgroundColor: "#11aa5a",
-        paddingVertical: 12,
-        paddingHorizontal: 20,
-        borderRadius: 8,
-        alignItems: "center",
-        justifyContent: "center",
-        width: 141,
-        marginTop: 10,
-    },
-   buttonText: {
+    buttonText:{
         color: "white",
-        fontSize: 16,
+        fontSize: 18,
         fontWeight: "bold",
-    },
-    textCuenta:{
-        fontSize: 16,
-        marginTop: 20
-    },
-    buttonLogIn:{
-        backgroundColor:"#ca312b",
-        borderRadius: 10,
-        width: 141,
-        height: 40,
-        alignItems: "center",
-        justifyContent: "center",
-        marginTop: 10,
-        marginBottom: 30
-    },
-    textLogIn:{
-        color: "white",
-        fontWeight: "bold",
-        fontSize: 16
     }
 });

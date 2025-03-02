@@ -1,15 +1,34 @@
 import { StyleSheet, View, Text } from "react-native";
 import { useLocalSearchParams } from "expo-router";
+import { auth } from "../firebaseConfig";
+import { useEffect } from "react";
+import  apiService  from "../services/apiService";
+
+
 
 export default function PaymentStatusPage() {
-  const params = useLocalSearchParams(); // Obtiene los parámetros de la URL
+    const user = auth.currentUser;
 
+    const params = useLocalSearchParams(); // Obtenemos los parámetros de la URL
+    const payment_id = params.payment_id;
+    const status = params.status;
+    const title = String(params.external_reference);
+    const quantity = title.match(/\d+/)?.[0] || "0";
+
+    useEffect(() => {
+    if (params.status === "approved") {
+        console.log("llamada al back addTicket",apiService.editUserTickets(user.uid, quantity));
+        console.log("uid firebase",user.uid);
+    }
+    }, [params.status]);
   return (
     <>
         <View style={styles.container}>
             <Text style={styles.title}>Payment Status</Text>
-            <Text style={styles.text}>Payment ID: {params.payment_id}</Text>
-            <Text style={styles.text}>Status: {params.status}</Text>
+            <Text style={styles.text}>Payment ID: {payment_id}</Text>
+            <Text style={styles.text}>Product: {title}</Text>
+            <Text style={styles.text}>Status: {status}</Text>
+            <Text style={styles.text}>Ticket Count: {quantity}</Text>
         </View>
     </>
   );

@@ -42,7 +42,8 @@ export function TicketPage() {
                         success: dipLink,
                         failure: dipLink,
                         cancel: dipLink
-                    }
+                    },
+                    external_reference: product.name
                 })
             });
             const data = await response.json();

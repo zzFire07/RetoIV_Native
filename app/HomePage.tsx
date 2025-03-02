@@ -6,28 +6,31 @@ import BuyTicketsButton from "../components/BuyTicketsButton";
 import MatchDisponibility from "../components/MatchDisponibility";
 import { useAppContext } from "@/context/AppContext";
 import WhatsAppButton from "@/components/unused-comps/WhatsAppButton";
+import HomePage2 from "./HomePage2";
 
 export function HomePage() {
   const { loggedIn, setLoggedIn } = useAppContext();
   
     return (
       <>
-        <CustomHeader title="Club Ituzaingo" />
+        
+        {/*</><CustomHeader title="Club Ituzaingo" />
         <TouchableOpacity style={styles.button} onPress={() => setLoggedIn(!loggedIn)}>
           <Text>{loggedIn ? "Cerrar Sesión" : "Iniciar Sesión"}</Text>
         </TouchableOpacity>
         
 
-        <View style={styles.container}>
-          {!loggedIn && <AuthenticationButton />}
+        <View style={styles.container}>*/}
+          {!loggedIn && <HomePage2 />}
           {loggedIn && (
             <>
               <MatchDisponibility />
               <BuyTicketsButton />
+              
             </>
           )}
-        </View>
-        <WhatsAppButton />
+        {/*</></View>
+        <WhatsAppButton />*/}
       </>
     );  
 }
@@ -39,6 +42,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     borderRadius: 8,
     alignItems: "center",
+  
   },
   container: {
     flex: 1,
