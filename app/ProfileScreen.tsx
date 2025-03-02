@@ -30,12 +30,14 @@ const ProfileScreen = () => {
 
   const editarPerfil = () => {
     if (showInputs) {
-      actualizarUsuario;
-      setShowInputs(false);
-    } else {
-      setShowInputs(true);
+      actualizarUsuario();
+      setNuevoNombre('');
+      setNuevoApellido('');
+      setNuevoNumero('');
     }
+    setShowInputs(!showInputs);
   };
+  
 
   return (
     <View style={styles.container}>
@@ -124,7 +126,7 @@ const styles = StyleSheet.create({
     borderRadius: 35,
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 20, // 🔹 Cambio: En vez de position absolute
+    marginTop: 20,
   },
   textSave: {
     color: '#000000',

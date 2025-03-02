@@ -5,14 +5,14 @@ interface ProfileButtonProps {
   showInputs: boolean;
 }
 
-const ProfileButton: React.FC<ProfileButtonProps> = ({ onPress }) => {
+const ProfileButton: React.FC<ProfileButtonProps> = ({ onPress, showInputs }) => {
   return (
     <TouchableHighlight
       style={styles.ProfileButton}
       onPress={onPress}
       underlayColor="#16a016"
     >
-      <Text style={styles.text}>Editar Perfil</Text>
+      <Text style={styles.text}>{showInputs ? "Guardar" : "Editar Perfil"}</Text>
     </TouchableHighlight>
   );
 }
@@ -23,16 +23,15 @@ const styles = StyleSheet.create({
     height: 50,
     backgroundColor: '#1bc01b',
     borderWidth: 2,
-    borderColor: '#000000',
+    borderColor: '#000',
     borderRadius: 35,
-    position: "absolute",
-    bottom: '5%',
     justifyContent: 'center',
+    alignItems: 'center',
     overflow: 'hidden',
-    marginTop: 50,
+    marginTop: 20,
   },
   text: {
-    color: '#000000',
+    color: '#000',
     fontSize: 15,
     textAlign: 'center'
   }
