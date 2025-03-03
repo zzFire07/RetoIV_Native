@@ -21,8 +21,6 @@ export default function RegisterPage() {
     const [isValid, setIsValid] = useState(false);
     const [error, setError] = useState("");
 
-    const { setLoggedIn, setToken } = useAuth();
-
 
     const validateEmail = (text: string) => {
         setEmail(text);

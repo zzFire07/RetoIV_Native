@@ -1,14 +1,10 @@
 // hacer boton de cerrar sesion con firebase y el contexto
 //
 import { Text, TouchableOpacity, StyleSheet} from "react-native";
-import { useAuth } from "@/context/AuthContext";
 import { auth } from "@/firebaseConfig";
-import { useRouter } from "expo-router";
 
 
 export function SignOffButton() {
-  const { setLoggedIn } = useAuth();
-  const router = useRouter();
 
   const handleSignOff = async () => {
     await auth.signOut();

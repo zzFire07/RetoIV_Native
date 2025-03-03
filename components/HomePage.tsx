@@ -4,7 +4,6 @@ import { StyleSheet, View } from "react-native";
 import BuyTicketsButton from "./BuyTicketsButton";
 import MatchDisponibility from "./MatchDisponibility";
 import { useAuth } from "@/context/AuthContext";
-import BackgroundContainer from "./BackgroundContainer";
 
 export function HomePage() {
   const { loggedIn } = useAuth();
@@ -12,12 +11,6 @@ export function HomePage() {
   if (!loggedIn) {
     return (
       <>
-      <BackgroundContainer>
-        <View style={styles.container}>
-
-        </View>
-      </BackgroundContainer>
-      
       </>
     )
   }
@@ -51,6 +44,13 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     flexDirection: "column",
     gap: 20,
+  },
+  fullpage: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    height: "100%",
+    width: "100%",
   },
   
 });

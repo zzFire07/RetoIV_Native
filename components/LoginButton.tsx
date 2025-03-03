@@ -1,7 +1,6 @@
 import {View, Text, TouchableOpacity, StyleSheet} from "react-native";
 import { Link } from "expo-router";
 
-
 export default function LoginButton(){
     return(
         <View style={styles.container}>
