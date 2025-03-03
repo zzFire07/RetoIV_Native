@@ -24,12 +24,16 @@ export default function RootLayout() {
     });
 
     useEffect(() => {
-        const handleDeepLink = (event) => { 
+        const handleDeepLink = (event: any) => { 
             const url = event.url; 
             if (url) {
                 const { path, queryParams } = Linking.parse(url); 
                 if (path === "PaymentStatus") {
-                    router.push(`/PaymentStatus?${new URLSearchParams(queryParams)}`);
+                    if (queryParams) {
+                        router.push(`/PaymentStatusPage?${new URLSearchParams(queryParams)}`);
+                    } else {
+                        router.push("/PaymentStatusPage");
+                    }
                 } 
             }
     };
@@ -63,30 +67,52 @@ export default function RootLayout() {
             SplashScreen.hideAsync();
         }
     }, [loaded]);
-
-  if (!loaded) {
-    return null;
-  }
-
-  return (
-    <ContextProvider>
-      <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-        <Stack>
-          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-          <Stack.Screen name="+not-found" />
-          <Stack.Screen 
-            name="TicketPage" 
-            options={{ 
-              headerTitle: '', 
-              headerTransparent: true,
-              headerBackButtonDisplayMode: 'minimal'
-              }} 
-          />
-        </Stack>
-        <StatusBar style="auto" />
-      </ThemeProvider>
-    </ContextProvider>
-  );
+    if (!loaded) {
+        return null;
+    }
+    return (
+        <ContextProvider>
+            <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
+                <Stack>
+                    <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+                    <Stack.Screen name="+not-found" />
+                    <Stack.Screen
+                        name="TicketPage"
+                        options={{
+                            headerTitle: "",
+                            headerTransparent: true,
+                            headerBackButtonDisplayMode: "minimal",
+                        }}
+                    />
+                    <Stack.Screen
+                        name="LoginPage"
+                        options={{
+                            headerTitle: "",
+                            headerTransparent: true,
+                            headerBackButtonDisplayMode: "minimal",
+                        }}
+                    />
+                    <Stack.Screen
+                        name="RegisterPage"
+                        options={{
+                            headerTitle: "",
+                            headerTransparent: true,
+                            headerBackButtonDisplayMode: "minimal",
+                        }}
+                    />
+                    <Stack.Screen
+                        name="AuthenticationPage"
+                        options={{
+                            headerTitle: "",
+                            headerTransparent: true,
+                            headerBackButtonDisplayMode: "minimal",
+                        }}
+                    />
+                </Stack>
+                <StatusBar style="auto" />
+            </ThemeProvider>
+        </ContextProvider>
+    );
 }
 
 
