@@ -66,6 +66,7 @@ export function TicketPage() {
             try {
                 const response = await apiService.getAllPackages(); // Usa el servicio API
                 setListaTicket(response.data);
+                console.log("Tickets cargados:", response.data);
             } catch (error) {
                 console.error("Error al traer los paquetes:", error);
             }

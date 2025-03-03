@@ -22,7 +22,7 @@ const apiService = {
     getAllUsers: () => api.get("/user/getUsers"),
     getUserById: (userId: any) => api.get(`/user/getUserById/${userId}`),
     editUserTickets: (userId: any, newTicketsData: any) =>
-        api.put(`/users/AddTickets/${userId}`, newTicketsData),
+        api.post(`/user/addTickets/${userId}`, newTicketsData),
 
     // Llamadas de Paquetes
     createPackage: (packageData: any) =>
