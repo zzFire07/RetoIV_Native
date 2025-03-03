@@ -2,31 +2,37 @@ import { useState } from "react";
 import { View, TextInput, Button, Text, StyleSheet } from "react-native";
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebaseConfig";
+import { useAuth } from "../context/AuthContext";
 
 export default function AuthScreen() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const {setToken} = useAuth();
 
   const handleLogin = async () => {
     try {
-      await signInWithEmailAndPassword(auth, email, password);
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      const token = await userCredential.user.getIdToken();
+      setToken(token);
       alert("Inicio de sesión exitoso");
     } catch (err) {
       console.log(err);
       setError(err.message);
     }
-  }
+  };
 
   const handleRegister = async () => {
     try {
-      await createUserWithEmailAndPassword(auth, email, password);
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      const token = await userCredential.user.getIdToken();
+      setToken(token);
       alert("Usuario registrado con éxito");
     } catch (err) {
       console.log(err);
       setError(err.message);
     }
-  }
+  };
 
   return (
     <View style={styles.container}>

@@ -22,6 +22,8 @@ const ProfileScreen = () => {
   );
 };
 
+export default ProfileScreen;
+
 const styles = StyleSheet.create({
   container: {
     paddingTop: 30,
@@ -63,4 +65,3 @@ const styles = StyleSheet.create({
   }
 });
 
-export default ProfileScreen;
