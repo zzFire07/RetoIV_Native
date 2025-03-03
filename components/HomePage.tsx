@@ -3,27 +3,20 @@ import CustomHeader from "./CustomHeader";
 import { StyleSheet, View } from "react-native";
 import BuyTicketsButton from "./BuyTicketsButton";
 import MatchDisponibility from "./MatchDisponibility";
-import { useRouter } from "expo-router";
 import { useAuth } from "@/context/AuthContext";
+import BackgroundContainer from "./BackgroundContainer";
 
 export function HomePage() {
-  const { loggedIn, setLoggedIn } = useAuth();
-
-  const router = useRouter();
-
-  useEffect(() => {
-    console.log("logueado en homepage?", loggedIn);
-    setTimeout(() => {
-    if (!loggedIn) {
-        router.replace("/AuthenticationPage");
-      }
-    }, 10); // Pequeño retraso para evitar el error de router, ya que demora en iniciar la estructura de router.
-  }, [loggedIn]);
-
+  const { loggedIn } = useAuth();
 
   if (!loggedIn) {
     return (
       <>
+      <BackgroundContainer>
+        <View style={styles.container}>
+
+        </View>
+      </BackgroundContainer>
       
       </>
     )
@@ -36,7 +29,7 @@ export function HomePage() {
           <MatchDisponibility />
           <BuyTicketsButton />
         </View>
-        {/*</></View>
+        {/*
         <WhatsAppButton />*/}
       </>
     );  

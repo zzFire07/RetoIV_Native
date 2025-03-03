@@ -1,8 +1,6 @@
 import React, {useState} from "react";
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from "react-native";
 import { useRouter } from "expo-router";
-import apiService from "@/services/apiService";
-import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
 import CustomHeader from "@/components/CustomHeader";
 import WhatsAppButton from "@/components/unused-comps/WhatsAppButton";
 import { LinearGradient } from 'expo-linear-gradient';
@@ -23,7 +21,7 @@ export default function RegisterPage() {
     const [isValid, setIsValid] = useState(false);
     const [error, setError] = useState("");
 
-    const { loggedIn, setLoggedIn } = useAuth();
+    const { setLoggedIn, setToken } = useAuth();
 
 
     const validateEmail = (text: string) => {
@@ -46,13 +44,9 @@ export default function RegisterPage() {
             return;
         }
         try {
-            await createUserWithEmailAndPassword(auth, email, password);
-            //await apiService.createUser({ nombre, email, password});
-            alert("Registro exitoso!");
-            setLoggedIn(true);
-            setTimeout(() => {
-                router.replace("/"); // Espera para que actualice el contexto.
-              }, 10);
+            const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+            //const user = await apiService.logUser();
+            router.back(); // Cierra el register page.
         } catch (error) {
             console.error("Error en el registro:", error);
             alert("Error al registrarse, intenta nuevamente.");

@@ -2,9 +2,9 @@ import React, { createContext, useState, useEffect, ReactNode, useContext } from
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { onAuthStateChanged, User } from "firebase/auth";
 import { auth } from "../firebaseConfig";
+import { useRouter } from "expo-router";
 
 interface AuthContextProps {
-  user : User | null;
   token: string | null;
   setToken: (token: string | null) => void;
   loggedIn: boolean;
@@ -14,29 +14,22 @@ interface AuthContextProps {
 export const AuthContext = createContext<AuthContextProps | null>(null);
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
-  const [user, setUser] = useState<User | null>(null);
   const [token, setToken] = useState<string | null>(null);
   const [loggedIn, setLoggedIn] = useState(false);
+  const router = useRouter();
 
-  useEffect(() => {
-    (async () => {
-      const storedToken = await AsyncStorage.getItem("authToken");
-      storedToken && setToken(storedToken);
-    })();
-  }, []);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
       if (currentUser) {
         const idToken = await currentUser.getIdToken();
-        setUser(currentUser);
-        setToken(idToken);
         setLoggedIn(true);
         await AsyncStorage.setItem("authToken", idToken);
         console.log("Usuario autenticado:", currentUser.email);
         console.log("Token:", idToken);
+        router.replace("/"); // Redirige a la página principal
       } else {
-        setUser(null);
+        router.replace("/AuthenticationPage")
         setToken(null);
         setLoggedIn(false);
         await AsyncStorage.removeItem("authToken");
@@ -53,7 +46,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ user, token, setToken: handleSetToken, loggedIn, setLoggedIn }}>
+    <AuthContext.Provider value={{ token, setToken: handleSetToken, loggedIn, setLoggedIn }}>
       {children}
     </AuthContext.Provider>
   );
