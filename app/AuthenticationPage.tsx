@@ -5,7 +5,7 @@ import BackgroundContainer from "@/components/BackgroundContainer";
 import LogoHomePage from "@/components/LogoHomePage";
 
 export function AuthenticationPage(){
-   
+
     return(
         <BackgroundContainer>
             <View style={styles.container}>

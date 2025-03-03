@@ -1,3 +1,4 @@
+import SignOffButton from '@/components/SignOffButton';
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 
@@ -17,10 +18,13 @@ const ProfileScreen = () => {
         <Text style={styles.textinfo}>Nombre: {User.nombre} {User.apellido}</Text>
         <Text style={styles.textinfo}>Email: {User.email}</Text>
         <Text style={styles.textinfo}>Partidos disponibles: {User.partidos}</Text>
+        <SignOffButton />
       </View>
     </View>
   );
 };
+
+export default ProfileScreen;
 
 const styles = StyleSheet.create({
   container: {
@@ -63,4 +67,3 @@ const styles = StyleSheet.create({
   }
 });
 
-export default ProfileScreen;

@@ -8,19 +8,19 @@ import WhatsAppButton from "@/components/unused-comps/WhatsAppButton";
 import AsyncStorage from "@react-native-async-storage/async-storage"; 
 import * as Linking from "expo-linking";
 const lista = [
-    { id: 1, name: "Ticketera 8 partidos", price: 1000 },
-    { id: 2, name: "Ticketera 18 partidos", price: 2000 },
-    { id: 3, name: "Ticketera 27 partidos", price: 3000 }
+    { package_id: 1, title: "Ticketera 8 partidos", price: 1000, ticket_quantity: 8 },
+    { package_id: 2, title: "Ticketera 18 partidos", price: 2000, ticket_quantity: 18 },
+    { package_id: 3, title: "Ticketera 27 partidos", price: 3000, ticket_quantity: 27 },
 ];
 export function TicketPage() {
     const [result, setResult] = useState<WebBrowser.WebBrowserResult | null>(null);
     const auth_token = process.env.EXPO_PUBLIC_MP_AUTH;
-    const [listaTicket, setListaTicket] = useState(lista);
+    const [listaTicket, setListaTicket] = useState<{ package_id: number; title: string; price: number; ticket_quantity: number }[]>([]);
 
     const dipLink = Linking.createURL("PaymentStatusPage");
 
     /** :diamante_azul_pequeño: Función para manejar la compra */
-    const handleBuy = async (product: { name: any; price: any }) => {
+    const handleBuy = async (product: { title: string; price: number, ticket_quantity: number}) => {
         try {
             const response = await fetch("https://api.mercadopago.com/checkout/preferences", {
                 method: "POST",
@@ -31,7 +31,7 @@ export function TicketPage() {
                 body: JSON.stringify({
                     items: [
                         {
-                            title: product.name,
+                            title: product.title,
                             quantity: 1,
                             currency_id: "$",
                             unit_price: product.price
@@ -43,7 +43,7 @@ export function TicketPage() {
                         failure: dipLink,
                         cancel: dipLink
                     },
-                    external_reference: product.name
+                    external_reference: product.ticket_quantity
                 })
             });
             const data = await response.json();
@@ -64,13 +64,9 @@ export function TicketPage() {
     useEffect(() => {
         const fetchTickets = async () => {
             try {
-                const token = await AsyncStorage.getItem("authToken");
-                if (!token) {
-                    console.error("No se encontró el token de autenticación.");
-                    return;
-                }
                 const response = await apiService.getAllPackages(); // Usa el servicio API
                 setListaTicket(response.data);
+                console.log("Tickets cargados:", response.data);
             } catch (error) {
                 console.error("Error al traer los paquetes:", error);
             }
@@ -84,11 +80,12 @@ export function TicketPage() {
             <Text style={styles.title}>Ticketeras Disponibles</Text>
             {listaTicket.length > 0 ? (
               listaTicket.map((ticket, index) => (
-                ticket && ticket?.id && ticket?.name ? ( 
+                ticket && ticket?.package_id && ticket?.title ? ( 
                   <TicketComponent
                     key={index}
-                    id={ticket?.id}
-                    name={ticket?.name}
+                    id={ticket?.package_id}
+                    name={ticket?.title}
+                    price={ticket?.price}
                     onPress={() => handlePayment(ticket)}
                   />
                 ) : (

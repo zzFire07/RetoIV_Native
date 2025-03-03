@@ -6,10 +6,11 @@ const mercadoPagoLogo = require("../assets/images/Mercado-Pagoo.png");
 interface TicketProps {
     id: number;
     name: string;
+    price: number;
     onPress: () => void;
 }
 
-const TicketComponent: React.FC<TicketProps> = ({id, name, onPress}) => {
+const TicketComponent: React.FC<TicketProps> = ({id, name, price, onPress}) => {
     return (
         <>
             <TouchableHighlight
@@ -20,6 +21,7 @@ const TicketComponent: React.FC<TicketProps> = ({id, name, onPress}) => {
             >
                 <View style={styles.buttonContent}>
                     <Text style={styles.buttonText}>{name}</Text>
+                    <Text style={styles.buttonText}>${price}</Text>
                     <Image source={mercadoPagoLogo} style={styles.logo} />
                 </View>
             </TouchableHighlight>

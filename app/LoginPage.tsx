@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Button } from "react-native";
+import React, { useState } from "react";
+import { View, Text, TextInput, TouchableOpacity, StyleSheet } from "react-native";
 import WhatsAppButton from "@/components/unused-comps/WhatsAppButton";
 import CustomHeader from "@/components/CustomHeader";
 import { LinearGradient } from 'expo-linear-gradient';
@@ -7,7 +7,8 @@ import { IconSymbol } from "@/components/ui/IconSymbol";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebaseConfig";
 import { useRouter } from "expo-router";
-import { useAuth } from "@/context/AuthContext";
+import { useUser } from "@/context/UserContext";
+import apiService from "@/services/apiService"; // Asegúrate de importar el servicio correctamente
 
 
 export function LoginPage () {
@@ -15,8 +16,6 @@ export function LoginPage () {
     const [password, setPassword]= useState("");
     const [isValid, setIsValid] = useState(false);
     const [error, setError] = useState("");
-
-    const { loggedIn, setLoggedIn } = useAuth();
 
     const router = useRouter();
 
@@ -28,20 +27,13 @@ export function LoginPage () {
 
     const firebaseLogin = async () => {
         try {
-          await signInWithEmailAndPassword(auth, email, password);
-          alert("Inicio de sesión exitoso");
-          setLoggedIn(true);
-          setTimeout(() => {
-            router.replace("/"); // Espera para que actualice el contexto.
-          }, 10);
+          const userCredential = await signInWithEmailAndPassword(auth, email, password);
+          //const user = await apiService.logUser();
+          router.back(); // cierra el login page.
         } catch (err: any) {
           console.log(err);
           setError(err.message);
         }
-      }
-
-      const irhome = () => {
-        router.replace("/");
       }
 
 

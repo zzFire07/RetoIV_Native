@@ -43,25 +43,6 @@ export default function RootLayout() {
 
 }, []);
 
-
-
-    // :diamante_azul_pequeño: Agregar el useEffect para verificar el token en AsyncStorage
-    useEffect(() => {
-        const checkToken = async () => {
-            try {
-                console.log("Ejecutando checkToken en RootLayout...");
-                const token = await AsyncStorage.getItem("authToken");
-                if (token === null) {
-                    console.log("TOKEN ENCONTRADO EN ASYNCSTORAGE: null (No hay token)");
-                } else {
-                    console.log("TOKEN ENCONTRADO EN ASYNCSTORAGE:", token);
-                }
-            } catch (error) {
-                console.error("Error al obtener el token:", error);
-            }
-        };
-        checkToken();
-    }, []);
     useEffect(() => {
         if (loaded) {
             SplashScreen.hideAsync();
