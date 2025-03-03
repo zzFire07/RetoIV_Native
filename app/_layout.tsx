@@ -1,47 +1,22 @@
 import { DarkTheme, DefaultTheme, ThemeProvider } from "@react-navigation/native";
 import { useFonts } from "expo-font";
-import { Stack, useRouter } from "expo-router";
+import { Stack } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 import { StatusBar } from "expo-status-bar";
 import { useEffect } from "react";
-import AsyncStorage from "@react-native-async-storage/async-storage"; // Importar AsyncStorage
 import "react-native-reanimated";
 import "react-native-screens";
 import { useColorScheme } from "@/hooks/useColorScheme";
 import { ContextProvider } from "@/context/ContextProvider";
 
-import * as Linking from "expo-linking"
-
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
 export default function RootLayout() {
 
-
-    const router = useRouter();
     const colorScheme = useColorScheme();
     const [loaded] = useFonts({
         SpaceMono: require("../assets/fonts/SpaceMono-Regular.ttf"),
     });
-
-    useEffect(() => {
-        const handleDeepLink = (event: any) => { 
-            const url = event.url; 
-            if (url) {
-                const { path, queryParams } = Linking.parse(url); 
-                if (path === "PaymentStatus") {
-                    if (queryParams) {
-                        router.push(`/PaymentStatusPage?${new URLSearchParams(queryParams)}`);
-                    } else {
-                        router.push("/PaymentStatusPage");
-                    }
-                } 
-            }
-    };
-
-    const subscription = Linking.addEventListener("url", handleDeepLink); 
-    return () => subscription.remove();
-
-}, []);
 
     useEffect(() => {
         if (loaded) {
