@@ -64,6 +64,13 @@ export default function RootLayout() {
                             headerBackButtonDisplayMode: "minimal",
                         }}
                     />
+                    <Stack.Screen
+                        name="PaymentStatusPage"
+                        options={{
+                            headerShown: false,
+                            gestureEnabled: false,
+                        }}
+                    />
                 </Stack>
                 <StatusBar style="auto" />
             </ThemeProvider>
