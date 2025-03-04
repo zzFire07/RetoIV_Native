@@ -68,6 +68,8 @@ export function TicketPage() {
     };
     /** :diamante_azul_pequeño: Cargar tickets desde la API con autenticación */
     useEffect(() => {
+        // Toma el tiempo en que demora la carga de los tickets
+        const start = new Date().getTime();
         const fetchTickets = async () => {
             try {
                 const response = await apiService.getAllPackages(); // Usa el servicio API
@@ -78,6 +80,8 @@ export function TicketPage() {
                 console.error("Error al traer los paquetes:", error);
             }
         };
+        const end = new Date().getTime();
+        console.log("Tiempo de carga de tickets:", end - start, "ms");
         fetchTickets();
     }, []);
     return (
