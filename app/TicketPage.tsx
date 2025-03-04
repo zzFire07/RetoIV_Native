@@ -5,8 +5,8 @@ import CustomHeader from "@/components/CustomHeader";
 import * as WebBrowser from "expo-web-browser";
 import apiService from "@/services/apiService"; // Asegúrate de importar el servicio correctamente
 import WhatsAppButton from "@/components/unused-comps/WhatsAppButton";
-import AsyncStorage from "@react-native-async-storage/async-storage"; 
 import * as Linking from "expo-linking";
+
 const lista = [
     { package_id: 1, title: "Ticketera 8 partidos", price: 1000, ticket_quantity: 8 },
     { package_id: 2, title: "Ticketera 18 partidos", price: 2000, ticket_quantity: 18 },
@@ -15,12 +15,14 @@ const lista = [
 export function TicketPage() {
     const [result, setResult] = useState<WebBrowser.WebBrowserResult | null>(null);
     const auth_token = process.env.EXPO_PUBLIC_MP_AUTH;
+
     const [listaTicket, setListaTicket] = useState<{ package_id: number; title: string; price: number; ticket_quantity: number }[]>([]);
 
     const dipLink = Linking.createURL("PaymentStatusPage");
 
+
     /** :diamante_azul_pequeño: Función para manejar la compra */
-    const handleBuy = async (product: { title: string; price: number, ticket_quantity: number}) => {
+    const handlePreference = async (product: { title: string; price: number, ticket_quantity: number}) => {
         try {
             const response = await fetch("https://api.mercadopago.com/checkout/preferences", {
                 method: "POST",
@@ -49,28 +51,37 @@ export function TicketPage() {
             const data = await response.json();
             return data.init_point;
         } catch (error) {
-            console.error("Error en la compra:", error);
+            console.error("Error en la creacion de preferencia:", error);
         }
     };
     /** :diamante_azul_pequeño: Función para abrir el pago en el navegador */
     const handlePayment = async (product: any) => {
-        const paymentUrl = await handleBuy(product);
-        if (paymentUrl) {
-            let result = await WebBrowser.openBrowserAsync(paymentUrl);
+        const preferenceUrl = await handlePreference(product);
+        if (preferenceUrl) {
+            //Linking.openURL(preferenceUrl);
+            const browser = await WebBrowser.openBrowserAsync(preferenceUrl, {
+                enableBarCollapsing: true,
+                showInRecents: false,
+            });
             setResult(result);
         }
     };
     /** :diamante_azul_pequeño: Cargar tickets desde la API con autenticación */
     useEffect(() => {
+        // Toma el tiempo en que demora la carga de los tickets
+        const start = new Date().getTime();
         const fetchTickets = async () => {
             try {
                 const response = await apiService.getAllPackages(); // Usa el servicio API
                 setListaTicket(response.data);
                 console.log("Tickets cargados:", response.data);
             } catch (error) {
+                setListaTicket(lista);
                 console.error("Error al traer los paquetes:", error);
             }
         };
+        const end = new Date().getTime();
+        console.log("Tiempo de carga de tickets:", end - start, "ms");
         fetchTickets();
     }, []);
     return (
