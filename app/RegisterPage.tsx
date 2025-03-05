@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from "react-native";
 import { useRouter } from "expo-router";
 import CustomHeader from "@/components/CustomHeader";
-import WhatsAppButton from "@/components/unused-comps/WhatsAppButton";
+import WhatsAppButton from "@/components/WhatsAppButton";
 import { LinearGradient } from 'expo-linear-gradient';
 import { IconSymbol } from "@/components/ui/IconSymbol";
 import { createUserWithEmailAndPassword } from "firebase/auth";

@@ -4,7 +4,7 @@ import TicketComponent from "@/components/TicketComponent";
 import CustomHeader from "@/components/CustomHeader";
 import * as WebBrowser from "expo-web-browser";
 import apiService from "@/services/apiService"; // Asegúrate de importar el servicio correctamente
-import WhatsAppButton from "@/components/unused-comps/WhatsAppButton";
+import WhatsAppButton from "@/components/WhatsAppButton";
 import * as Linking from "expo-linking";
 
 const lista = [
@@ -68,20 +68,20 @@ export function TicketPage() {
     };
     /** :diamante_azul_pequeño: Cargar tickets desde la API con autenticación */
     useEffect(() => {
-        // Toma el tiempo en que demora la carga de los tickets
-        const start = new Date().getTime();
         const fetchTickets = async () => {
+            const start = new Date().getTime(); // ⏱ Inicio del tiempo
             try {
-                const response = await apiService.getAllPackages(); // Usa el servicio API
+                const response = await apiService.getAllPackages(); // 🛜 Llamada a la API
                 setListaTicket(response.data);
                 console.log("Tickets cargados:", response.data);
             } catch (error) {
                 setListaTicket(lista);
                 console.error("Error al traer los paquetes:", error);
             }
+            const end = new Date().getTime(); // ⏱ Fin del tiempo
+            console.log("Tiempo de carga de tickets:", end - start, "ms"); // ⏳ Calcula la diferencia
         };
-        const end = new Date().getTime();
-        console.log("Tiempo de carga de tickets:", end - start, "ms");
+
         fetchTickets();
     }, []);
     return (

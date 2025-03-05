@@ -16,7 +16,7 @@ export default function WhatsAppButton() {
       <Text style={styles.texto}>Contáctanos</Text>
     
       <TouchableOpacity onPress={handleWhatsAppPress}>
-        <Image source={require("../../assets/images/whatsapp-logo.jpg")}
+        <Image source={require("../assets/images/whatsapp-logo.jpg")}
         style={styles.whatsappIcon} 
         />
       </TouchableOpacity>

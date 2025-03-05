@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from "react-native";
-import WhatsAppButton from "@/components/unused-comps/WhatsAppButton";
+import WhatsAppButton from "@/components/WhatsAppButton";
 import CustomHeader from "@/components/CustomHeader";
 import { LinearGradient } from 'expo-linear-gradient';
 import { IconSymbol } from "@/components/ui/IconSymbol";
