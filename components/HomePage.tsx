@@ -15,16 +15,11 @@ export function HomePage() {
 
   useEffect(() => {
     const authenticateUser = async () => {
-      console.log("Autenticar usuario:");
-      const firebase_uid = await AsyncStorage.getItem("firebase_uid");
+      console.log("Autenticar usuario por primera vez:");
       try {
-        if (firebase_uid) {
-          const response = await apiService.getUserByFirebaseId(firebase_uid);
-          console.log("Usuario actualizado:", response.data);
-          setUser(response.data);
-        } else {
-          console.log("Firebase UID is null");
-        }
+        const response = await apiService.logUser();
+        console.log("Usuario actualizado:", response.data);
+        setUser(response.data);
       } catch (error) {
         console.error("Error al loguear el usuario:", error);
       }
