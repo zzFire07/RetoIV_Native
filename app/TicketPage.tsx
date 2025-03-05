@@ -69,17 +69,18 @@ export function TicketPage() {
     /** :diamante_azul_pequeño: Cargar tickets desde la API con autenticación */
     useEffect(() => {
         const fetchTickets = async () => {
-            const start = new Date().getTime(); // ⏱ Inicio del tiempo
             try {
                 const response = await apiService.getAllPackages(); // 🛜 Llamada a la API
                 setListaTicket(response.data);
                 console.log("Tickets cargados:", response.data);
+                if(response.data.length === 0) {
+                    console.warn("No hay tickets disponibles.");
+                    setListaTicket(lista);
+                }
             } catch (error) {
                 setListaTicket(lista);
                 console.error("Error al traer los paquetes:", error);
             }
-            const end = new Date().getTime(); // ⏱ Fin del tiempo
-            console.log("Tiempo de carga de tickets:", end - start, "ms"); // ⏳ Calcula la diferencia
         };
 
         fetchTickets();

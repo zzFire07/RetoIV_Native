@@ -10,6 +10,7 @@ const api = axios.create({ //instancia personalizada de axios
 api.interceptors.request.use( //modifico la request antes que se envie al servidor
     async (config) => { //objeto config tiene la configuracion de la request
         const token = await AsyncStorage.getItem("authToken"); //obtener token del storage
+        console.log("Token:", token);
         if (token) {
             config.headers["Authorization"] = `Bearer ${token}`; // agregar token al header
         }
@@ -20,9 +21,11 @@ const apiService = {
     // Llamadas de Usuarios
     logUser: () => api.post("/user/logUser"),
     getAllUsers: () => api.get("/user/getUsers"),
-    getUserById: (userId: any) => api.get(`/user/getUserById/${userId}`),
-    editUserTickets: (userId: any, newTicketsData: any) =>
+    getUserById: (userId: string) => api.get(`/user/getUserById/${userId}`),
+    getUserByFirebaseId: (firebaseId: String) => api.get(`/user/getUserByFirebaseId/${firebaseId}`),
+    addTickets: (userId: string, newTicketsData: any) =>
         api.post(`/user/addTickets/${userId}`, newTicketsData),
+    addPhoneNumber: (userId: Number, phoneNumberData: String) => api.post(`/user/addPhoneNumber/${userId}`, phoneNumberData),
 
     // Llamadas de Paquetes
     createPackage: (packageData: any) =>
@@ -31,7 +34,9 @@ const apiService = {
         api.post(`/package/deletePackageByID/${packageId}`),
     editPackage: (packageId: any, packageData: any) =>
         api.put(`/package/updatePackageByID/${packageId}`, packageData),
-    getAllPackages: () => api.get("/package/getPackages"),
+    getAllPackages: () => 
+        api.get("/package/getPackages")
+    ,
     getPackageById: (packageId: any) =>
         api.get(`/package/getPackageById/${packageId}`),
 

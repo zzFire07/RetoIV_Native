@@ -5,9 +5,33 @@ import BuyTicketsButton from "./BuyTicketsButton";
 import MatchDisponibility from "./MatchDisponibility";
 import { useAuth } from "@/context/AuthContext";
 import WhatsAppButton from "./WhatsAppButton";
+import apiService from "@/services/apiService";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useUser } from "@/context/UserContext";
 
 export function HomePage() {
   const { loggedIn } = useAuth();
+  const { user, setUser } = useUser();
+
+  useEffect(() => {
+    const authenticateUser = async () => {
+      console.log("Autenticar usuario:");
+      const firebase_uid = await AsyncStorage.getItem("firebase_uid");
+      try {
+        if (firebase_uid) {
+          const response = await apiService.getUserByFirebaseId(firebase_uid);
+          console.log("Usuario actualizado:", response.data);
+          setUser(response.data);
+        } else {
+          console.log("Firebase UID is null");
+        }
+      } catch (error) {
+        console.error("Error al loguear el usuario:", error);
+      }
+    };
+    authenticateUser();
+  }, []);
+
 
   if (!loggedIn) {
     return (
@@ -20,7 +44,9 @@ export function HomePage() {
       <>
         <CustomHeader/>
         <View style={styles.container}>
+          <View style={styles.matchDisponibility}>
           <MatchDisponibility />
+          </View>
           <BuyTicketsButton />
         </View>
         <WhatsAppButton/>
@@ -51,5 +77,7 @@ const styles = StyleSheet.create({
     height: "100%",
     width: "100%",
   },
-  
+  matchDisponibility: {
+    marginTop : 80,
+  },
 });

@@ -1,10 +1,21 @@
 import { StyleSheet, Text, View } from "react-native";
 import { LinearGradient } from 'expo-linear-gradient';
 import Ionicons from '@expo/vector-icons/Ionicons';
+import { useEffect, useState } from "react";
+import { useUser } from "@/context/UserContext";
 
 export default function MatchDisponibility(){
 
-    const cantidadTickets = 1;
+    const {user} = useUser();
+
+    useEffect(() => {
+        setTickets(parseInt(user?.tickets ?? "0"));
+    }, [user?.tickets]);
+    
+    const [tickets, setTickets] = useState(0);
+
+
+    const cantidadTickets = tickets;
 
     return (
 
@@ -32,16 +43,13 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         height: 50, //Mantener igual que el height del text y el lineHeight
-        borderRadius: 25,
-        margin: 10,
-        marginTop:80,
+        borderRadius: 25
     },
     text:{
         color: 'white',
         fontWeight: 'bold',
         height: 50, //Mantener igual que el height del LinearGradient y el lineHeight
         lineHeight: 50, //Mantener igual que el height del LinearGradient y el height
-        fontSize: 21,
         alignItems: "center",
         justifyContent: "center",
         textAlign: "center",
