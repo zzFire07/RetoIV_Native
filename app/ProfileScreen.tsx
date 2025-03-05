@@ -1,154 +1,165 @@
+import MatchDisponibility from '@/components/MatchDisponibility';
 import ProfileButton from '@/components/ProfileButton';
+import SignOffButton from '@/components/SignOffButton';
+import { useUser } from '@/context/UserContext';
+import apiService from '@/services/apiService';
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, TextInput } from 'react-native';
-
-const User = {
-    nombre: 'Pedro',
-    apellido: 'Perez',
-    email: 'super_pedro@gmail.com',
-    partidos: 10
-}
+import { View, Text, StyleSheet, TextInput, TouchableWithoutFeedback, Keyboard } from 'react-native';
 
 const ProfileScreen = () => {
-  const [usuario, setUsuario] = useState({
-    nombre: 'Pedro',
-    apellido: 'Perez',
-    numero: '099123123',
-    email: 'super_pedro@gmail.com',
-    partidos: 10
-  });
+
+  const { user, setUser } = useUser();
 
   const [showInputs, setShowInputs] = useState(false);
-  const [nuevoNombre, setNuevoNombre] = useState('');
-  const [nuevoApellido, setNuevoApellido] = useState('');
-  const [nuevoNumero, setNuevoNumero] = useState('');
+  const [newNumber, setNewNumber] = useState("");
 
-  const actualizarUsuario = () => {
-    if (nuevoNombre.trim() !== '' && nuevoNumero.trim() !== '') {
-      setUsuario(prevUsuario => ({
-        ...prevUsuario,
-        nombre: nuevoNombre,
-        apellido: nuevoApellido,
-        numero: nuevoNumero
-      }));
+  const actualizarUsuario = async () => {
+
+  
+    // Validar que el teléfono solo contenga números o vacio.
+    const telefonoValido = /^$|^[0-9]+$/.test(newNumber);
+  
+    if (!telefonoValido) {
+      setNewNumber("");
+      alert('El teléfono solo puede contener números o estar vacio.');
+      return;
+    }
+  
+    // Si ambas validaciones son correctas, actualizamos el usuario
+    if(user){
+      if(user.phone_number !== newNumber)
+      {
+        setUser({
+          ...user,
+          phone_number: newNumber,
+        });
+        try {
+          console.log("Actualizando el teléfono:", newNumber);
+          console.log("Usuario:", user.user_id);
+          const result = await apiService.addPhoneNumber(Number(user.user_id), newNumber);
+          console.log("Resultado de la actualización del teléfono:", result);
+        } catch (error) {
+          console.error("Error al actualizar el teléfono:", error);
+        }
+      }
     }
   };
 
   const editarPerfil = () => {
     if (showInputs) {
       actualizarUsuario();
-      setNuevoNombre('');
-      setNuevoApellido('');
-      setNuevoNumero('');
     }
     setShowInputs(!showInputs);
   };
   
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Mi Perfil</Text>
-      <View style={styles.infocontainer}>
-        <Text style={styles.text}>Información de la cuenta</Text>
+    <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+      <View style={styles.container}>
+          <View style={styles.infocontainer}>
+          <Text style={styles.title}>Mi Perfil</Text>
+              <View style={styles.textContainer}>
+                <Text style={styles.textinfo}>Nombre</Text>
+                <Text style={styles.textInline}>{user?.name}</Text>
+              </View>
+      
+            {showInputs ? (
+              <View style={styles.textContainer}>
+                <Text style={styles.textinfo}>Teléfono</Text>
+                <TextInput
+                  style={[styles.inputInline, {backgroundColor: 'white'}]}
+                  placeholder="Nuevo número"
+                  value={newNumber}
+                  onChangeText={setNewNumber}
+                  keyboardType='numeric'
+                  />
+              </View>
+            ) : (
+              <View style={styles.textContainer}>
+                <Text style={styles.textinfo}>Teléfono</Text>
+                <Text style={styles.textInline}>{user?.phone_number}</Text>
+              </View>
+            )}
 
-        {showInputs ? (
-          <>
-            <TextInput
-              style={styles.inputInline}
-              placeholder="Nuevo nombre"
-              value={nuevoNombre}
-              onChangeText={setNuevoNombre}
-            />
-            <TextInput
-              style={styles.inputInline}
-              placeholder="Nuevo apellido"
-              value={nuevoApellido}
-              onChangeText={setNuevoApellido}
-            />
-          </>
-        ) : (
-          <Text style={styles.textinfo}>Nombre: {usuario.nombre} {usuario.apellido}</Text>
-        )}
-  
-        {showInputs ? (
-          <TextInput
-            style={styles.inputInline}
-            placeholder="Nuevo número"
-            value={nuevoNumero}
-            onChangeText={setNuevoNumero}
-            keyboardType='numeric'
-          />
-        ) : (
-          <Text style={styles.textinfo}>Número: {usuario.numero}</Text>
-        )}
-  
-        <Text style={styles.textinfo}>Email: {usuario.email}</Text>
-        <Text style={styles.textinfo}>Partidos disponibles: {usuario.partidos}</Text>
-  
-        <ProfileButton onPress={editarPerfil} showInputs={showInputs} />
-  
+            <View style={styles.textContainer}>
+              <Text style={styles.textinfo}>E-Mail</Text>
+              <Text style={styles.textInline}>{user?.email}</Text>
+            </View>
+
+            <View style={styles.matchDisponibility}>
+              <MatchDisponibility/>
+            </View>
+            <View style={styles.profileButton}>
+              <ProfileButton onPress={editarPerfil} showInputs={showInputs} />
+            </View>
+            <View style={styles.signOffButton}>
+              <SignOffButton />
+            </View>
+          </View>
       </View>
-    </View>
+    </TouchableWithoutFeedback>
   );  
 };
 
 const styles = StyleSheet.create({
   container: {
-    paddingTop: 30,
-    flex: 1,
+    height: '100%',
     alignItems: 'center',
     backgroundColor: '#ffffff',
   },
   title: {
     fontSize: 30,
-    marginBottom: 40,
     textAlign: 'center',
-    fontWeight: "bold"
+    fontWeight: "bold",
+    marginBottom: 20,
   },
   infocontainer: {
     width: '75%',
-    padding: 20,
-    borderRadius: 15,
+    borderRadius: 25,
     backgroundColor: '#95d3a1',
-    alignItems: 'center'
+    alignItems: 'center',
+    padding: 25,
+    marginTop: "10%",
+  },
+  textContainer: {
+    width: '90%',
+    alignItems: 'center',
+    marginBottom: 20,
   },
   textinfo: {
-    marginTop: 10,
-    fontSize: 15,
+    fontSize: 16,
     textAlign: 'left',
     alignSelf: 'flex-start',
-  },
-  text: {
-    fontSize: 16,
-    fontWeight: "bold",
+    fontWeight: 'bold',
     marginBottom: 10,
+    marginLeft: 10,
   },
-  ProfileSaveButton: {
-    width: 200,
-    height: 50,
-    backgroundColor: '#1bc01b',
-    borderWidth: 2,
-    borderColor: '#000000',
-    borderRadius: 35,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginTop: 20,
-  },
-  textSave: {
-    color: '#000000',
-    fontSize: 15,
-    textAlign: 'center'
+  textInline: {
+    height: 40,
+    lineHeight: 40,
+    width: '100%',
+    textAlign: 'center',
+    backgroundColor: 'lightgray',
+    borderRadius: 15,
   },
   inputInline: {
     height: 40,
     width: '100%',
-    borderColor: 'gray',
-    borderWidth: 1,
-    paddingHorizontal: 10,
-    borderRadius: 5,
-    backgroundColor: '#fff',
-    marginBottom: 10
-  }  
+    textAlign: 'left',
+    backgroundColor: 'white',
+    borderRadius: 15,
+    paddingLeft: 10,
+  },
+  matchDisponibility: {
+    marginBottom: 25,
+    marginTop: 5,
+  },
+  profileButton: {
+    marginBottom: 25,
+  },
+  signOffButton: {
+    marginBottom: 5,
+  },
 });
 
 export default ProfileScreen;

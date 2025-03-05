@@ -7,7 +7,6 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { IconSymbol } from "@/components/ui/IconSymbol";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebaseConfig";
-import { useAuth } from "@/context/AuthContext";
 
 
 
@@ -44,6 +43,7 @@ export default function RegisterPage() {
         try {
             const userCredential = await createUserWithEmailAndPassword(auth, email, password);
             //const user = await apiService.logUser();
+            //console.log("Usuario logged in:", user);
             router.back(); // Cierra el register page.
         } catch (error) {
             console.error("Error en el registro:", error);

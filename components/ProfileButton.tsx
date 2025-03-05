@@ -1,4 +1,4 @@
-import { StyleSheet, View, Text, TouchableHighlight } from "react-native";
+import { StyleSheet, Text, TouchableHighlight } from "react-native";
 
 interface ProfileButtonProps {
   onPress: () => void;
@@ -28,7 +28,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     overflow: 'hidden',
-    marginTop: 20,
   },
   text: {
     color: '#000',

@@ -7,7 +7,6 @@ import { IconSymbol } from "@/components/ui/IconSymbol";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebaseConfig";
 import { useRouter } from "expo-router";
-import { useUser } from "@/context/UserContext";
 import apiService from "@/services/apiService"; // Asegúrate de importar el servicio correctamente
 
 
@@ -29,6 +28,7 @@ export function LoginPage () {
         try {
           const userCredential = await signInWithEmailAndPassword(auth, email, password);
           //const user = await apiService.logUser();
+          //console.log("Usuario logged in:", user);
           router.back(); // cierra el login page.
         } catch (err: any) {
           console.log(err);

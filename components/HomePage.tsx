@@ -9,6 +9,7 @@ import WhatsAppButton from "./WhatsAppButton";
 export function HomePage() {
   const { loggedIn } = useAuth();
 
+
   if (!loggedIn) {
     return (
       <>
@@ -20,7 +21,9 @@ export function HomePage() {
       <>
         <CustomHeader/>
         <View style={styles.container}>
+          <View style={styles.matchDisponibility}>
           <MatchDisponibility />
+          </View>
           <BuyTicketsButton />
         </View>
         <WhatsAppButton/>
@@ -51,5 +54,7 @@ const styles = StyleSheet.create({
     height: "100%",
     width: "100%",
   },
-  
+  matchDisponibility: {
+    marginTop : 80,
+  },
 });

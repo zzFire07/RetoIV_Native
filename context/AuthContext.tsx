@@ -22,17 +22,18 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
       if (currentUser) {
-        const idToken = await currentUser.getIdToken();
         setLoggedIn(true);
+        const idToken = await currentUser.getIdToken();
         await AsyncStorage.setItem("authToken", idToken);
+        await AsyncStorage.setItem("firebase_uid", currentUser.uid);
         console.log("Usuario autenticado:", currentUser.email);
-        console.log("Token:", idToken);
         router.replace("/"); // Redirige a la página principal
       } else {
         router.replace("/AuthenticationPage")
-        setToken(null);
         setLoggedIn(false);
+        setToken(null);
         await AsyncStorage.removeItem("authToken");
+        await AsyncStorage.removeItem("firebase_uid");
         console.log("Usuario no autenticado");
       }
     });
