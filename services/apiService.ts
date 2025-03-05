@@ -27,7 +27,7 @@ const apiService = {
     getUserByFirebaseId: (firebaseId: String) => api.get(`/user/getUserByFirebaseId/${firebaseId}`),
     addTickets: (userId: string, newTicketsData: any) =>
         api.post(`/user/addTickets/${userId}`, newTicketsData),
-    addPhoneNumber: (userId: Number, phoneNumberData: String) => api.post(`/user/addPhoneNumber/${userId}`, phoneNumberData),
+    addPhoneNumber: (userId: Number, phoneNumberData: String) => api.post(`/user/addPhoneNumber/${userId}`, {"phone_number": phoneNumberData}),
 
     // Llamadas de Paquetes
     createPackage: (packageData: any) =>

@@ -41,17 +41,12 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
 
   useEffect(() => {
     const fetchUserData = async () => {
-      const user_firebaseuid = await AsyncStorage.getItem("firebase_uid");
       try {
-        if (user_firebaseuid) {
-          const response = await apiService.getUserByFirebaseId(user_firebaseuid);
-          console.log("Usuario actualizado:", response.data);
+          const response = await apiService.logUser();
+          console.log("Usuario actualizado de forma regular:", response.data);
           setUser(response.data);
-        } else {
-          console.log("Firebase UID is null");
-        }
       } catch (error) {
-        console.error("Error al loguear el usuario:", error);
+        console.error("Error al loguear el usuario de forma regular:", error);
       }
     };
 
