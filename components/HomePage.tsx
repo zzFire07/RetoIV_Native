@@ -17,11 +17,14 @@ export function HomePage() {
     const authenticateUser = async () => {
       console.log("Autenticar usuario por primera vez:");
       try {
+        if(user?.email === "loading@gmail.com"){
+          throw new Error("Usuario no cargado");
+        }
         const response = await apiService.logUser();
         console.log("Usuario actualizado:", response.data);
         setUser(response.data);
       } catch (error) {
-        console.error("Error al loguear el usuario:", error);
+        console.log("Error al loguear el usuario:", error);
       }
     };
     authenticateUser();

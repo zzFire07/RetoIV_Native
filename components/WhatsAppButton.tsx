@@ -12,15 +12,16 @@ const handleWhatsAppPress = () => {
 
 export default function WhatsAppButton() {
   return (
-    <View style={styles.container}>
-      <Text style={styles.texto}>Contáctanos</Text>
+
+      
     
-      <TouchableOpacity onPress={handleWhatsAppPress}>
+      <TouchableOpacity onPress={handleWhatsAppPress} style={styles.container}>
+      <Text style={styles.texto}>Contáctanos</Text>
         <Image source={require("../assets/images/whatsapp-logo.jpg")}
         style={styles.whatsappIcon} 
         />
       </TouchableOpacity>
-    </View>
+    
   );
 }
 
