@@ -42,11 +42,14 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
+        if(user?.email === "loading@gmail.com"){
+          throw new Error("Usuario no cargado");
+        }
           const response = await apiService.logUser();
           console.log("Usuario actualizado de forma regular:", response.data);
           setUser(response.data);
       } catch (error) {
-        console.error("Error al loguear el usuario de forma regular:", error);
+        console.log("Error al loguear el usuario de forma regular:", error);
       }
     };
 

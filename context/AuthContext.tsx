@@ -26,8 +26,9 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         await AsyncStorage.setItem("authToken", idToken);
         await AsyncStorage.setItem("firebase_uid", currentUser.uid);
         setLoggedIn(true);
-        console.log("Usuario autenticado:", currentUser.email);
-        router.replace("/"); // Redirige a la página principal
+        setTimeout(() => {
+          router.replace("/"); // Redirige a la página principal
+        }, 100);
       } else {
         await AsyncStorage.removeItem("authToken");
         await AsyncStorage.removeItem("firebase_uid");
