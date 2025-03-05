@@ -1,13 +1,12 @@
 import React, { useState } from "react";
-import { View, Text, TextInput, TouchableOpacity, StyleSheet } from "react-native";
-import WhatsAppButton from "@/components/unused-comps/WhatsAppButton";
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, TouchableWithoutFeedback, Keyboard } from "react-native";
+import WhatsAppButton from "@/components/WhatsAppButton";
 import CustomHeader from "@/components/CustomHeader";
 import { LinearGradient } from 'expo-linear-gradient';
 import { IconSymbol } from "@/components/ui/IconSymbol";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebaseConfig";
 import { useRouter } from "expo-router";
-import { useUser } from "@/context/UserContext";
 import apiService from "@/services/apiService"; // Asegúrate de importar el servicio correctamente
 
 
@@ -29,6 +28,7 @@ export function LoginPage () {
         try {
           const userCredential = await signInWithEmailAndPassword(auth, email, password);
           //const user = await apiService.logUser();
+          //console.log("Usuario logged in:", user);
           router.back(); // cierra el login page.
         } catch (err: any) {
           console.log(err);
@@ -38,48 +38,50 @@ export function LoginPage () {
 
 
     return (
-       <>
-       <CustomHeader title="Club Ituzaingo" />
-       <View style= {styles.container}>
-            <Text style= {styles.title}>Iniciar Sesión</Text>
-            <View style={styles.content}>
-                <Text style={styles.subtitle}>Bienvenido</Text>
-                <View style={styles.inputContainer}>
-                    <View style={{flexDirection: "row", alignItems: "center"}}>
-                        <IconSymbol name="envelope.fill" size={30} color="black" />
-                        <Text style={styles.inputText}>Correo electrónico</Text>
+       <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+        <View style={{flex: 1}}>
+            <CustomHeader/>
+            <View style= {styles.container}>
+                    <Text style= {styles.title}>Iniciar Sesión</Text>
+                    <View style={styles.content}>
+                        <Text style={styles.subtitle}>Bienvenido</Text>
+                        <View style={styles.inputContainer}>
+                            <View style={{flexDirection: "row", alignItems: "center"}}>
+                                <IconSymbol name="envelope.fill" size={30} color="black" />
+                                <Text style={styles.inputText}>Correo electrónico</Text>
+                            </View>
+                            <TextInput
+                                style={styles.input}
+                                placeholder="Correo electrónico"
+                                keyboardType="email-address"
+                                value={email}
+                                onChangeText={validateEmail}
+                            />
+                        </View>
+                        <View style={styles.inputContainer}>
+                            <View style={{flexDirection: "row", alignItems: "center"}}>
+                                <IconSymbol name="lock.fill" size={30} color="black" />
+                                <Text style={styles.inputText}>Contraseña</Text>
+                            </View>
+                            <TextInput
+                                style={styles.input}
+                                placeholder="Contraseña"
+                                secureTextEntry
+                                value={password}
+                                onChangeText={setPassword}
+                            />
+                        </View>
+                        <TouchableOpacity onPress={firebaseLogin}>
+                            <LinearGradient style={styles.button} colors={['#255E13', '#4DC428']} start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }}>
+                                <Text style={styles.buttonText}> Iniciar sesión </Text>
+                            </LinearGradient>
+                        </TouchableOpacity>
+                        {/* <Text style={styles.forgotPasswordText}>¿Olvidaste tu contraseña? Recuperala aqui</Text> */}
                     </View>
-                    <TextInput
-                        style={styles.input}
-                        placeholder="Correo electrónico"
-                        keyboardType="email-address"
-                        value={email}
-                        onChangeText={validateEmail}
-                    />
-                </View>
-                <View style={styles.inputContainer}>
-                    <View style={{flexDirection: "row", alignItems: "center"}}>
-                        <IconSymbol name="lock.fill" size={30} color="black" />
-                        <Text style={styles.inputText}>Contraseña</Text>
-                    </View>
-                    <TextInput
-                        style={styles.input}
-                        placeholder=""
-                        secureTextEntry
-                        value={password}
-                        onChangeText={setPassword}
-                    />
-                </View>
-                <TouchableOpacity onPress={firebaseLogin}>
-                    <LinearGradient style={styles.button} colors={['#255E13', '#4DC428']} start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }}>
-                        <Text style={styles.buttonText}> Iniciar sesión </Text>
-                    </LinearGradient>
-                </TouchableOpacity>
-                {/* <Text style={styles.forgotPasswordText}>¿Olvidaste tu contraseña? Recuperala aqui</Text> */}
             </View>
-       </View>
-       <WhatsAppButton/>
-       </>
+            <WhatsAppButton/>
+        </View>
+       </TouchableWithoutFeedback>
     );
 }
 

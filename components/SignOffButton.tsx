@@ -1,13 +1,28 @@
 // hacer boton de cerrar sesion con firebase y el contexto
 //
-import { Text, TouchableOpacity, StyleSheet} from "react-native";
+import { Text, TouchableOpacity, StyleSheet, Alert} from "react-native";
 import { auth } from "@/firebaseConfig";
 
 
 export function SignOffButton() {
 
   const handleSignOff = async () => {
-    await auth.signOut();
+    Alert.alert(
+      "Cerrar sesión",
+      "¿Estás seguro de que deseas cerrar sesión?",
+      [
+        {
+          text: "Cancelar",
+          style: "cancel",
+        },
+        {
+          text: "Aceptar",
+          onPress: async () => {
+            await auth.signOut();
+          },
+        },
+      ]
+    );
   };
 
   return (
@@ -19,20 +34,19 @@ export function SignOffButton() {
 
 const styles = StyleSheet.create({
     button: {
-        backgroundColor: "#255E13",
-        padding: 10,
+        backgroundColor: "red",
+        padding: 15,
         borderRadius: 20,
-        width: 270,
-        height: 75,
+        width: 150,
+        height: 50,
         alignItems: "center",
         justifyContent: "center",
-        marginTop: 60,
-        boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.5)",
+        boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.5)"
     },
     
     buttonText: {
         color: "#fff",
-        fontSize: 20,
+        fontSize: 17,
         fontWeight: "bold",
     }
     })

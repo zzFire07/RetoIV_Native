@@ -4,9 +4,32 @@ import { StyleSheet, View } from "react-native";
 import BuyTicketsButton from "./BuyTicketsButton";
 import MatchDisponibility from "./MatchDisponibility";
 import { useAuth } from "@/context/AuthContext";
+import WhatsAppButton from "./WhatsAppButton";
+import apiService from "@/services/apiService";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useUser } from "@/context/UserContext";
 
 export function HomePage() {
   const { loggedIn } = useAuth();
+  const { user, setUser } = useUser();
+
+  useEffect(() => {
+    const authenticateUser = async () => {
+      console.log("Autenticar usuario por primera vez:");
+      try {
+        if(user?.email === "loading@gmail.com"){
+          throw new Error("Usuario no cargado");
+        }
+        const response = await apiService.logUser();
+        console.log("Usuario actualizado:", response.data);
+        setUser(response.data.user);
+      } catch (error) {
+        console.log("Error al loguear el usuario:", error);
+      }
+    };
+    authenticateUser();
+  }, []);
+
 
   if (!loggedIn) {
     return (
@@ -17,13 +40,14 @@ export function HomePage() {
   
     return (
       <>
-        <CustomHeader title="Club Ituzaingo" />
+        <CustomHeader/>
         <View style={styles.container}>
+          <View style={styles.matchDisponibility}>
           <MatchDisponibility />
+          </View>
           <BuyTicketsButton />
         </View>
-        {/*
-        <WhatsAppButton />*/}
+        <WhatsAppButton/>
       </>
     );  
 }
@@ -41,7 +65,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "white",
     alignItems: "center",
-    justifyContent: "center",
     flexDirection: "column",
     gap: 20,
   },
@@ -52,5 +75,7 @@ const styles = StyleSheet.create({
     height: "100%",
     width: "100%",
   },
-  
+  matchDisponibility: {
+    marginTop : 80,
+  },
 });

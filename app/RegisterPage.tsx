@@ -1,13 +1,12 @@
 import React, {useState} from "react";
-import { View, Text, TextInput, TouchableOpacity, StyleSheet } from "react-native";
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, TouchableWithoutFeedback, Keyboard } from "react-native";
 import { useRouter } from "expo-router";
 import CustomHeader from "@/components/CustomHeader";
-import WhatsAppButton from "@/components/unused-comps/WhatsAppButton";
+import WhatsAppButton from "@/components/WhatsAppButton";
 import { LinearGradient } from 'expo-linear-gradient';
 import { IconSymbol } from "@/components/ui/IconSymbol";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebaseConfig";
-import { useAuth } from "@/context/AuthContext";
 
 
 
@@ -44,6 +43,7 @@ export default function RegisterPage() {
         try {
             const userCredential = await createUserWithEmailAndPassword(auth, email, password);
             //const user = await apiService.logUser();
+            //console.log("Usuario logged in:", user);
             router.back(); // Cierra el register page.
         } catch (error) {
             console.error("Error en el registro:", error);
@@ -52,47 +52,49 @@ export default function RegisterPage() {
     };
 
     return ( 
-        <>
-        <CustomHeader title="Club Ituzaingo" />
-         <View style={styles.container}>
-            <Text style={styles.title}>Registrarse</Text>
-            <View style={styles.content}>
-                <View style={styles.inputContainer}>
-                    <View style={{flexDirection: "row", alignItems: "center"}}>
-                        <IconSymbol style={{marginRight: 5}} name="envelope.fill" size={25} color="black" />
-                        <Text style={styles.inputText}>Correo electrónico</Text>
+        <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+            <View style={{flex: 1}}>
+                <CustomHeader/>
+                <View style={styles.container}>
+                    <Text style={styles.title}>Registrarse</Text>
+                    <View style={styles.content}>
+                        <View style={styles.inputContainer}>
+                            <View style={{flexDirection: "row", alignItems: "center"}}>
+                                <IconSymbol style={{marginRight: 5}} name="envelope.fill" size={25} color="black" />
+                                <Text style={styles.inputText}>Correo electrónico</Text>
+                            </View>
+                            <TextInput
+                                style={styles.input}
+                                placeholder="Correo electrónico"
+                                keyboardType="email-address"
+                                autoCapitalize="none"
+                                value={email}
+                                onChangeText={validateEmail}
+                            />
+                        </View>
+                        <View style={styles.inputContainer}>
+                            <View style={{flexDirection: "row", alignItems: "center"}}>
+                                <IconSymbol style={{marginRight: 5}} name="lock.fill" size={25} color="black" />
+                                <Text style={styles.inputText}>Contraseña</Text>
+                            </View>
+                            <TextInput
+                                style={styles.input}
+                                placeholder="Contraseña"
+                                secureTextEntry
+                                value={password}
+                                onChangeText={setPassword}
+                            />
+                        </View>
+                        <TouchableOpacity onPress={handleRegister}>
+                            <LinearGradient style={styles.button} colors={['#255E13', '#4DC428']} start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }}>
+                                <Text style={styles.buttonText}> Registrarse </Text>
+                            </LinearGradient>
+                        </TouchableOpacity>
                     </View>
-                    <TextInput
-                        style={styles.input}
-                        placeholder=""
-                        keyboardType="email-address"
-                        autoCapitalize="none"
-                        value={email}
-                        onChangeText={validateEmail}
-                    />
                 </View>
-                <View style={styles.inputContainer}>
-                    <View style={{flexDirection: "row", alignItems: "center"}}>
-                        <IconSymbol style={{marginRight: 5}} name="lock.fill" size={25} color="black" />
-                        <Text style={styles.inputText}>Contraseña</Text>
-                    </View>
-                    <TextInput
-                        style={styles.input}
-                        placeholder=""
-                        secureTextEntry
-                        value={password}
-                        onChangeText={setPassword}
-                    />
-                </View>
-                <TouchableOpacity onPress={handleRegister}>
-                    <LinearGradient style={styles.button} colors={['#255E13', '#4DC428']} start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }}>
-                        <Text style={styles.buttonText}> Registrarse </Text>
-                    </LinearGradient>
-                </TouchableOpacity>
+                <WhatsAppButton />
             </View>
-         </View>
-         <WhatsAppButton />
-        </>
+        </TouchableWithoutFeedback>
     );
 }
 const styles = StyleSheet.create({

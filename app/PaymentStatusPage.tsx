@@ -4,6 +4,7 @@ import { auth } from "../firebaseConfig";
 import { useEffect, useState } from "react";
 import  apiService  from "../services/apiService";
 import * as WebBrowser from "expo-web-browser";
+import { useUser } from "@/context/UserContext";
 
 
 
@@ -13,6 +14,8 @@ export default function PaymentStatusPage() {
     const [payment_id, setPaymentId] = useState("");
     const [status, setStatus] = useState("");
     const [quantity, setQuantity] = useState("");
+
+    const {user, setUser} = useUser();
 
     const router = useRouter();
 
@@ -28,13 +31,19 @@ export default function PaymentStatusPage() {
         const fetchData = async () => {
             console.log("Payment Status: ", status);
             if (status === "approved") {
-                const user_uid = await auth.currentUser?.uid;
+                const user_uid = await auth.currentUser?.uid || "";
                 console.log(user_uid)
+                if (user) {
+                    setUser({
+                        ...user,
+                        tickets: String((Number(user.tickets) || 0) + Number(quantity)),
+                    });
+                }
                 try {
-                    const response = await apiService.editUserTickets(user_uid, {"description": "Compra de tickets", "tickets": quantity });
+                    const response = await apiService.addTickets(user_uid, {"description": "Compra de tickets", "tickets": Number(quantity) });
                     console.log("Respuesta de la API agregar ticket:", response);
                 } catch (error) {
-                    console.error("Error al traer los paquetes:", error);
+                    console.error("Error al agregar los tickets al usuario:", error);
                 }
             }
         };
