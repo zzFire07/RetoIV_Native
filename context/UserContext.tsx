@@ -46,8 +46,8 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
           throw new Error("Usuario no cargado");
         }
           const response = await apiService.logUser();
-          console.log("Usuario actualizado de forma regular:", response.data);
-          setUser(response.data);
+          console.log("Usuario actualizado de forma regular:", response.data.user);
+          setUser(response.data.user);
       } catch (error) {
         console.log("Error al loguear el usuario de forma regular:", error);
       }
