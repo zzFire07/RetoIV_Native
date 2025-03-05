@@ -79,13 +79,13 @@ const styles = StyleSheet.create({
   },
   userIdText: {
     fontSize: 18,
-    fontWeight: "600", // Semibold en React Native
+    fontWeight: "600", 
     color: "black",
-    alignSelf: "flex-start", // Alinea a la izquierda
-    marginLeft: 20, // Agrega margen a la izquierda
-    marginTop: 20,
+    textAlign: "center",
+    marginBottom: 10,
+    marginTop:70,
   },
   matchDisponibility: {
-    marginTop : 70,
+    marginTop : 0,
   },
 });
