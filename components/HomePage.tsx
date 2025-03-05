@@ -22,7 +22,7 @@ export function HomePage() {
         }
         const response = await apiService.logUser();
         console.log("Usuario actualizado:", response.data);
-        setUser(response.data);
+        setUser(response.data.user);
       } catch (error) {
         console.log("Error al loguear el usuario:", error);
       }

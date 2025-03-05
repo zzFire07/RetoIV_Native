@@ -48,5 +48,9 @@ const apiService = {
     getAllTransactions: () => api.get("/transaction/getTransactions"),
     getTransactionById: (transactionId: any) =>
         api.get(`/transaction/getTransactionById/${transactionId}`),
+
+    // Llamadas para mercadopago
+    validateBuy: (paymentId: string, userId: any, packageId: any) =>
+        api.post(`/transaction/mercadopago/validateBuy`, { "payment_id": paymentId, "id_package": packageId, "user_id": userId }),
 };
 export default apiService;
