@@ -31,10 +31,20 @@ export function LoginPage () {
           //console.log("Usuario logged in:", user);
           router.back(); // cierra el login page.
         } catch (err: any) {
-          console.log(err);
-          setError(err.message);
+            var errorCode = err.code;
+            var errorMessage = err.message;
+            if (errorCode === "auth/invalid-email") {
+                setError("Correo electrónico no válido");
+            } else if (errorCode === "auth/invalid-credential") {
+                setError("Credenciales no válidas");
+            } else if (errorCode === "auth/missing-password") {
+                setError("Falta la contraseña");
+            } else {
+                setError(errorMessage);
+                console.error(errorMessage);
+            } 
         }
-      }
+    }
 
 
     return (
@@ -70,6 +80,7 @@ export function LoginPage () {
                                 value={password}
                                 onChangeText={setPassword}
                             />
+                            {error ? <Text style={{ color: 'red', textAlign: 'center' }}>{error}</Text> : null}
                         </View>
                         <TouchableOpacity onPress={firebaseLogin}>
                             <LinearGradient style={styles.button} colors={['#255E13', '#4DC428']} start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }}>

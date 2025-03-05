@@ -7,6 +7,7 @@ const api = axios.create({ //instancia personalizada de axios
         "Content-Type": "application/json"
     },
 });
+
 api.interceptors.request.use( //modifico la request antes que se envie al servidor
     async (config) => { //objeto config tiene la configuracion de la request
         const token = await AsyncStorage.getItem("authToken"); //obtener token del storage
@@ -16,6 +17,7 @@ api.interceptors.request.use( //modifico la request antes que se envie al servid
         }
         return config;
 });
+
 const apiService = {
 
     // Llamadas de Usuarios
