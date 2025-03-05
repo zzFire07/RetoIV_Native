@@ -4,6 +4,7 @@ import { StyleSheet, View } from "react-native";
 import BuyTicketsButton from "./BuyTicketsButton";
 import MatchDisponibility from "./MatchDisponibility";
 import { useAuth } from "@/context/AuthContext";
+import WhatsAppButton from "./WhatsAppButton";
 
 export function HomePage() {
   const { loggedIn } = useAuth();
@@ -17,13 +18,12 @@ export function HomePage() {
   
     return (
       <>
-        <CustomHeader title="Club Ituzaingo" />
+        <CustomHeader/>
         <View style={styles.container}>
           <MatchDisponibility />
           <BuyTicketsButton />
         </View>
-        {/*
-        <WhatsAppButton />*/}
+        <WhatsAppButton/>
       </>
     );  
 }

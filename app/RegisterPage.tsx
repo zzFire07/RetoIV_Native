@@ -53,7 +53,7 @@ export default function RegisterPage() {
 
     return ( 
         <>
-        <CustomHeader title="Club Ituzaingo" />
+        <CustomHeader/>
          <View style={styles.container}>
             <Text style={styles.title}>Registrarse</Text>
             <View style={styles.content}>

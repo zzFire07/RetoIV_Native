@@ -39,7 +39,7 @@ export function LoginPage () {
 
     return (
        <>
-       <CustomHeader title="Club Ituzaingo" />
+       <CustomHeader/>
        <View style= {styles.container}>
             <Text style= {styles.title}>Iniciar Sesión</Text>
             <View style={styles.content}>

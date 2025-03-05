@@ -86,7 +86,7 @@ export function TicketPage() {
     }, []);
     return (
         <>
-          <CustomHeader title="Club Ituzaingo" />
+          <CustomHeader/>
           <View style={styles.container}>
             <Text style={styles.title}>Ticketeras Disponibles</Text>
             {listaTicket.length > 0 ? (
