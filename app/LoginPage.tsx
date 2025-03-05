@@ -31,10 +31,19 @@ export function LoginPage () {
           //console.log("Usuario logged in:", user);
           router.back(); // cierra el login page.
         } catch (err: any) {
-          console.log(err);
-          setError(err.message);
-        }
+            var errorCode = err.code;
+            var errorMessage = err.message;
+            if (errorCode === "auth/invalid-email") {
+                alert("Correo electrónico no válido");
+            } else if (errorCode === "auth/invalid-credential") {
+                alert("Credenciales no válidas");
+            } else if (errorCode === "auth/missing-password") {
+                alert("Falta la contraseña");
+            } else {
+                alert(errorMessage);
+            } 
       }
+    }
 
 
     return (
