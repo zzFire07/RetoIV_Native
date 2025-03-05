@@ -1,7 +1,13 @@
 import ProfileButton from '@/components/ProfileButton';
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, TextInput, Button } from 'react-native';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import { View, Text, StyleSheet, TextInput } from 'react-native';
+
+const User = {
+    nombre: 'Pedro',
+    apellido: 'Perez',
+    email: 'super_pedro@gmail.com',
+    partidos: 10
+}
 
 const ProfileScreen = () => {
   const [usuario, setUsuario] = useState({

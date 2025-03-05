@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "1083190847956",
+    "project_id": "clubituzaingopadel",
+    "storage_bucket": "clubituzaingopadel.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1083190847956:android:acbbc931b3cc9d652a8e41",
+        "android_client_info": {
+          "package_name": "com.clubituzango.retoivnative2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1083190847956-notm40hnffsccoroov51iju80smub5hl.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.clubituzango.retoivnative2",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "1083190847956-12sm91dqgh1ms21qqvgm4fielagp76ft.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDVbPkIPpABcAzKcB9lIcl5XFbae_FGoKo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1083190847956-12sm91dqgh1ms21qqvgm4fielagp76ft.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1083190847956-44ameuqrc30cmav0trviova3m9ja2otf.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.clubituzango.retoivnative"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

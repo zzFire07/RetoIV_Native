@@ -1,39 +1,46 @@
-import { StyleSheet, Text, View, TouchableHighlight } from "react-native";
+import { StyleSheet, Text, View, TouchableHighlight, ImageBackground, TouchableOpacity } from "react-native";
 import { Link } from "expo-router";
 
 export default function BuyTicketsButton(){
     return(
-        <View>
+        <>
             <Link href={"/TicketPage"} asChild>
-                <TouchableHighlight
+                <TouchableOpacity
                 style= {styles.buttonTicketera}
-                underlayColor={"black"}
-            >
-                <Text style= {styles.text}>COMPRAR TICKETERA</Text>
-                </TouchableHighlight>
+                >
+                    <ImageBackground 
+                    source={require("../assets/images/origen-padel.png")} // Reemplaza con tu imagen
+                    resizeMode="cover"
+                    style={styles.imagecontainer}
+                    >
+                        <Text style= {styles.text}>Acceder a la tienda</Text>
+                    </ImageBackground>
+                </TouchableOpacity>
             </Link>
-        </View>
+        </>
     )
 }
 
 const styles = StyleSheet.create({
     buttonTicketera:{
-        width: 153,
-        height: 79,
-        backgroundColor: "#ca312b",
+        width: "60%",
+        height: 100,
         borderRadius: 20,
-        alignSelf: "center",
-        justifyContent: "center",
         overflow: "hidden",
-        marginBottom: 300,
-        boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.5)"
-    }, 
+        marginTop: 120,
+    },
+    imagecontainer:{
+        width: "100%",
+        height: "100%",
+        justifyContent: "flex-end",
+        alignItems: "flex-end",
+    },
     text:{
+        fontSize: 18,
+        fontWeight: "bold",
         color: "white",
-        fontSize: 16,
-        alignSelf: "center", 
-        justifyContent: "center",
-        fontWeight: "800",
-        textAlign: "center"
+        width: "50%",
+        marginBottom: 10,
+        marginRight: 2,
     },
 })
