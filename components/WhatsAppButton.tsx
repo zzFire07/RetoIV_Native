@@ -16,7 +16,7 @@ export default function WhatsAppButton() {
       <Text style={styles.texto}>Contáctanos</Text>
     
       <TouchableOpacity onPress={handleWhatsAppPress}>
-        <Image source={require("../../assets/images/whatsapp-logo.jpg")}
+        <Image source={require("../assets/images/whatsapp-logo.jpg")}
         style={styles.whatsappIcon} 
         />
       </TouchableOpacity>
@@ -30,15 +30,16 @@ const styles = StyleSheet.create({
     alignItems:"center",
     justifyContent: "center",
     position:"absolute",
-    bottom: 100,
+    bottom: 95,
     right: 20,
     zIndex: 10,
     backgroundColor: "white",
-    borderWidth: 2,
-    borderColor:"#00bf63",
-    borderRadius:10,
+    borderWidth: 1,
+    borderColor:"black",
+    borderRadius:40,
     paddingHorizontal: 10,
     paddingVertical: 5,
+    boxShadow: "0px 3px 3px rgba(0, 0, 0, 0.3)",
   },
   texto:{
     fontSize: 16,
@@ -46,7 +47,7 @@ const styles = StyleSheet.create({
     marginRight: 10,
   },
   whatsappIcon: {
-    width: 50,
+    width: 45,
     height: 50,
     resizeMode: "contain",
   },

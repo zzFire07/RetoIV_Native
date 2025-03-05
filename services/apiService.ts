@@ -2,15 +2,16 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
 
 const api = axios.create({ //instancia personalizada de axios
-    baseURL: "https://retopadelbackend.onrender.com/",
-    headers: {
-        "Content-Type": "application/json", 
-    }
+    baseURL: "https://retopadelbackend.onrender.com/", // url base
+    headers: { // headers de la request
+        "Content-Type": "application/json"
+    },
 });
 
 api.interceptors.request.use( //modifico la request antes que se envie al servidor
-    (config) => { //objeto config tiene la configuracion de la request
-        const token = "tocken"; // obtengo token almacenado
+    async (config) => { //objeto config tiene la configuracion de la request
+        const token = await AsyncStorage.getItem("authToken"); //obtener token del storage
+        console.log("Token:", token);
         if (token) {
             config.headers["Authorization"] = `Bearer ${token}`; // agregar token al header
         }
@@ -18,22 +19,15 @@ api.interceptors.request.use( //modifico la request antes que se envie al servid
 });
 
 const apiService = {
-    // Función para almacenar el token al iniciar sesión
-    saveToken: async (token: string) => {
-        await AsyncStorage.setItem("authToken", token);
-    },
-    
-    // Función para eliminar el token al cerrar sesión
-    removeToken: async () => {
-        await AsyncStorage.removeItem("authToken");
-    },
 
     // Llamadas de Usuarios
+    logUser: () => api.post("/user/logUser"),
     getAllUsers: () => api.get("/user/getUsers"),
-    getUserById: (userId: any) => api.get(`/user/getUserById/${userId}`),
-    editUserTickets: (userId: any, newTicketsData: any) =>
-        api.put(`/users/AddTickets/${userId}`, newTicketsData),
-    logUser: (firebase_uid: any) => api.post(`/user/logUser/${firebase_uid}`),
+    getUserById: (userId: string) => api.get(`/user/getUserById/${userId}`),
+    getUserByFirebaseId: (firebaseId: String) => api.get(`/user/getUserByFirebaseId/${firebaseId}`),
+    addTickets: (userId: string, newTicketsData: any) =>
+        api.post(`/user/addTickets/${userId}`, newTicketsData),
+    addPhoneNumber: (userId: Number, phoneNumberData: String) => api.post(`/user/addPhoneNumber/${userId}`, phoneNumberData),
 
     // Llamadas de Paquetes
     createPackage: (packageData: any) =>
@@ -42,7 +36,9 @@ const apiService = {
         api.post(`/package/deletePackageByID/${packageId}`),
     editPackage: (packageId: any, packageData: any) =>
         api.put(`/package/updatePackageByID/${packageId}`, packageData),
-    getAllPackages: () => api.get("/package/getPackages"),
+    getAllPackages: () => 
+        api.get("/package/getPackages")
+    ,
     getPackageById: (packageId: any) =>
         api.get(`/package/getPackageById/${packageId}`),
 

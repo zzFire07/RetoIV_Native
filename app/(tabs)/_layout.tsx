@@ -4,15 +4,15 @@ import { Platform } from 'react-native';
 import { HapticTab } from '@/components/premade-comps/HapticTab';
 import { IconSymbol } from '@/components/ui/IconSymbol';
 import TabBarBackground from '@/components/ui/TabBarBackground';
-import { useAppContext } from '@/context/AppContext';
+import { useAuth } from '@/context/AuthContext';
 
 
 export default function TabLayout() {
 
-  const { loggedIn } = useAppContext();
+  const { loggedIn } = useAuth();
 
   return (
-    <Tabs
+      <Tabs
         screenOptions={{
           tabBarActiveTintColor: "#fff",
           tabBarInactiveTintColor: "#000",
@@ -21,12 +21,13 @@ export default function TabLayout() {
           headerShown: false,
           tabBarButton: HapticTab,
           tabBarBackground: TabBarBackground,
-          tabBarStyle: Platform.select({
-            ios: {
-              position: 'absolute',
-            },
-            default: {},
-          }),
+          tabBarStyle: {
+            position: 'absolute',
+            backgroundColor: "#00bf63",
+            borderTopWidth: 0, // Elimina la línea superior del Tab Bar
+            height: 60, // Ajusta la altura para que se vea bien
+            paddingBottom: 0, // Elimina margen extra
+          },
         }}>
         <Tabs.Screen
           name="index"
@@ -44,6 +45,5 @@ export default function TabLayout() {
           }}
         />
       </Tabs>
-      
     );
 }

@@ -4,23 +4,25 @@ import TicketComponent from "@/components/TicketComponent";
 import CustomHeader from "@/components/CustomHeader";
 import * as WebBrowser from "expo-web-browser";
 import apiService from "@/services/apiService"; // Asegúrate de importar el servicio correctamente
-import WhatsAppButton from "@/components/unused-comps/WhatsAppButton";
-import AsyncStorage from "@react-native-async-storage/async-storage"; 
+import WhatsAppButton from "@/components/WhatsAppButton";
 import * as Linking from "expo-linking";
+
 const lista = [
-    { id: 1, name: "Ticketera 8 partidos", price: 1000 },
-    { id: 2, name: "Ticketera 18 partidos", price: 2000 },
-    { id: 3, name: "Ticketera 27 partidos", price: 3000 }
+    { package_id: 1, title: "Ticketera 8 partidos", price: 1000, ticket_quantity: 8 },
+    { package_id: 2, title: "Ticketera 18 partidos", price: 2000, ticket_quantity: 18 },
+    { package_id: 3, title: "Ticketera 27 partidos", price: 3000, ticket_quantity: 27 },
 ];
 export function TicketPage() {
     const [result, setResult] = useState<WebBrowser.WebBrowserResult | null>(null);
     const auth_token = process.env.EXPO_PUBLIC_MP_AUTH;
-    const [listaTicket, setListaTicket] = useState(lista);
+
+    const [listaTicket, setListaTicket] = useState<{ package_id: number; title: string; price: number; ticket_quantity: number }[]>([]);
 
     const dipLink = Linking.createURL("PaymentStatusPage");
 
+
     /** :diamante_azul_pequeño: Función para manejar la compra */
-    const handleBuy = async (product: { name: any; price: any }) => {
+    const handlePreference = async (product: { title: string; price: number, ticket_quantity: number}) => {
         try {
             const response = await fetch("https://api.mercadopago.com/checkout/preferences", {
                 method: "POST",
@@ -31,7 +33,7 @@ export function TicketPage() {
                 body: JSON.stringify({
                     items: [
                         {
-                            title: product.name,
+                            title: product.title,
                             quantity: 1,
                             currency_id: "$",
                             unit_price: product.price
@@ -42,20 +44,25 @@ export function TicketPage() {
                         success: dipLink,
                         failure: dipLink,
                         cancel: dipLink
-                    }
+                    },
+                    external_reference: product.ticket_quantity
                 })
             });
             const data = await response.json();
             return data.init_point;
         } catch (error) {
-            console.error("Error en la compra:", error);
+            console.error("Error en la creacion de preferencia:", error);
         }
     };
     /** :diamante_azul_pequeño: Función para abrir el pago en el navegador */
     const handlePayment = async (product: any) => {
-        const paymentUrl = await handleBuy(product);
-        if (paymentUrl) {
-            let result = await WebBrowser.openBrowserAsync(paymentUrl);
+        const preferenceUrl = await handlePreference(product);
+        if (preferenceUrl) {
+            //Linking.openURL(preferenceUrl);
+            const browser = await WebBrowser.openBrowserAsync(preferenceUrl, {
+                enableBarCollapsing: true,
+                showInRecents: false,
+            });
             setResult(result);
         }
     };
@@ -63,31 +70,34 @@ export function TicketPage() {
     useEffect(() => {
         const fetchTickets = async () => {
             try {
-                const token = await AsyncStorage.getItem("authToken");
-                if (!token) {
-                    console.error("No se encontró el token de autenticación.");
-                    return;
-                }
-                const response = await apiService.getAllPackages(); // Usa el servicio API
+                const response = await apiService.getAllPackages(); // 🛜 Llamada a la API
                 setListaTicket(response.data);
+                console.log("Tickets cargados:", response.data);
+                if(response.data.length === 0) {
+                    console.warn("No hay tickets disponibles.");
+                    setListaTicket(lista);
+                }
             } catch (error) {
+                setListaTicket(lista);
                 console.error("Error al traer los paquetes:", error);
             }
         };
+
         fetchTickets();
     }, []);
     return (
         <>
-          <CustomHeader title="Club Ituzaingo" />
+          <CustomHeader/>
           <View style={styles.container}>
             <Text style={styles.title}>Ticketeras Disponibles</Text>
             {listaTicket.length > 0 ? (
               listaTicket.map((ticket, index) => (
-                ticket && ticket?.id && ticket?.name ? ( 
+                ticket && ticket?.package_id && ticket?.title ? ( 
                   <TicketComponent
                     key={index}
-                    id={ticket?.id}
-                    name={ticket?.name}
+                    id={ticket?.package_id}
+                    name={ticket?.title}
+                    price={ticket?.price}
                     onPress={() => handlePayment(ticket)}
                   />
                 ) : (
