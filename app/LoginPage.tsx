@@ -34,15 +34,16 @@ export function LoginPage () {
             var errorCode = err.code;
             var errorMessage = err.message;
             if (errorCode === "auth/invalid-email") {
-                alert("Correo electrónico no válido");
+                setError("Correo electrónico no válido");
             } else if (errorCode === "auth/invalid-credential") {
-                alert("Credenciales no válidas");
+                setError("Credenciales no válidas");
             } else if (errorCode === "auth/missing-password") {
-                alert("Falta la contraseña");
+                setError("Falta la contraseña");
             } else {
-                alert(errorMessage);
+                setError(errorMessage);
+                console.error(errorMessage);
             } 
-      }
+        }
     }
 
 
@@ -79,6 +80,7 @@ export function LoginPage () {
                                 value={password}
                                 onChangeText={setPassword}
                             />
+                            {error ? <Text style={{ color: 'red', textAlign: 'center' }}>{error}</Text> : null}
                         </View>
                         <TouchableOpacity onPress={firebaseLogin}>
                             <LinearGradient style={styles.button} colors={['#255E13', '#4DC428']} start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }}>
