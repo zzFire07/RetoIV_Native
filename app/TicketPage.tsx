@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, FlatList } from "react-native";
 import TicketComponent from "@/components/TicketComponent";
 import CustomHeader from "@/components/CustomHeader";
 import * as WebBrowser from "expo-web-browser";
@@ -8,9 +8,9 @@ import WhatsAppButton from "@/components/unused-comps/WhatsAppButton";
 import * as Linking from "expo-linking";
 
 const lista = [
-    { package_id: 1, title: "Ticketera 8 partidos", price: 1000, ticket_quantity: 8 },
-    { package_id: 2, title: "Ticketera 18 partidos", price: 2000, ticket_quantity: 18 },
-    { package_id: 3, title: "Ticketera 27 partidos", price: 3000, ticket_quantity: 27 },
+    { package_id: 1, title: "8 partidos", price: 1000, ticket_quantity: 8 },
+    { package_id: 2, title: "18 partidos", price: 2000, ticket_quantity: 18 },
+    { package_id: 3, title: "27 partidos", price: 3000, ticket_quantity: 27 },
 ];
 export function TicketPage() {
     const [result, setResult] = useState<WebBrowser.WebBrowserResult | null>(null);
@@ -75,6 +75,7 @@ export function TicketPage() {
                 const response = await apiService.getAllPackages(); // Usa el servicio API
                 setListaTicket(response.data);
                 console.log("Tickets cargados:", response.data);
+                if (response.data.Length === 0){setListaTicket(lista)}
             } catch (error) {
                 setListaTicket(lista);
                 console.error("Error al traer los paquetes:", error);
@@ -89,24 +90,26 @@ export function TicketPage() {
           <CustomHeader title="Club Ituzaingo" />
           <View style={styles.container}>
             <Text style={styles.title}>Ticketeras Disponibles</Text>
-            {listaTicket.length > 0 ? (
-              listaTicket.map((ticket, index) => (
-                ticket && ticket?.package_id && ticket?.title ? ( 
-                  <TicketComponent
-                    key={index}
-                    id={ticket?.package_id}
-                    name={ticket?.title}
-                    price={ticket?.price}
-                    onPress={() => handlePayment(ticket)}
-                  />
-                ) : (
-                    <Text key={index} style={styles.noTickets}>Error en los datos del ticket</Text>
+            <View style={styles.ticketContainer}>
+                <FlatList
+                data={listaTicket}
+                keyExtractor={(item, index) => index.toString()}
+                showsVerticalScrollIndicator={false} // Oculta la barra de desplazamiento
+                ListEmptyComponent={<Text style={styles.noTickets}>No hay tickets disponibles.</Text>}
+                renderItem={({ item }) =>
+                    item?.package_id && item?.title ? (
+                    <TicketComponent
+                        id={item.package_id}
+                        tickets={item.ticket_quantity}
+                        price={item.price}
+                        onPress={() => handlePayment(item)}
+                    />
+                    ) : (
+                    <Text style={styles.noTickets}>Error en los datos del ticket</Text>
                     )
-                  ))
-                ) : (
-                  <Text style={styles.noTickets}>No hay tickets disponibles.</Text>
-                )}
-  
+                }
+            />
+            </View>
           </View>
           <WhatsAppButton />
         </>
@@ -114,31 +117,40 @@ export function TicketPage() {
     }
   
       const styles = StyleSheet.create({
-          container: {
-              height: "100%",
-              alignItems: "center",
-              padding: 2,
-              backgroundColor: "white",
-              paddingTop: 60,
-          },
-          title: {
-              fontSize: 24,
-              fontWeight: "bold",
-              marginBottom: 40,
-              width: 300,
-              height: 70, // MANTENER HEIGHT CON LINE HEIGHT PARA MANTENER CENTRADO
-              backgroundColor:"#ca312b",
-              borderRadius: 15,
-              textAlign: "center",
-              textAlignVertical: "center", // For Android
-              lineHeight: 70, // For iOS == MANTENER LINE HEIGHT CON HEIGHT PARA MANTENER CENTRADO
-              color: "white",
-          },
-          noTickets: {
+        container: {
+            height: "100%",
+            alignItems: "center",
+            padding: 2,
+            backgroundColor: "white",
+            paddingTop: 30,
+        },
+        title: {
+            fontSize: 30,
+            fontWeight: "400",
+            marginBottom: 30,
+            width: 300,
+            height: 70, // MANTENER HEIGHT CON LINE HEIGHT PARA MANTENER CENTRADO
+            backgroundColor:"white",
+            textAlign: "center",
+            textAlignVertical: "center", // For Android
+            lineHeight: 70, // For iOS == MANTENER LINE HEIGHT CON HEIGHT PARA MANTENER CENTRADO
+            color: "black",
+        },
+        ticketContainer:{
+            width: 260,
+            height: 430,
+            alignItems: "center",
+            backgroundColor: "#F1F1F1",
+            boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.5)",
+            borderRadius: 20,
+            paddingTop: 20,
+            paddingBottom: 20,
+        },
+        noTickets: {
             fontSize: 18,
             color: "gray",
             marginTop: 20,
-          },
+        },
       });
   
   

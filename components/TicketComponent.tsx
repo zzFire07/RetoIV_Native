@@ -5,12 +5,12 @@ const mercadoPagoLogo = require("../assets/images/Mercado-Pagoo.png");
 
 interface TicketProps {
     id: number;
-    name: string;
+    tickets: number;
     price: number;
     onPress: () => void;
 }
 
-const TicketComponent: React.FC<TicketProps> = ({id, name, price, onPress}) => {
+const TicketComponent: React.FC<TicketProps> = ({id, tickets, price, onPress}) => {
     return (
         <>
             <TouchableHighlight
@@ -20,9 +20,11 @@ const TicketComponent: React.FC<TicketProps> = ({id, name, price, onPress}) => {
             	underlayColor="#333"
             >
                 <View style={styles.buttonContent}>
-                    <Text style={styles.buttonText}>{name}</Text>
+                  <View style={{flexDirection:"column", width: "70%"}}>
+                    <Text style={styles.buttonText}>Partidos {tickets}</Text>
                     <Text style={styles.buttonText}>${price}</Text>
-                    <Image source={mercadoPagoLogo} style={styles.logo} />
+                  </View>
+                  <Image source={mercadoPagoLogo} style={styles.logo} /> 
                 </View>
             </TouchableHighlight>
         </>
@@ -31,29 +33,32 @@ const TicketComponent: React.FC<TicketProps> = ({id, name, price, onPress}) => {
 
 const styles= StyleSheet.create({
     button: {
-        backgroundColor: "#00bf63",
-        padding: 15,
-        marginVertical: 10,
-        borderRadius: 20,
-        alignItems: "center",
-        width: "65%",
-      },
-      buttonContent: {
-        flexDirection:"row",
-        alignItems:"center",
-        justifyContent:"center"
-      },
-      logo:{
-        width:30,
-        height: 30,
-        resizeMode: "contain",
-        marginRight: 10,
-        marginLeft: 10
-      },
-      buttonText: {
-        color: "#111",
-        fontSize: 16
-      }
+      backgroundColor: "#AFD4C1",
+      padding: 10,
+      marginVertical: 10,
+      borderRadius: 20,
+      alignItems: "center",
+      width: 200,
+    },
+    buttonContent: {
+      flexDirection:"row",
+      alignItems: "center",
+      justifyContent: "space-evenly",
+      width: "100%"
+    },
+    logo:{
+      width:30,
+      height: 30,
+      resizeMode: "contain",
+      
+    },
+    buttonText: {
+      color: "#111",
+      fontSize: 16,
+      fontStyle: "italic",
+      fontWeight: 500,
+      textAlign: "left"
+    }
 });
 
 export default TicketComponent;
