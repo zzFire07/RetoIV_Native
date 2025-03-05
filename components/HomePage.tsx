@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import CustomHeader from "./CustomHeader";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, View, Text } from "react-native";
 import BuyTicketsButton from "./BuyTicketsButton";
 import MatchDisponibility from "./MatchDisponibility";
 import { useAuth } from "@/context/AuthContext";
@@ -41,7 +41,9 @@ export function HomePage() {
     return (
       <>
         <CustomHeader/>
+
         <View style={styles.container}>
+        {user && user.user_id && <Text style={styles.userIdText} >Socio N° {user.user_id}</Text>}
           <View style={styles.matchDisponibility}>
           <MatchDisponibility />
           </View>
@@ -75,7 +77,15 @@ const styles = StyleSheet.create({
     height: "100%",
     width: "100%",
   },
+  userIdText: {
+    fontSize: 18,
+    fontWeight: "600", 
+    color: "black",
+    textAlign: "center",
+    marginBottom: 10,
+    marginTop:70,
+  },
   matchDisponibility: {
-    marginTop : 80,
+    marginTop : 0,
   },
 });
