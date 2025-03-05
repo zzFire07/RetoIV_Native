@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Text, TextInput, TouchableOpacity, StyleSheet } from "react-native";
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, TouchableWithoutFeedback, Keyboard } from "react-native";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import CustomHeader from "@/components/CustomHeader";
 import { LinearGradient } from 'expo-linear-gradient';
@@ -39,46 +39,48 @@ export function LoginPage () {
 
     return (
        <>
-       <CustomHeader/>
-       <View style= {styles.container}>
-            <Text style= {styles.title}>Iniciar Sesión</Text>
-            <View style={styles.content}>
-                <Text style={styles.subtitle}>Bienvenido</Text>
-                <View style={styles.inputContainer}>
-                    <View style={{flexDirection: "row", alignItems: "center"}}>
-                        <IconSymbol name="envelope.fill" size={30} color="black" />
-                        <Text style={styles.inputText}>Correo electrónico</Text>
+       <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+        <CustomHeader/>
+        <View style= {styles.container}>
+                <Text style= {styles.title}>Iniciar Sesión</Text>
+                <View style={styles.content}>
+                    <Text style={styles.subtitle}>Bienvenido</Text>
+                    <View style={styles.inputContainer}>
+                        <View style={{flexDirection: "row", alignItems: "center"}}>
+                            <IconSymbol name="envelope.fill" size={30} color="black" />
+                            <Text style={styles.inputText}>Correo electrónico</Text>
+                        </View>
+                        <TextInput
+                            style={styles.input}
+                            placeholder="Correo electrónico"
+                            keyboardType="email-address"
+                            value={email}
+                            onChangeText={validateEmail}
+                        />
                     </View>
-                    <TextInput
-                        style={styles.input}
-                        placeholder="Correo electrónico"
-                        keyboardType="email-address"
-                        value={email}
-                        onChangeText={validateEmail}
-                    />
-                </View>
-                <View style={styles.inputContainer}>
-                    <View style={{flexDirection: "row", alignItems: "center"}}>
-                        <IconSymbol name="lock.fill" size={30} color="black" />
-                        <Text style={styles.inputText}>Contraseña</Text>
+                    <View style={styles.inputContainer}>
+                        <View style={{flexDirection: "row", alignItems: "center"}}>
+                            <IconSymbol name="lock.fill" size={30} color="black" />
+                            <Text style={styles.inputText}>Contraseña</Text>
+                        </View>
+                        <TextInput
+                            style={styles.input}
+                            placeholder=""
+                            secureTextEntry
+                            value={password}
+                            onChangeText={setPassword}
+                        />
                     </View>
-                    <TextInput
-                        style={styles.input}
-                        placeholder=""
-                        secureTextEntry
-                        value={password}
-                        onChangeText={setPassword}
-                    />
+                    <TouchableOpacity onPress={firebaseLogin}>
+                        <LinearGradient style={styles.button} colors={['#255E13', '#4DC428']} start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }}>
+                            <Text style={styles.buttonText}> Iniciar sesión </Text>
+                        </LinearGradient>
+                    </TouchableOpacity>
+                    {/* <Text style={styles.forgotPasswordText}>¿Olvidaste tu contraseña? Recuperala aqui</Text> */}
                 </View>
-                <TouchableOpacity onPress={firebaseLogin}>
-                    <LinearGradient style={styles.button} colors={['#255E13', '#4DC428']} start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }}>
-                        <Text style={styles.buttonText}> Iniciar sesión </Text>
-                    </LinearGradient>
-                </TouchableOpacity>
-                {/* <Text style={styles.forgotPasswordText}>¿Olvidaste tu contraseña? Recuperala aqui</Text> */}
-            </View>
-       </View>
-       <WhatsAppButton/>
+        </View>
+        <WhatsAppButton/>
+       </TouchableWithoutFeedback>
        </>
     );
 }
