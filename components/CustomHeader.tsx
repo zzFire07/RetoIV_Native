@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, Image, SafeAreaView } from "react-native";
 
 const logodoble = require("../assets/images/logo-doble.png");
 
-const CustomHeader = ({ title }: { title: string }) => {
+const CustomHeader = () => {
   return (
       <View style={styles.header}>
         <Image style={styles.logo} source={logodoble} />
