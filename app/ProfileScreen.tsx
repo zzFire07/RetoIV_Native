@@ -116,7 +116,7 @@ const styles = StyleSheet.create({
   infocontainer: {
     width: '75%',
     borderRadius: 25,
-    backgroundColor: '#95d3a1',
+    backgroundColor: '#f1f1f1',
     alignItems: 'center',
     padding: 25,
     marginTop: "10%",

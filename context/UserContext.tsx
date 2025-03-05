@@ -48,7 +48,7 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
           console.log("Usuario actualizado:", response.data);
           setUser(response.data);
         } else {
-          console.error("Firebase UID is null");
+          console.log("Firebase UID is null");
         }
       } catch (error) {
         console.error("Error al loguear el usuario:", error);

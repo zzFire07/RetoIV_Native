@@ -1,4 +1,5 @@
-import { StyleSheet, Text, TouchableHighlight } from "react-native";
+import { LinearGradient } from "expo-linear-gradient";
+import { StyleSheet, Text, TouchableHighlight, TouchableOpacity } from "react-native";
 
 interface ProfileButtonProps {
   onPress: () => void;
@@ -7,31 +8,38 @@ interface ProfileButtonProps {
 
 const ProfileButton: React.FC<ProfileButtonProps> = ({ onPress, showInputs }) => {
   return (
-    <TouchableHighlight
-      style={styles.ProfileButton}
-      onPress={onPress}
-      underlayColor="#16a016"
+  <TouchableOpacity
+    onPress={onPress}
+  >
+    <LinearGradient
+      colors={['#9FCEAB', '#4EA765']}
+      start={{ x: 0, y: 0 }}
+      end={{ x: 1, y: 1 }}
+      style={styles.LinearGradientContainer}
     >
-      <Text style={styles.text}>{showInputs ? "Guardar" : "Editar Perfil"}</Text>
-    </TouchableHighlight>
+        
+        {showInputs ? (
+          <Text style={styles.text}>Guardar</Text>
+        ) : (
+          <Text style={styles.text}>Editar perfil</Text>
+        )}
+    </LinearGradient>
+  </TouchableOpacity>
   );
 }
 
 const styles = StyleSheet.create({
-  ProfileButton: {
+  LinearGradientContainer:{
     width: 200,
     height: 50,
-    backgroundColor: '#1bc01b',
-    borderWidth: 2,
-    borderColor: '#000',
-    borderRadius: 35,
-    justifyContent: 'center',
     alignItems: 'center',
-    overflow: 'hidden',
+    justifyContent: 'center',
+    borderRadius: 25,
   },
   text: {
     color: '#000',
-    fontSize: 15,
+    fontSize: 16,
+    fontWeight: 'bold',
     textAlign: 'center'
   }
 });

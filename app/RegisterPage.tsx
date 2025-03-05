@@ -52,49 +52,49 @@ export default function RegisterPage() {
     };
 
     return ( 
-        <>
         <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-            <CustomHeader/>
-            <View style={styles.container}>
-                <Text style={styles.title}>Registrarse</Text>
-                <View style={styles.content}>
-                    <View style={styles.inputContainer}>
-                        <View style={{flexDirection: "row", alignItems: "center"}}>
-                            <IconSymbol style={{marginRight: 5}} name="envelope.fill" size={25} color="black" />
-                            <Text style={styles.inputText}>Correo electrónico</Text>
+            <View style={{flex: 1}}>
+                <CustomHeader/>
+                <View style={styles.container}>
+                    <Text style={styles.title}>Registrarse</Text>
+                    <View style={styles.content}>
+                        <View style={styles.inputContainer}>
+                            <View style={{flexDirection: "row", alignItems: "center"}}>
+                                <IconSymbol style={{marginRight: 5}} name="envelope.fill" size={25} color="black" />
+                                <Text style={styles.inputText}>Correo electrónico</Text>
+                            </View>
+                            <TextInput
+                                style={styles.input}
+                                placeholder="Correo electrónico"
+                                keyboardType="email-address"
+                                autoCapitalize="none"
+                                value={email}
+                                onChangeText={validateEmail}
+                            />
                         </View>
-                        <TextInput
-                            style={styles.input}
-                            placeholder=""
-                            keyboardType="email-address"
-                            autoCapitalize="none"
-                            value={email}
-                            onChangeText={validateEmail}
-                        />
-                    </View>
-                    <View style={styles.inputContainer}>
-                        <View style={{flexDirection: "row", alignItems: "center"}}>
-                            <IconSymbol style={{marginRight: 5}} name="lock.fill" size={25} color="black" />
-                            <Text style={styles.inputText}>Contraseña</Text>
+                        <View style={styles.inputContainer}>
+                            <View style={{flexDirection: "row", alignItems: "center"}}>
+                                <IconSymbol style={{marginRight: 5}} name="lock.fill" size={25} color="black" />
+                                <Text style={styles.inputText}>Contraseña</Text>
+                            </View>
+                            <TextInput
+                                style={styles.input}
+                                placeholder="Contraseña"
+                                secureTextEntry
+                                value={password}
+                                onChangeText={setPassword}
+                            />
                         </View>
-                        <TextInput
-                            style={styles.input}
-                            placeholder=""
-                            secureTextEntry
-                            value={password}
-                            onChangeText={setPassword}
-                        />
+                        <TouchableOpacity onPress={handleRegister}>
+                            <LinearGradient style={styles.button} colors={['#255E13', '#4DC428']} start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }}>
+                                <Text style={styles.buttonText}> Registrarse </Text>
+                            </LinearGradient>
+                        </TouchableOpacity>
                     </View>
-                    <TouchableOpacity onPress={handleRegister}>
-                        <LinearGradient style={styles.button} colors={['#255E13', '#4DC428']} start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }}>
-                            <Text style={styles.buttonText}> Registrarse </Text>
-                        </LinearGradient>
-                    </TouchableOpacity>
                 </View>
+                <WhatsAppButton />
             </View>
-            <WhatsAppButton />
         </TouchableWithoutFeedback>
-        </>
     );
 }
 const styles = StyleSheet.create({
