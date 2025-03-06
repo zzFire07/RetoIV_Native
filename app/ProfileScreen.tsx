@@ -37,7 +37,7 @@ const ProfileScreen = () => {
           console.log("Actualizando el teléfono:", newNumber);
           console.log("Usuario:", user.user_id);
           const result = await apiService.addPhoneNumber(Number(user.user_id), newNumber);
-          console.log("Resultado de la actualización del teléfono:", result);
+          console.log("Resultado de la actualización del teléfono:", result.status);
           setNewNumber("");
         } catch (error) {
           console.error("Error al actualizar el teléfono:", error);

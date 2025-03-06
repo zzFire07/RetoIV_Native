@@ -41,7 +41,7 @@ export default function PaymentStatusPage() {
                 }
                 try {
                     const response = await apiService.addTickets(user_uid, {"description": "Compra de tickets", "tickets": Number(quantity) });
-                    console.log("Respuesta de la API agregar ticket:", response);
+                    console.log("Respuesta de la API agregar ticket:", response.status);
                 } catch (error) {
                     console.error("Error al agregar los tickets al usuario:", error);
                 }

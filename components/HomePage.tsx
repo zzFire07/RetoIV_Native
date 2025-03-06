@@ -6,7 +6,6 @@ import MatchDisponibility from "./MatchDisponibility";
 import { useAuth } from "@/context/AuthContext";
 import WhatsAppButton from "./WhatsAppButton";
 import apiService from "@/services/apiService";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useUser } from "@/context/UserContext";
 
 export function HomePage() {
@@ -16,18 +15,18 @@ export function HomePage() {
   useEffect(() => {
     const authenticateUser = async () => {
       console.log("Autenticar usuario por primera vez:");
-      try {
-        if(user?.email === "loading@gmail.com"){
-          throw new Error("Usuario no cargado");
+        try {
+          const response = await apiService.logUser();
+          console.log("Usuario actualizado:", response.data);
+          setUser(response.data.user);
+        } catch (error) {
+          console.log("Error al loguear el usuario:", error);
         }
-        const response = await apiService.logUser();
-        console.log("Usuario actualizado:", response.data);
-        setUser(response.data.user);
-      } catch (error) {
-        console.log("Error al loguear el usuario:", error);
-      }
     };
-    authenticateUser();
+    console.log("Usuario:", user);
+    if(user == null){
+      authenticateUser();
+    }
   }, []);
 
 

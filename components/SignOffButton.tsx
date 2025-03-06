@@ -2,9 +2,12 @@
 //
 import { Text, TouchableOpacity, StyleSheet, Alert} from "react-native";
 import { auth } from "@/firebaseConfig";
+import { useUser } from "@/context/UserContext";
 
 
 export function SignOffButton() {
+
+  const { setUser } = useUser();
 
   const handleSignOff = async () => {
     Alert.alert(
@@ -19,6 +22,8 @@ export function SignOffButton() {
           text: "Aceptar",
           onPress: async () => {
             await auth.signOut();
+            setUser(null);
+
           },
         },
       ]

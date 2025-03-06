@@ -11,10 +11,11 @@ const api = axios.create({ //instancia personalizada de axios
 api.interceptors.request.use( //modifico la request antes que se envie al servidor
     async (config) => { //objeto config tiene la configuracion de la request
         const token = await AsyncStorage.getItem("authToken"); //obtener token del storage
-        console.log("Token:", token);
+        console.log("Se envio la request: ", config.url);
         if (token) {
             config.headers["Authorization"] = `Bearer ${token}`; // agregar token al header
         }
+        console.log("Configuración auth de la request: ", config.headers.Authorization);
         return config;
 });
 

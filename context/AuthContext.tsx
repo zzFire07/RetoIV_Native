@@ -22,6 +22,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
       if (currentUser) {
+        console.log("Usuario autenticado:", currentUser.email);
         const idToken = await currentUser.getIdToken();
         await AsyncStorage.setItem("authToken", idToken);
         await AsyncStorage.setItem("firebase_uid", currentUser.uid);

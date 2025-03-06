@@ -22,19 +22,6 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
 
   useEffect(() => {
-    if(!user){
-      setUser({
-        firebase_uid: "loading",
-        user_id: "0",
-        name: "Loading",
-        phone_number: "",
-        email: "loading@gmail.com",
-        tickets: "0",
-      });
-    }
-  }, []);
-
-  useEffect(() => {
     console.log("tickets cargados: ", user?.tickets);
   }
   , [user]);
@@ -42,8 +29,9 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        if(user?.email === "loading@gmail.com"){
+        if(user == null){
           throw new Error("Usuario no cargado");
+          return;
         }
           const response = await apiService.logUser();
           console.log("Usuario actualizado de forma regular:", response.data.user);
@@ -59,7 +47,7 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
     // Configurar el intervalo para actualizar cada 30 segundos
     const interval = setInterval(() => {
       fetchUserData();
-    }, 30000); // Cambia a 60000 para 1 minuto
+    }, 120000); // Cambia a 120000 para 2 minutos, 60000 para 1 minuto o 30000 para 30 segundos
 
     // Limpiar el intervalo cuando el componente se desmonta
     return () => clearInterval(interval);
