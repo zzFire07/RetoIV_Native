@@ -17,7 +17,7 @@ export function HomePage() {
       console.log("Autenticar usuario por primera vez:");
         try {
           const response = await apiService.logUser();
-          console.log("Usuario actualizado:", response.data);
+          console.log("Usuario autenticado:", response.data);
           setUser(response.data.user);
         } catch (error) {
           console.log("Error al loguear el usuario:", error);

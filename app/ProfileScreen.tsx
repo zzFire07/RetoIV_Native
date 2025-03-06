@@ -3,7 +3,7 @@ import ProfileButton from '@/components/ProfileButton';
 import SignOffButton from '@/components/SignOffButton';
 import { useUser } from '@/context/UserContext';
 import apiService from '@/services/apiService';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, TextInput, TouchableWithoutFeedback, Keyboard } from 'react-native';
 
 const ProfileScreen = () => {
@@ -13,6 +13,11 @@ const ProfileScreen = () => {
   const [showInputs, setShowInputs] = useState(false);
   const [newNumber, setNewNumber] = useState("");
 
+  useEffect(() => {
+    setNewNumber(user?.phone_number || "");
+  }
+  , [user]);
+
   const actualizarUsuario = async () => {
 
   
@@ -20,15 +25,12 @@ const ProfileScreen = () => {
     const telefonoValido = /^$|^[0-9]+$/.test(newNumber);
   
     if (!telefonoValido) {
-      setNewNumber("");
       alert('El teléfono solo puede contener números o estar vacio.');
       return;
     }
   
     // Si ambas validaciones son correctas, actualizamos el usuario
-    if(user){
-      if(user.phone_number !== newNumber)
-      {
+    if(user && user.phone_number != newNumber){
         setUser({
           ...user,
           phone_number: newNumber,
@@ -38,11 +40,9 @@ const ProfileScreen = () => {
           console.log("Usuario:", user.user_id);
           const result = await apiService.addPhoneNumber(Number(user.user_id), newNumber);
           console.log("Resultado de la actualización del teléfono:", result.status);
-          setNewNumber("");
         } catch (error) {
           console.error("Error al actualizar el teléfono:", error);
         }
-      }
     }
   };
 
@@ -85,10 +85,6 @@ const ProfileScreen = () => {
             <View style={styles.textContainer}>
               <Text style={styles.textinfo}>E-Mail</Text>
               <Text style={styles.textInline}>{user?.email}</Text>
-            </View>
-
-            <View style={styles.matchDisponibility}>
-              <MatchDisponibility/>
             </View>
             <View style={styles.profileButton}>
               <ProfileButton onPress={editarPerfil} showInputs={showInputs} />
