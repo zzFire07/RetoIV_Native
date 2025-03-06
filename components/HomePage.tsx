@@ -42,7 +42,7 @@ export function HomePage() {
         <CustomHeader/>
 
         <View style={styles.container}>
-        {user && user.user_id && <Text style={styles.userIdText} >Socio N° {user.user_id}</Text>}
+        <Text style={styles.userIdText} >Socio N° {user?.user_id || 0}</Text>
           <View style={styles.matchDisponibility}>
           <MatchDisponibility />
           </View>
